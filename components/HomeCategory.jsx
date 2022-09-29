@@ -1,13 +1,11 @@
 import Post from "./Post";
+import PostsContainer from "./PostsContainer";
 
 const HomeCategory = ({posts,heading}) => {
-    console.log(posts);
   return (
     <section>
         <h1 className="text-3xl text-bold p-4">{heading}</h1>
-        <div className="grid grid-cols-3 px-4 gap-4">
-          {posts.map(post => <Post key={post.id} post={post}/>)}
-        </div>
+        <PostsContainer posts={posts}/>
       </section>
   )
 }

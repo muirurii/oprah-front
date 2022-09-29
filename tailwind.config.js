@@ -8,6 +8,9 @@ module.exports = {
         extend: {
             fontFamily: {
                 main: [" -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,sans-serif;"]
+            },
+            colors: {
+                secondary: "indigo",
             }
         },
     },

@@ -3,7 +3,7 @@ import Header from "./Header";
 
 const Layout = ({children}) => {
   return (
-    <div>
+    <div className="overflow-x-hidden">
         <Header/>
         {children}
         <Footer/>
