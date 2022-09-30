@@ -6,7 +6,7 @@ const MoreCard = ({post}) => {
         <img className='w-12 h-12 rounded-full' src="/pic.jpg" alt={post.title.slice(0,5)} />
         <article>
             <h2 className='font-bold'>{post.title}</h2>
-            <p className='text-sm py-2'>{post.body.slice(0,100)}</p>
+            <p className='text-sm py-1'>{post.body.slice(0,100)}</p>
             <Link href={"/posts/[slug]"} as={`/posts/${post.slug}`}>
               <a className="text-secondary inline-flex items-center text-sm">
                 Read More

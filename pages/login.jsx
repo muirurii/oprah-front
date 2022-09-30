@@ -2,8 +2,14 @@ import Link from 'next/link';
 import Meta from "../components/Meta";
 import { useState } from 'react';
 import fetchData from '../customFunctions/fetch';
+import {setUser} from "../context/actions/userActions";
+import { Context } from '../context';
+import { useContext } from 'react';
+import { useRouter } from 'next/router';
 
 const LogIn = () => {
+  const {dispatch} = useContext(Context);
+  const router = useRouter();
 
   const [formData, setFormData] = useState({
     username: "",
@@ -29,7 +35,13 @@ const LogIn = () => {
     const res = await fetchData('users/login',"POST",details);
     const data = await res.json();
 
-    console.log(data)
+    if(res.status === 200){
+      setUser(dispatch,data);
+      setErr("");
+      router.push("/")
+    }else{
+      setErr(data.message)
+    }
   }
 
   return (

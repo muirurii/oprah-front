@@ -2,8 +2,18 @@ import HomeCategory from "../components/HomeCategory";
 import HomeCatLink from "../components/HomeCatLink";
 import Meta from "../components/Meta";
 import fetchData from "../customFunctions/fetch";
+import { useState,useContext } from "react";
+import { Context } from "../context";
 
 export default function Home({latest,featured}) {
+  const {state,dispatch} = useContext(Context);
+  // console.log(state,"gg")
+  // const test = ()=>{
+  //   dispatch({
+  //     type:"ADD",
+  //   })
+    // console.log(state);
+  // }
   return (
     <div className="py-8 pt-[500px] min-h-screen -top-[80px] w-screen relative">
       <Meta title="Blogue | Home"/>

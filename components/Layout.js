@@ -10,11 +10,11 @@ const Layout = ({children}) => {
   }, [])
   
   return (
-    <div className="overflow-x-hidden font-main">
+    <section className="overflow-x-hidden font-main">
         <Header/>
         {children}
         <Footer/>
-    </div>
+    </section>
   )
 }
 

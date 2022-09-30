@@ -2,6 +2,10 @@ import Link from "next/link";
 import Meta from "../components/Meta";
 import { useState } from "react";
 import fetchData from "../customFunctions/fetch";
+import { setUser } from "../context/actions/userActions";
+import { useContext } from "react";
+import { Context } from "../context";
+import { useRouter } from "next/router";
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -10,7 +14,9 @@ const SignUp = () => {
     repeatPassword: "",
   });
 
+  const {dispatch} = useContext(Context);
   const [err,setErr] = useState("");
+  const router = useRouter();
 
   const handleFormChange = (value) => {
     setFormData({ ...formData, ...value });
@@ -32,11 +38,16 @@ const SignUp = () => {
         repeatPassword:formData.repeatPassword
       }
     const res =  await fetchData('users/register',"POST",details);
-    const user = await res.json();
-    console.log(user)
+    const data = await res.json();
+    
+    if(res.status === 200){
+        setUser(dispatch,data);
+        setErr("");
+        router.push("/");
+    }else{
+      setErr(data.message);
+    }
   };
-
- 
 
   return (
     <div className="w-full h-screen flex items-center justify-center">

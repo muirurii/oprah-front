@@ -1,12 +1,14 @@
 import '../styles/globals.css';
 import Layout from '../components/Layout';
+import { Provider } from '../context';
 
 function MyApp({ Component, pageProps }) {
-  return (
-  <Layout>
+  return (<Provider>
+    <Layout>
        <Component {...pageProps} />
-  </Layout>
+      </Layout>
+  </Provider>
   )
 }
 
-export default MyApp
+export default MyApp;
