@@ -1,12 +1,45 @@
-import React from 'react'
+import Link from 'next/link';
+import Meta from "../components/Meta";
+import { useState } from 'react';
+import fetchData from '../customFunctions/fetch';
 
 const LogIn = () => {
+
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
+
+  const [err,setErr] = useState("");
+
+  const handleLogIn = async(e)=>{
+    e.preventDefault();
+
+    if(formData.username.length < 2 || formData.password < 2){
+      return setErr("Please fill in all fields")
+    }
+
+    const details = {
+      username:formData.username,
+      password:formData.password
+    }
+
+    setErr("");
+
+    const res = await fetchData('users/login',"POST",details);
+    const data = await res.json();
+
+    console.log(data)
+  }
+
   return (
-    <div className="w-full h-screen flex items-center justify-center bg-indigo-100">
-        <form className="w-full md:w-1/3 rounded-lg">
-          <h2 className="text-2xl text-center text-gray-200 mb-8">Login</h2>
+    <div className="w-full h-screen flex items-center justify-center">
+      <Meta title={"Log in"} />
+        <form className="w-full md:w-1/3 rounded-lg" onSubmit={handleLogIn}>
+          <h2 className="text-2xl text-center mb-8">Login</h2>
+          {err.length ? <p className="text-sm text-red-600 text-center pb-2">{err}</p> : null} 
           <div className="px-12 pb-10">
-            <div className="w-full mb-2">
+            <div className="w-full mb-4">
               <div className="flex items-center">
                 <input
                   type="text"
@@ -14,16 +47,18 @@ const LogIn = () => {
                   className="
                     w-full
                     border
+                    border-black
+                    focus:border-secondary
                     rounded
                     px-3
                     py-2
-                    text-gray-700
                     focus:outline-none
                   "
+                  onChange={(e)=> setFormData({...formData,username:e.target.value})}
                 />
               </div>
             </div>
-            <div className="w-full mb-2">
+            <div className="w-full mb-4">
               <div className="flex items-center">
                 <input
                   type="password"
@@ -31,15 +66,20 @@ const LogIn = () => {
                   className="
                     w-full
                     border
+                    border-black
+                    focus:border-secondary
                     rounded
                     px-3
                     py-2
-                    text-gray-700
                     focus:outline-none
                   "
+                  onChange={(e)=> setFormData({...formData,password:e.target.value})}
                 />
               </div>
             </div>
+            <p className='text-sm'>Create account
+           <Link href={"/signup"}><a className='mx-1 inline-block border-b border-secondary text-secondary'>here</a></Link>  
+            if you do not have one</p>
             <button
               type="submit"
               className="
@@ -47,7 +87,7 @@ const LogIn = () => {
                 py-2
                 mt-8
                 rounded-full
-                bg-blue-400
+                bg-secondary
                 text-gray-100
                 focus:outline-none
               "

@@ -1,9 +1,12 @@
 import HomeCategory from "../components/HomeCategory";
 import HomeCatLink from "../components/HomeCatLink";
+import Meta from "../components/Meta";
+import fetchData from "../customFunctions/fetch";
 
 export default function Home({latest,featured}) {
   return (
     <div className="py-8 pt-[500px] min-h-screen -top-[80px] w-screen relative">
+      <Meta title="Blogue | Home"/>
       <div className="absolute top-0 left-0 h-[500px] w-screen gap-y-12 flex flex-col items-center justify-center bg9-[#fffeff75]">
         <h2 className="text-3xl py-4">Welcome to my blog</h2>
         <button className="text-white bg-black rounded py-2 px-5">To blogs</button>
@@ -25,7 +28,7 @@ export default function Home({latest,featured}) {
 }
 
 export const getStaticProps = async () =>{
-    const res = await fetch("http://localhost:5000/api/posts/featured");
+    const res = await fetchData('posts/featured',"GET");
     const posts = await res.json();
 
     return{

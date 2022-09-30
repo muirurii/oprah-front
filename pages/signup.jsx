@@ -1,48 +1,117 @@
-import React from 'react'
+import Link from "next/link";
+import Meta from "../components/Meta";
+import { useState } from "react";
+import fetchData from "../customFunctions/fetch";
 
 const SignUp = () => {
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+    repeatPassword: "",
+  });
+
+  const [err,setErr] = useState("");
+
+  const handleFormChange = (value) => {
+    setFormData({ ...formData, ...value });
+  };
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    if(formData.username < 2 || formData.password.length < 2 || formData.repeatPassword.length < 2){
+      return setErr("Please fill in all fields");
+    }
+    if(formData.password !== formData.repeatPassword){
+      return setErr("Passwords don't match!");
+    }
+    setErr("");
+
+    const details = {
+        username:formData.username,
+        password:formData.password,
+        repeatPassword:formData.repeatPassword
+      }
+    const res =  await fetchData('users/register',"POST",details);
+    const user = await res.json();
+    console.log(user)
+  };
+
+ 
+
   return (
     <div className="w-full h-screen flex items-center justify-center">
-        <form className="w-full md:w-1/3 rounded-lg">
-          <h2 className="text-2xl text-center text-black mb-8">Login</h2>
-          <div className="px-12 pb-10">
-            <div className="w-full mb-2">
-              <div className="flex items-center">
-                <input
-                  type="text"
-                  placeholder="Email Address"
-                  className="
+      <Meta title={"Signup"} />
+      <form className="w-full md:w-1/3 rounded-lg" onSubmit={handleFormSubmit}>
+        <h2 className="text-2xl text-center mb-8">Create account</h2>
+        <div className="px-12 pb-10">
+         {err.length ? <p className="text-sm text-red-600 text-center pb-2">{err}</p> : null} 
+          <div className="w-full mb-4">
+            <div className="flex items-center">
+              <input
+                type="text"
+                placeholder="username"
+                className="
                     w-full
                     border
                     rounded
                     px-3
                     py-2
-                    text-black
                     focus:outline-none
-                  "
-                />
-              </div>
+                    border-black focus:border-secondary"
+                onChange={(e) => handleFormChange({ username: e.target.value })}
+              />
             </div>
-            <div className="w-full mb-2">
-              <div className="flex items-center">
-                <input
-                  type="password"
-                  placeholder="Password"
-                  className="
+          </div>
+          <div className="w-full mb-4">
+            <div className="flex items-center">
+              <input
+                type="password"
+                placeholder="password"
+                className="
                     w-full
                     border
                     rounded
                     px-3
                     py-2
-                    text-black
                     focus:outline-none
+                    border-black focus:border-secondary
                   "
-                />
-              </div>
+                onChange={(e) => handleFormChange({ password: e.target.value })}
+              />
             </div>
-            <button
-              type="submit"
-              className="
+          </div>
+          <div className="w-full mb-4">
+            <div className="flex items-center">
+              <input
+                type="password"
+                placeholder="repeat password"
+                className="
+                    w-full
+                    border
+                    rounded
+                    px-3
+                    py-2
+                    focus:outline-none
+                    border-black focus:border-secondary"
+                  
+                onChange={(e) =>
+                  handleFormChange({ repeatPassword: e.target.value })
+                }
+              />
+            </div>
+          </div>
+          <p className="text-sm">
+            Log in
+            <Link href={"/login"}>
+              <a className="mx-1 inline-block border-b border-secondary text-secondary">
+                here
+              </a>
+            </Link>
+            if you have an account
+          </p>
+          <button
+            type="submit"
+            className="
                 w-full
                 py-2
                 mt-8
@@ -51,13 +120,13 @@ const SignUp = () => {
                 text-white
                 focus:outline-none
               "
-            >
-              Login
-            </button>
-          </div>
-        </form>
-      </div>
-  )
-}
+          >
+            Create
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+};
 
 export default SignUp;

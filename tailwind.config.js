@@ -7,7 +7,7 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                main: [" -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,sans-serif;"]
+                main: [" Poppins, BlinkMacSystemFont, Segoe UI, Roboto,sans-serif;"]
             },
             colors: {
                 secondary: "indigo",
