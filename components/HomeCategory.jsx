@@ -1,4 +1,3 @@
-import Post from "./Post";
 import PostsContainer from "./PostsContainer";
 
 const HomeCategory = ({ posts, heading }) => {

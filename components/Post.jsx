@@ -1,13 +1,7 @@
 import Link from "next/link";
-import { useState } from "react";
 import Reactions from "./Reactions";
 
-
 const Post = ({ post }) => {
-
-  const [like,setLike] = useState(false);
-
-  const lik = () => setLike(!like)
 
   return (
     <section className="p-4 max-w-[320px] md:max-w-[500px]">
@@ -40,7 +34,7 @@ const Post = ({ post }) => {
                 </svg>
               </a>
             </Link>
-            <Reactions post={post} handleReaction={lik} like={like} />
+            <Reactions post={post} />
           </div>
         </article>
       </section>

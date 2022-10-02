@@ -3,6 +3,7 @@ import { userReducer } from "./reducers/userReducers";
 
 const initialState = {
   user: {
+    isLogged:false,
     _id: '', 
     username: '',
     token:"",
