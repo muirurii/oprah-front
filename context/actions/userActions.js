@@ -9,3 +9,15 @@ export const setUser = (dispatch, user) => {
         }
     });
 }
+export const addBookMark = (dispatch, payload) => {
+    dispatch({
+        type: actionTypes.addBookMark,
+        payload
+    });
+}
+export const removeBookMark = (dispatch, payload) => {
+    dispatch({
+        type: actionTypes.removeBookMark,
+        payload
+    });
+}

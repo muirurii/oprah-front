@@ -76,11 +76,12 @@ const PostPage = ({ initialPost, recommended }) => {
           <h1 className="font-bold text-2xl"> {post.title} </h1>
           <div className="flex justify-between items-center my-4">
             <p className="text-sm text-gray-400">
-              <span> By {post.creator.username} </span>
+              <span>By {post.creator.username} </span>
               <span className="inline-block pl-4">
                 {new Date(post.createdAt).toLocaleDateString()}
               </span>
             </p>
+            <Link href={"/edit/[slug]"} as={`/edit/${post.slug}`}>Edit</Link>
             <Reactions post={post} />
           </div>
           <img

@@ -38,6 +38,9 @@ const Header = () => {
             <Link href="/about">About</Link>
           </li>
           <li className="mr-4 hover:text-secondary transition-colors duration-300">
+            <Link href="/admin">Admin</Link>
+          </li>
+          <li className="mr-4 hover:text-secondary transition-colors duration-300">
             <Link href="/contacts">Contacts</Link>
           </li>
           {user.username.length ? (
