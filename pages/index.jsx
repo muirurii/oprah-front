@@ -26,7 +26,7 @@ export default function Home({latest,featured}) {
       <HomeCategory posts={featured} heading="Popular blogs" />
       <section className="my-8">
         <h1 className="text-3xl pl-4">Explore More</h1>
-          <ul className="grid grid-cols-4 p-8 my-8 gap-4">
+          <ul className="flex flex-wrap items-center justify-evenly p-8 my-8 gap-4">
             <HomeCatLink text="lifestyle" />
             <HomeCatLink text="fashion" />
             <HomeCatLink text="technology" />

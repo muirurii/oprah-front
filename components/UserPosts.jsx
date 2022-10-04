@@ -31,21 +31,21 @@ const UserPosts = () => {
 
   return (
     <section>
-      <section className="shadow-sm shadow-gray-200">
-        <div className="flex">
+      <section className="border border-gray-50">
+        <div
+          className={`flex relative after:absolute after:h-[1px] after:left-0 ${
+            tab === "likes" ? "" : "after:translate-x-full"
+          } after:transition-all after:duration-300 after:bottom-0 after:w-1/2 after:bg-secondary`}
+        >
           <h1
             onClick={() => setTab("likes")}
-            className={`py-2 text-md hover:bg-gray-50 cursor-pointer text-center w-1/2 border-b ${
-              tab === "likes" ? "border-secondary" : "border-gray-100"
-            }`}
+            className={`py-2 text-md hover:bg-gray-50 cursor-pointer text-center w-1/2 border-b border-gray-200`}
           >
             Liked Posts
           </h1>
           <h1
             onClick={() => setTab("bookmarks")}
-            className={`py-2 text-md hover:bg-gray-50 cursor-pointer text-center w-1/2 border-b ${
-              tab === "bookmarks" ? "border-secondary" : "border-gray-100"
-            }`}
+            className={`py-2 text-md hover:bg-gray-50 cursor-pointer text-center w-1/2 border-b border-gray-200`}
           >
             Bookmarks
           </h1>

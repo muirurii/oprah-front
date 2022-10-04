@@ -37,17 +37,20 @@ const Header = () => {
           <li className="mr-4 hover:text-secondary transition-colors duration-300">
             <Link href="/about">About</Link>
           </li>
-          <li className="mr-4 hover:text-secondary transition-colors duration-300">
-            <Link href="/admin">Admin</Link>
-          </li>
+          {user.isLogged && user.role === "ADMIN" ? (
+            <li className="mr-4 hover:text-secondary transition-colors duration-300">
+              <Link href="/new">Add a blog</Link>
+            </li>
+          ) : null}
+
           <li className="mr-4 hover:text-secondary transition-colors duration-300">
             <Link href="/contacts">Contacts</Link>
           </li>
-          {user.username.length ? (
+          {user.isLogged ? (
             <li className="mr-4 flex items-center justify-center gap-x-4 hover:text-secondary transition-colors duration-300">
               <Link href="/profile">Profile</Link>
               <span className="h-9 w-9 flex items-center justify-center uppercase text-lg rounded-full border border-secondary relative after:absolute after:left-0 after:bottom-0 after:h-2 after:w-2 after:bg-secondary after:rounded-full cursor-pointer">
-                {user.username.slice(0,1)}
+                {user.username.slice(0, 1)}
                 {user.username.slice(-1)}
               </span>
             </li>

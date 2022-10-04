@@ -15,7 +15,7 @@ const Post = ({ post }) => {
           <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
             {post.title}
           </h1>
-          <p className="leading-relaxed mb-3">{post.body.slice(0, 100)}...</p>
+          <p className="leading-relaxed mb-3 break-words">{post.body.slice(0, 100)}...</p>
           <div className="flex items-center justify-between">
             <Link href={"/posts/[slug]"} as={`/posts/${post.slug}`}>
               <a className="text-secondary inline-flex items-center md:mb-2 lg:mb-0">

@@ -51,6 +51,7 @@ const PostPage = ({ initialPost, recommended }) => {
       if (res.status === 200) {
         const data = await res.json();
         setPost({ ...post, comments: [...post.comments, data] });
+        setComment("");
       }
     } catch (e) {
       console.log(e);
@@ -160,7 +161,7 @@ const PostPage = ({ initialPost, recommended }) => {
             className="w-full h-[400px] rounded-md"
             alt={post.title.slice(0, 6)}
           />
-          <p className="py-4"> {post.body} </p>
+          <p className="py-4 break-words"> {post.body} </p>
           <form onSubmit={handleCommenting} className="px-2 pb-2">
             <textarea
               onChange={(e) => setComment(e.target.value)}

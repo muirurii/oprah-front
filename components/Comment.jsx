@@ -39,10 +39,35 @@ const Comment = ({ comment }) => {
   };
 
   return (
-    <div className="w-fit shadow shadow-gray-200 bg-gray-50 rounded-md p-2 px-5">
+    <div className="w-fit shadow shadow-gray-200 bg-gray0 rounded-md p-2 px-5">
       <div className="flex gap-2 items-end">
-        <div className="h-8 w-8 border border-gray-300 rounded-full"></div>
-        <p className="text-xs text-gray-800">@{comment.user}</p>
+        <div className="h-5 w-5 rounded-full">
+        <svg
+                className="h-5 w-5"
+                x="0px"
+                y="0px"
+                viewBox="0 0 512 512"
+                style={{ enableBackground: "new 0 0 512 512" }}
+                xmlSpace="preserve"
+              >
+                <g>
+                  <g>
+                    <path d="M256,0C114.608,0,0,114.608,0,256s114.608,256,256,256s256-114.608,256-256S397.392,0,256,0z M256,496    C123.664,496,16,388.336,16,256S123.664,16,256,16s240,107.664,240,240S388.336,496,256,496z" />
+                  </g>
+                </g>
+                <g>
+                  <g>
+                    <path d="M257.408,106.256c-32.704,0-59.296,26.608-59.296,59.312s26.592,59.296,59.296,59.296    c32.704,0,59.312-26.592,59.312-59.296C316.72,132.864,290.112,106.256,257.408,106.256z M257.408,208.864    c-23.872,0-43.296-19.424-43.296-43.296s19.424-43.312,43.296-43.312s43.312,19.44,43.312,43.312S281.28,208.864,257.408,208.864z    " />
+                  </g>
+                </g>
+                <g>
+                  <g>
+                    <path d="M314.112,252.256l-56.704,42.752l-56.704-42.752c-69.792,20.944-68.912,91.6-68.912,91.6h125.616h125.616    C383.024,343.856,383.904,273.2,314.112,252.256z M257.392,327.84H149.824c3.888-17.408,15.2-44.688,48.048-57.68l49.904,37.616    c2.848,2.144,6.24,3.216,9.632,3.216c3.392,0,6.784-1.072,9.632-3.216l49.904-37.632c33.008,13.024,44.256,40.272,48.096,57.696    H257.392z" />
+                  </g>
+                </g>
+              </svg>
+        </div>
+        <p className="text-xs text-secondary">@{comment.user}</p>
       </div>
       <p className="text-sm pt-2 max-w-xs sm:max-w-sm md:max-w-md">
         {comment.body}

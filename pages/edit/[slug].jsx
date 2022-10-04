@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import Link from "next/link";
 import { useEffect, useState, useContext } from "react";
 import FormFields from "../../components/FormFields";
 import Meta from "../../components/Meta";
@@ -54,7 +55,7 @@ const Edit = () => {
       );
       const data = await res.json();
       if (res.status === 200) {
-          router.push(`/posts/${data.slug}`);
+        router.push(`/posts/${data.slug}`);
       } else {
         throw new Error(data.message);
       }
@@ -68,14 +69,22 @@ const Edit = () => {
     <main>
       <Meta title="Update post" />
       {fetching || !user.isLogged || user.role !== "ADMIN" ? (
-        <div className="h-[500px]">log in</div>
+        <div className="h-[400px] flex items-center justify-center">
+          <Meta title="You are not logged in" />
+          <Link href="/login">
+            <a className="border-secondary border-b text-secondary">Log in</a>
+          </Link>
+        </div>
       ) : (
+        <>
+        <h1 className="text-3xl pt-4 text-center">Edit blog post</h1>
         <FormFields
           initial={post}
           buttonText="Update blog"
           message={message}
           submitHandler={submitHandler}
         />
+        </>
       )}
     </main>
   );
