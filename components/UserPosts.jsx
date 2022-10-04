@@ -51,7 +51,7 @@ const UserPosts = () => {
           </h1>
         </div>
         {tab === "likes" ? (
-          <article className="flex flex-col min-h-[100px] flex items-center justify-center">
+          <article className="flex flex-col min-h-[100px] items-start justify-start">
             {likes.length ? (
               likes.map((p) => <MoreCard post={p} key={p._id} />)
             ) : (
@@ -62,7 +62,7 @@ const UserPosts = () => {
           </article>
         ) : null}
         {tab === "bookmarks" ? (
-          <article className="flex flex-col min-h-[200px] flex items-center justify-center">
+          <article className="flex flex-col min-h-[100px] items-start justify-center">
             {bookmarks.length ? (
               bookmarks.map((p) => <MoreCard post={p} key={p._id} />)
             ) : (
