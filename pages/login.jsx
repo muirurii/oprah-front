@@ -47,10 +47,10 @@ const LogIn = () => {
   return (
     <div className="w-full h-screen flex items-center justify-center">
       <Meta title={"Log in"} />
-        <form className="w-full md:w-1/3 rounded-lg" onSubmit={handleLogIn}>
+        <form className="max-w-[400px] sm:w-[500px] rounded-lg" onSubmit={handleLogIn}>
           <h2 className="text-2xl text-center mb-8">Login</h2>
           {err.length ? <p className="text-sm text-red-600 text-center pb-2">{err}</p> : null} 
-          <div className="px-12 pb-10">
+          <div className="px-2 pb-10">
             <div className="w-full mb-4">
               <div className="flex items-center">
                 <input

@@ -16,12 +16,13 @@ export default function Home({latest,featured}) {
   // }
   return (
     <div className="py-8 pt-[500px] min-h-screen -top-[80px] w-screen relative">
-      <Meta title="Blogue | Home"/>
-      <div className="absolute top-0 left-0 h-[500px] w-screen gap-y-12 flex flex-col items-center justify-center bg9-[#fffeff75]">
-        <h2 className="text-3xl py-4">Welcome to my blog</h2>
-        <button className="text-white bg-black rounded py-2 px-5">To blogs</button>
-        <img className="absolute top-0 -z-30 left-0 h-full w-screen" src="https://images.pexels.com/photos/3975572/pexels-photo-3975572.jpeg?auto=compress&cs=tinysrgb&w=1024" alt="HERO" />
-      </div>
+      <Meta title="Oprah | Home"/>
+      <div className="absolute top-0 left-0 h-[500px] w-screen gap-y-12 flex flex-col items-center justify-center bg-conic-to-t from-yellow-200 via-emerald-200 to-yellow-200">
+        <h2 className="text-2xl py-4 max-w-[600px]">
+        “Sometimes the ideas just come to me. Other times I have to sweat and almost bleed to make ideas come. It’s a mysterious process, but I hope I never find out exactly how it works. I like a mystery, as you may have noticed.”
+        <br/>~ J.K. Rowling 
+        </h2>
+  </div>
       <HomeCategory posts={latest} heading="Latest blogs" />
       <HomeCategory posts={featured} heading="Popular blogs" />
       <section className="my-8">
@@ -30,14 +31,13 @@ export default function Home({latest,featured}) {
             <HomeCatLink text="lifestyle" />
             <HomeCatLink text="fashion" />
             <HomeCatLink text="technology" />
-            <HomeCatLink text="politics" />
           </ul>
       </section>
     </div>
   );
 }
 
-export const getStaticProps = async () =>{
+export const getServerSideProps = async () =>{
     const res = await fetchData('posts/featured',"GET");
     const posts = await res.json();
 
@@ -45,7 +45,6 @@ export const getStaticProps = async () =>{
       props:{
         featured:posts.featured,
         latest:posts.latest,
-        revalidate: 1
       }
     }
 }

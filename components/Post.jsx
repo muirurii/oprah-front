@@ -5,13 +5,16 @@ const Post = ({ post }) => {
 
   return (
     <section className="p-4 max-w-[320px] md:max-w-[500px]">
-      <section className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+      <div className="h-full border-2 border-gray-50 border-opacity-60 rounded-lg overflow-hidden">
         <img
           className="lg:h-48 md:h-36 w-full object-cover object-center"
           src="pic.jpg"
           alt="blog"
         />
-        <article className="p-6">
+        <div className="p-4">
+          <p className="mb-1 text-xs">{new Date(post.createdAt).toLocaleDateString("en-GB",{
+            dateStyle:"full"
+          })}</p>
           <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
             {post.title}
           </h1>
@@ -36,8 +39,8 @@ const Post = ({ post }) => {
             </Link>
             <Reactions post={post} />
           </div>
-        </article>
-      </section>
+        </div>
+      </div>
     </section>
   );
 };

@@ -2,10 +2,10 @@ import PostsContainer from "./PostsContainer";
 
 const HomeCategory = ({ posts, heading }) => {
   return (
-    <article>
+    <div>
       <h1 className="text-3xl text-bold p-4">{heading}</h1>
       <PostsContainer posts={posts} />
-    </article>
+    </div>
   );
 };
 

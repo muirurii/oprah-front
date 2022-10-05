@@ -51,11 +51,11 @@ const UserPosts = () => {
           </h1>
         </div>
         {tab === "likes" ? (
-          <article className="flex flex-col min-h-[100px] items-start justify-start">
+          <article className="flex flex-col min-h-[100px] items-start justify-center">
             {likes.length ? (
               likes.map((p) => <MoreCard post={p} key={p._id} />)
             ) : (
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-gray-500 text-center w-full">
                 You have not liked any post
               </p>
             )}
@@ -66,7 +66,7 @@ const UserPosts = () => {
             {bookmarks.length ? (
               bookmarks.map((p) => <MoreCard post={p} key={p._id} />)
             ) : (
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-gray-500 text-center w-full">
                 You have not bookmarked any post
               </p>
             )}
