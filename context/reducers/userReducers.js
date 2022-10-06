@@ -9,6 +9,22 @@ export const userReducer = (state, action) => {
                     user: action.payload
                 }
             }
+        case actionTypes.resetUser:
+            {
+                return {
+                    ...state,
+                    user: {
+                        isLogged: false,
+                        _id: '',
+                        username: '',
+                        token: "",
+                        bookmarks: [],
+                        likes: [],
+                        bookmarks: [],
+                        profilePic: "",
+                    }
+                }
+            }
         case actionTypes.addBookMark:
             {
                 return {

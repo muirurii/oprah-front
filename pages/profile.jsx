@@ -47,8 +47,8 @@ const Profile = () => {
     const getUserData = async () => {
       try {
         const res = await fetchData(
-          `users/user/${user._id}`,
-          "POST",
+          `users/user/u/${user._id}`,
+          "GET",
           {},
           user.token
         );
@@ -144,7 +144,7 @@ const Profile = () => {
             </div>
             <p>{user.username}</p>
             <button
-              className="flex items-center justify-center p-2 gap-x-4 w-2/3 bg-gray-300 mt-2"
+              className="flex items-center justify-center p-2 gap-x-4 w-2/3 bg-gray-100 mt-2"
               onClick={() => setUpdateForm(!updateForm)}
             >
               <span>Update your details</span>

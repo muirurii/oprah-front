@@ -17,10 +17,10 @@ export default function Home({latest,featured}) {
   return (
     <div className="py-8 pt-[500px] min-h-screen -top-[80px] w-screen relative">
       <Meta title="Oprah | Home"/>
-      <div className="absolute top-0 left-0 h-[500px] w-screen gap-y-12 flex flex-col items-center justify-center bg-conic-to-t from-yellow-200 via-emerald-200 to-yellow-200">
+      <div className="absolute top-0 left-0 h-[500px] w-screen gap-y-12 flex flex-col items-center justify-center hero">
         <h2 className="text-2xl py-4 max-w-[600px]">
         “Sometimes the ideas just come to me. Other times I have to sweat and almost bleed to make ideas come. It’s a mysterious process, but I hope I never find out exactly how it works. I like a mystery, as you may have noticed.”
-        <br/>~ J.K. Rowling 
+       <span className="block mt-2">~ J.K. Rowling </span>
         </h2>
   </div>
       <HomeCategory posts={latest} heading="Latest blogs" />

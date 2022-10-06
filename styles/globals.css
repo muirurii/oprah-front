@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer utilities {
+    .hero {
+        background: conic-gradient(at center bottom, rgb(255, 255, 255), rgb(180, 215, 203), rgb(180, 215, 203));
+    }
+}

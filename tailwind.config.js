@@ -10,7 +10,7 @@ module.exports = {
                 main: [" Poppins, BlinkMacSystemFont, Segoe UI, Roboto,sans-serif;"]
             },
             colors: {
-                secondary: "indigo",
+                secondary: " rgb(90, 225, 200)",
             }
         },
     },

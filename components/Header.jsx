@@ -1,11 +1,26 @@
 import Link from "next/link";
+import {useRouter} from "next/router";
 import { useContext } from "react";
 import { Context } from "../context";
+import { resetUser } from "../context/actions/userActions";
+import fetchData from "../customFunctions/fetch";
 
 const Header = () => {
   const {
-    state: { user },
+    state: { user },dispatch
   } = useContext(Context);
+
+  const router = useRouter();
+
+  const handleLogOut = async () =>{
+    try {
+      const res = await fetchData('auth/logout','GET');
+      router.push("/");
+      resetUser(dispatch);
+    } catch (error) {
+      
+    }
+  }
 
   return (
     <header className="bg-transparent z-10 relative flex items-center justify-between px-12 shadow shadow-gray-300 h-[70px]">
@@ -47,9 +62,9 @@ const Header = () => {
                 <div className="hidden group-hover:block absolute text-sm top-full right-0 min-w-[240px] p-3 bg-white border border-gray-200 rounded">
                   <p className="text-center">Logged in as {user.username}</p>
                   <div className="mt-4 flex justify-center gap-x-3 font-light">
-              <button className="border transition-colors duration-300 hover:text-white hover:bg-secondary border-secondary p-2 rounded">Log out</button>
+              <button onClick={handleLogOut} className="border transition-colors duration-300 hover:text-white hover:bg-secondary border-secondary p-2 rounded text-sm">Log out</button>
                  <Link href="/profile"> 
-                 <a className=" border border-secondary hover:bg-white hover:text-black transition-colors duration-300 bg-secondary p-2 rounded text-white">View Profile</a>
+                 <a className=" border border-secondary hover:bg-white hover:text-black transition-colors duration-300 bg-secondary p-2 rounded text-sm text-white">Profile</a>
                  </Link>
                   </div>
                 </div>
