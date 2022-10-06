@@ -110,7 +110,7 @@ const Profile = () => {
   };
 
   return user.isLogged ? (
-    <main className="px-4 mb-8">
+    <main className="px-4 mb-8 text-sm">
       <Meta title={user.username} />
       <h1 className="text-3xl py-8">Profile</h1>
       <section className="h- grid gap-8 lg:grid-cols-2">
@@ -201,7 +201,7 @@ const Profile = () => {
                   onChange={handleDetailsChange}
                 />
               </div>
-              <div className="w-2/3">
+              {/* <div className="w-2/3">
                 <label htmlFor="">profile pic url</label>
                 <input
                   className="border rounded border-secondary outline-none h-10 mt-1 w-full pl-1"
@@ -211,7 +211,7 @@ const Profile = () => {
                   placeholder="enter a url for your profile pic"
                   onChange={handleDetailsChange}
                 />
-              </div>
+              </div> */}
               <button
                 disabled = {updating}
                 className="bg-secondary w-2/3 py-2 text-white mt-4 rounded"

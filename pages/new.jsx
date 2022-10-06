@@ -24,7 +24,6 @@ const Admin = () => {
     };
 
     try {
-      console.log(details);
       const res = await fetchData("posts/new", "POST", details, user.token);
       const data = await res.json();
       if (res.status === 200) {

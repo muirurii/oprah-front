@@ -4,22 +4,22 @@ import Reactions from "./Reactions";
 const Post = ({ post }) => {
 
   return (
-    <section className="p-4 max-w-[320px] md:max-w-[500px]">
-      <div className="h-full border-2 border-gray-50 border-opacity-60 rounded-lg overflow-hidden">
+    <section className="p-4 mx-auto max-w-[320px] md:max-w-[500px]">
+      <div className="h-fit border-2 border-gray-100 border-opacity-60 rounded-lg overflow-hidden">
         <img
           className="lg:h-48 md:h-36 w-full object-cover object-center"
-          src="pic.jpg"
+          src={post.image}
           alt="blog"
         />
         <div className="p-4">
           <p className="mb-1 text-xs">{new Date(post.createdAt).toLocaleDateString("en-GB",{
             dateStyle:"full"
           })}</p>
-          <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
-            {post.title}
+          <h1 className="text-lg font-medium text-gray-900 mb-3">
+            {post.title.slice(0,100)} {post.title.length > 100 ? '...' : null}
           </h1>
-          <p className="leading-relaxed mb-3 break-words">{post.body.slice(0, 100)}...</p>
-          <div className="flex items-center justify-between">
+          <p className="leading-relaxed text-sm font-light mb-3 break-words">{post.body.slice(0, 100)}...</p>
+          <div className="flex items-center justify-between text-sm">
             <Link href={"/posts/[slug]"} as={`/posts/${post.slug}`}>
               <a className="text-secondary inline-flex items-center md:mb-2 lg:mb-0">
                 Read More

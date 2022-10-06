@@ -2,11 +2,11 @@ import Link from "next/link";
 
 const MoreCard = ({post}) => {
   return (
-    <section className="min-h-[140px] w-full flex justify-start items-center p-4 gap-x-4 border-b border-gray-200">
+    <section className="min-h-[140px] w-full text-sm font-light flex justify-start items-center p-4 gap-x-4 border-b border-gray-200">
         <img className='w-12 h-12 rounded-full' src="/pic.jpg" alt={post.title.slice(0,5)} />
         <article>
-            <h2 className='font-bold'>{post.title}</h2>
-            <p className='text-sm py-1'>{post.body.slice(0,100)}</p>
+            <h2 className='font-bold'>{post.title.slice(0,60)} {post.title.length > 60 ? "..." : null}</h2>
+            <p className='text-sm py-1'>{post.body.slice(0,100)} {post.body.length > 100 ? "..." : null}</p>
             <Link href={"/posts/[slug]"} as={`/posts/${post.slug}`}>
               <a className="text-secondary inline-flex items-center text-sm">
                 Read More

@@ -44,7 +44,7 @@ const Layout = ({ children }) => {
   };
 
   return (
-    <section className="overflow-x-hidden font-main">
+    <section className="overflow-x-hidden font-main pt-20">
       <Header />
       {children}
       <Footer />

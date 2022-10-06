@@ -13,6 +13,7 @@ const PostPage = ({ initialPost, recommended }) => {
 
   useEffect(()=>{
   setPost(initialPost)
+  console.log(initialPost.body.split('#'));
   },[initialPost]);
 
   const {
@@ -40,9 +41,6 @@ const PostPage = ({ initialPost, recommended }) => {
   }, []);
 
   const router = useRouter();
-  const goBack = () => {
-    router.replace("/");
-  };
 
   const sendComment = async (details) => {
     try {
@@ -99,32 +97,9 @@ const PostPage = ({ initialPost, recommended }) => {
         keywords={post.title.slice(0, 100)}
         title={initialPost.title}
       />
-      <button
-        className="text-white rounded-sm"
-        onClick={goBack}
-      >
-        <svg
-          className="h-8 w-8"
-          x="0px"
-          y="0px"
-          viewBox="0 0 26.39 26.39"
-          style={{ enableBackground: "new 0 0 26.39 26.39" }}
-          xmlSpace="preserve"
-        >
-          <g>
-            <g>
-              <path d="M3.588,24.297c0,0-0.024,0.59,0.553,0.59c0.718,0,6.652-0.008,6.652-0.008l0.01-5.451c0,0-0.094-0.898,0.777-0.898h2.761    c1.031,0,0.968,0.898,0.968,0.898l-0.012,5.434c0,0,5.628,0,6.512,0c0.732,0,0.699-0.734,0.699-0.734V14.076L13.33,5.913    l-9.742,8.164C3.588,14.077,3.588,24.297,3.588,24.297z" />
-              <path d="M0,13.317c0,0,0.826,1.524,2.631,0l10.781-9.121l10.107,9.064c2.088,1.506,2.871,0,2.871,0L13.412,1.504L0,13.317z" />
-              <polygon points="23.273,4.175 20.674,4.175 20.685,7.328 23.273,9.525   " />
-            </g>
-            <g></g>
-          </g>
-        </svg>
-      </button>
-      <section className="mt-4 flex items-center lg:items-start flex-col lg:flex-row justify-center gap-y-4 lg:gap-4 relative">
+      <section className="mt-4 flex items-center lg:items-start text-sm font-light flex-col lg:flex-row justify-center gap-y-4 lg:gap-4 relative">
         <section className="max-w-xl shadow-gray-300 shadow-sm rounded-md p-4 pb-6 relative">
-          <h1 className="font-bold text-2xl"> {post.title} </h1>
-          <article className="flex justify-between items-start my-4">
+          <article className="flex justify-between items-start my-4 pr-2">
             <p className="text-sm text-gray-400">
               <span>By {post.creator.username} </span>
               <span className="block pt-1">
@@ -153,7 +128,7 @@ const PostPage = ({ initialPost, recommended }) => {
               </button>
             ) : null}
             {editModule && user.isLogged && user.role === "ADMIN" ? (
-              <div className="absolute top-2 right-4 p-4 gap-y-2 grid w-32 rounded shadow bg-white shadow-gray-300">
+              <div className="absolute top-2 right-5 text-sm px-4 py-6 gap-y-2 grid w-32 rounded shadow bg-white shadow-gray-300">
                 <Link href={"/edit/[slug]"} as={`/edit/${post.slug}`}>
                   <a className="py-1 flex items-center justify-start w-full gap-x-2 border-b border-gray-400 hover:border-secondary hover:text-secondary transition-colors duration-300">
                     <svg
@@ -207,12 +182,15 @@ const PostPage = ({ initialPost, recommended }) => {
             ) : null}
             <Reactions post={post} />
           </article>
+          <h1 className="font-bold text-xl pb-2"> {post.title} </h1>
           <img
-            src="/pic.jpg"
-            className="w-full h-[400px] rounded-md"
+            src={post.image}
+            className="w-full h-[280px] rounded-md"
             alt={post.title.slice(0, 6)}
           />
-          <p className="py-4 break-words"> {post.body} </p>
+          <article className="py-4 break-words grid gap-2">
+             {post.body.split("#").map((t,i)=> <p key={t+ i}>{t}</p>)} 
+            </article>
           <form onSubmit={handleCommenting} className="px-2 pb-2">
             <textarea
               onChange={(e) => setComment(e.target.value)}
