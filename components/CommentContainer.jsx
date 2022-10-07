@@ -12,6 +12,11 @@ const CommentContainer = ({ postId, updatePost }) => {
   const {
     state: { user },
   } = useContext(Context);
+  
+  const b = comments.sort((a,b)=>{
+    return new Date(b.createdAt) - new Date(a.createdAt)
+  },0);
+  console.log(b)
 
   useEffect(() => {
     const getComments = async () => {
@@ -86,7 +91,7 @@ const CommentContainer = ({ postId, updatePost }) => {
         )}
       </form>
       {comments.length ? (
-        comments.map((comm) => {
+        comments.sort((a,b)=> parseInt(a.createdAt)  - parseInt(b.createdAt)  ,0).map((comm) => {
           return <Comment comment={comm} key={comm._id} />;
         })
       ) : (

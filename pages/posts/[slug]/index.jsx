@@ -11,13 +11,13 @@ import CommentContainer from "../../../components/CommentContainer";
 const PostPage = ({ initialPost, recommended }) => {
   const [post, setPost] = useState(initialPost);
 
-  useEffect(()=>{
-  setPost(initialPost)
-  },[initialPost]);
+  useEffect(() => {
+    setPost(initialPost);
+  }, [initialPost]);
 
-  const updatePost = (post) =>{
+  const updatePost = (post) => {
     setPost(post);
-  }
+  };
 
   const {
     state: { user },
@@ -82,11 +82,11 @@ const PostPage = ({ initialPost, recommended }) => {
             {user.isLogged && user.role === "ADMIN" ? (
               <button
                 onClick={toggleModule}
-                onBlur={()=>{
+                onBlur={() => {
                   setTimeout(() => {
-                    setEditModule(false)
+                    setEditModule(false);
                   }, 50);
-                } }
+                }}
                 className="absolute top-4 right-1 h-fit"
               >
                 <svg
@@ -167,12 +167,14 @@ const PostPage = ({ initialPost, recommended }) => {
             alt={post.title.slice(0, 6)}
           />
           <article className="py-4 break-all grid gap-2">
-             {post.body.split("#").map((t,i)=> <p key={t+ i}>{t}</p>)} 
-            </article>
+            {post.body.split("#").map((t, i) => (
+              <p key={t + i}>{t}</p>
+            ))}
+          </article>
           <div className="min-h-[100px]">
             <p className="px-4 pt-2"> Comments </p>
             <div className="p-4 flex flex-col gap-4">
-                <CommentContainer postId={post._id} updatePost={updatePost} />
+              <CommentContainer postId={post._id} updatePost={updatePost} />
             </div>
           </div>
         </section>
