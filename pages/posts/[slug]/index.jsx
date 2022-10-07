@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import Comment from "../../../components/Comment";
 import Meta from "../../../components/Meta";
 import MoreCard from "../../../components/MoreCard";
 import fetchData from "../../../customFunctions/fetch";
@@ -7,6 +6,7 @@ import Reactions from "../../../components/Reactions";
 import { useState, useEffect, useContext } from "react";
 import { Context } from "../../../context";
 import Link from "next/link";
+import CommentContainer from "../../../components/CommentContainer";
 
 const PostPage = ({ initialPost, recommended }) => {
   const [post, setPost] = useState(initialPost);
@@ -15,10 +15,13 @@ const PostPage = ({ initialPost, recommended }) => {
   setPost(initialPost)
   },[initialPost]);
 
+  const updatePost = (post) =>{
+    setPost(post);
+  }
+
   const {
     state: { user },
   } = useContext(Context);
-  const [comment, setComment] = useState("");
   const [editModule, setEditModule] = useState(false);
 
   const toggleModule = () => setEditModule(!editModule);
@@ -30,7 +33,6 @@ const PostPage = ({ initialPost, recommended }) => {
         const data = await res.json();
         if (res.status === 200) {
           setPost({ ...post, ...data });
-          setComment("");
         }
       } catch (error) {
         console.log(error);
@@ -40,34 +42,6 @@ const PostPage = ({ initialPost, recommended }) => {
   }, []);
 
   const router = useRouter();
-
-  const sendComment = async (details) => {
-    try {
-      const res = await fetchData(
-        `reaction/comment/${post.slug}`,
-        "POST",
-        details,
-        user.token
-      );
-
-      if (res.status === 200) {
-        const data = await res.json();
-        setPost({ ...post, comments: [...post.comments, data] });
-        setComment("");
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const handleCommenting = (e) => {
-    e.preventDefault();
-    if (comment.trim().length < 1) return;
-    const details = {
-      body: comment,
-    };
-    sendComment(details);
-  };
 
   const handleDelete = async () => {
     try {
@@ -195,43 +169,10 @@ const PostPage = ({ initialPost, recommended }) => {
           <article className="py-4 break-all grid gap-2">
              {post.body.split("#").map((t,i)=> <p key={t+ i}>{t}</p>)} 
             </article>
-          <form onSubmit={handleCommenting} className="px-2 pb-2">
-            <textarea
-              onChange={(e) => setComment(e.target.value)}
-              value={comment}
-              required
-              rows={5}
-              className="border min-h-[80px] rounded outline-none pl-2 focus:border-secondary transition-colors duration-300 border-black w-full"
-              placeholder="Leave your reply..."
-            ></textarea>
-            {user.isLogged ? (
-              <button
-                type="submit"
-                className="inline-block rounded text-white my-2 py-2 px-3 bg-secondary"
-              >
-                comment
-              </button>
-            ) : (
-              <p className="text-sm font-light">
-                <Link href="/login">
-                  <a className="border-secondary border-b text-secondary mr-1">
-                    Log in
-                  </a>
-                </Link>
-                to add a comment
-              </p>
-            )}
-          </form>
           <div className="min-h-[100px]">
             <p className="px-4 pt-2"> Comments </p>
             <div className="p-4 flex flex-col gap-4">
-              {post.comments.length ? (
-                post.comments.map((comm) => (
-                  <Comment key={comm._id} comment={comm} />
-                ))
-              ) : (
-                <p className="text-sm text-gray-500"> No comments </p>
-              )}
+                <CommentContainer postId={post._id} updatePost={updatePost} />
             </div>
           </div>
         </section>
@@ -273,12 +214,12 @@ export const getServerSideProps = async (context) => {
     };
   }
   const data = await res.json();
-  console.log(data.post.title)
+
   return {
     props: {
       initialPost: data.post,
       recommended: data.recommended,
-      revalidate: 2,
+      // revalidate: 2,
     },
   };
 };

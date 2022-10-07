@@ -39,7 +39,7 @@ const Comment = ({ comment }) => {
   };
 
   return (
-    <div className="w-fit shadow shadow-gray-200 rounded-md py-1 px-5">
+    <div className="w-fit shadow shadow-gray-200 rounded-md py-1 mb-4 px-5">
       <div className="flex gap-2 items-center">
         <div className="rounded-full">
         <svg
@@ -68,7 +68,7 @@ const Comment = ({ comment }) => {
               </svg>
         </div>
         <p className="">
-         <span className="text-[10px] text-secondary">@{comment.user}</span> 
+         <span className="text-[10px] text-secondary">@{comment.user[0].username}</span> 
           <span className="text-[8px] block">{new Date(comment.createdAt).toLocaleString("en-GB",{dateStyle:"short"})}</span>
           </p>
       </div>
@@ -99,7 +99,7 @@ const Comment = ({ comment }) => {
             </svg>
           ) : (
             <svg
-              className="w-4 h-4 mr-1 transition-colors duration-300 fill-red-600"
+              className="w-4 h-4 mr-1 transition-colors duration-300 fill-secondary"
               id="Capa_1"
               x="0px"
               y="0px"
