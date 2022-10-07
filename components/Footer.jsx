@@ -6,7 +6,7 @@ const Footer = () => {
       <section className="px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
         <article className="w-64 md:w-96 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
           <a className="flex font-medium items-center md:justify-start justify-center text-gray-500">
-            <h1 className="text-xl text-secondary">Oprah</h1>
+            <h1 className="text-xl text-secondary font-sec">Oprah</h1>
           </a>
           <p className="mt-2 text-sm text-gray-500">
                 After nourishment, shelter and companionship, stories are things we need most in the world.
@@ -83,7 +83,7 @@ const Footer = () => {
           <p className="text-center text-black sm:text-left">
             Crafted by 
             <a
-              className="underline ml-1 text-orange-600"
+              className="underline ml-1 text-secondary"
               href="https://peterngugi.netlify.app"
               target="_blank"
               rel="noopener noreferrer"

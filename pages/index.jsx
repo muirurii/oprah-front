@@ -9,8 +9,10 @@ export default function Home({latest,featured}) {
       <Meta title="Oprah | Home"/>
       <div className="gap-y-12 flex flex-col items-center justify-center hero">
         <h2 className="text-xl sm:text-2xl py-4 px-4 max-w-[600px]">
-        “Sometimes the ideas just come to me. Other times I have to sweat and almost bleed to make ideas come. It’s a mysterious process, but I hope I never find out exactly how it works. I like a mystery, as you may have noticed.”
-       <span className="block mt-2">~ J.K. Rowling </span>
+       <span className="text-secondary">“ </span> 
+        Sometimes the ideas just come to me. Other times I have to sweat and almost bleed to make ideas come. It’s a mysterious process, but I hope I never find out exactly how it works. I like a mystery, as you may have noticed.
+        <span className="text-secondary"> ”</span>
+       <span className="block mt-2"> <span className="text-secondary">~</span>J.K. Rowling </span>
         </h2>
   </div>
       <HomeCategory posts={latest} heading="Latest blogs" />

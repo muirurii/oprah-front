@@ -37,7 +37,7 @@ const Admin = () => {
     }
   };
   return (
-    <main className="px-4 min-h-screen">
+    <main className="min-h-screen">
       {!user.isLogged || user.role !== "ADMIN" ? (
         <div className="h-[400px] flex items-center justify-center">
           <Meta title="You are not logged in" />

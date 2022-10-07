@@ -26,7 +26,7 @@ const FormFields = ({ initial, buttonText, submitHandler,message }) => {
     <section className="my-8 flex justify-center w-screen">
       <form onSubmit={handleSubmit} className="grid gap-1">
         {message.length ? <p className="text-center text-red-600">{message}</p> : null}
-        <div className="flex flex-col gap-y-1 w-[320px] sm:w-[500px]">
+        <div className="flex flex-col gap-y-1 w-[300px] sm:w-[500px]">
           <label htmlFor="title">Title</label>
           <input
             required
@@ -39,7 +39,7 @@ const FormFields = ({ initial, buttonText, submitHandler,message }) => {
             onChange={handleChange}
           />
         </div>
-        <div className="flex flex-col gap-y-1 w-[320px] sm:w-[500px]">
+        <div className="flex flex-col gap-y-1 w-[300px] sm:w-[500px]">
           <label htmlFor="image">Image</label>
           <input
             required
@@ -52,7 +52,7 @@ const FormFields = ({ initial, buttonText, submitHandler,message }) => {
             onChange={handleChange}
           />
         </div>
-        <div className="flex flex-col gap-y-1 w-[320px] sm:w-[500px]">
+        <div className="flex flex-col gap-y-1 w-[300px] sm:w-[500px]">
           <label htmlFor="category">Category</label>
           <select
             required
@@ -68,7 +68,7 @@ const FormFields = ({ initial, buttonText, submitHandler,message }) => {
             <option value="technology">Tech</option>
           </select>
         </div>
-        <div className="flex flex-col gap-y-1 w-[320px] sm:w-[500px]">
+        <div className="flex flex-col gap-y-1 w-[300px] sm:w-[500px]">
           <label htmlFor="body">Body</label>
           <textarea
             required
@@ -82,7 +82,7 @@ const FormFields = ({ initial, buttonText, submitHandler,message }) => {
           ></textarea>
         </div>
         <button
-          className="p-2 bg-secondary rounded w-[320px] sm:w-[500px] text-white mt-2"
+          className="p-2 bg-secondary rounded w-[300px] sm:w-[500px] text-white mt-2"
           type="submit"
         >
           {buttonText}

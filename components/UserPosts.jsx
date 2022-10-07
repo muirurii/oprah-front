@@ -30,7 +30,7 @@ const UserPosts = () => {
   }, []);
 
   return (
-    <section>
+    <section className="w-full">
       <section className="border border-gray-50">
         <div
           className={`flex relative after:absolute after:h-[1px] after:left-0 ${
@@ -41,13 +41,13 @@ const UserPosts = () => {
             onClick={() => setTab("likes")}
             className={`py-2 text-md hover:bg-gray-50 cursor-pointer text-center w-1/2 border-b border-gray-200`}
           >
-            Liked Posts
+            Liked Posts ({likes.length})
           </h1>
           <h1
             onClick={() => setTab("bookmarks")}
             className={`py-2 text-md hover:bg-gray-50 cursor-pointer text-center w-1/2 border-b border-gray-200`}
           >
-            Bookmarks
+            Bookmarks ({bookmarks.length})
           </h1>
         </div>
         {tab === "likes" ? (

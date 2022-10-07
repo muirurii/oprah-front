@@ -79,8 +79,8 @@ const Profile = () => {
     ) {
       return toggleMessage("Please fill all fields", "red");
     }
-    
-    if(updating) return;
+
+    if (updating) return;
     setUpdating(true);
 
     try {
@@ -91,7 +91,7 @@ const Profile = () => {
 
       if (res.status === 200) {
         setUser(dispatch, data);
-        toggleMessage("updated","green");
+        toggleMessage("updated", "green");
       } else {
         throw new Error(data.message);
       }
@@ -110,13 +110,13 @@ const Profile = () => {
   };
 
   return user.isLogged ? (
-    <main className="px-4 mb-8 text-sm">
+    <main className="mb-8 text-sm">
       <Meta title={user.username} />
-      <h1 className="text-3xl py-8">Profile</h1>
-      <section className="h- grid gap-8 lg:grid-cols-2">
+      <h1 className="text-3xl py-8 pl-4">Profile</h1>
+      <section className="grid gap-8 lg:grid-cols-2">
         <section className="h-fit min-h-[300px] pb-4 relative">
           <section className="flex items-center justify-center flex-col py-4">
-            <div className="h-14 w-14 rounded-full  border border-gray-400 flex items-center justify-center gap-x-4">
+            <div className="h-14 w-14 flex items-center justify-center gap-x-4">
               <svg
                 className="h-14 w-14"
                 x="0px"
@@ -144,7 +144,7 @@ const Profile = () => {
             </div>
             <p>{user.username}</p>
             <button
-              className="flex items-center justify-center p-2 gap-x-4 w-2/3 bg-gray-100 mt-2"
+              className="flex items-center relative justify-center p-2 gap-x-4 sm:w-2/3 w-[300px] bg-gray-100 mt-2"
               onClick={() => setUpdateForm(!updateForm)}
             >
               <span>Update your details</span>
@@ -168,40 +168,56 @@ const Profile = () => {
                   </g>
                 </g>
               </svg>
+              <div className="absolute top-1/2 -translate-y-1/2 right-4">
+                <svg
+                  className={`h-8 w-4 transition-all duration-300 ${
+                    updateForm ? "fill-secondary rotate-[180deg]" : "fill-black"
+                  }`}
+                  x="0px"
+                  y="0px"
+                  viewBox="0 0 512 512"
+                  style={{ enableBackground: "new 0 0 512 512" }}
+                  xmlSpace="preserve"
+                >
+                  <path d="M505.183,123.179c-9.087-9.087-23.824-9.089-32.912,0.002l-216.266,216.27L39.729,123.179  c-9.087-9.087-23.824-9.089-32.912,0.002c-9.089,9.089-9.089,23.824,0,32.912L239.55,388.82c4.364,4.364,10.283,6.816,16.455,6.816  c6.172,0,12.092-2.453,16.455-6.817l232.721-232.727C514.272,147.004,514.272,132.268,505.183,123.179z" />
+                </svg>
+              </div>
             </button>
           </section>
-            <form
-              onSubmit={handleUpdate}
-              className={`flex flex-col transition-all origin-top overflow-hidden duration-300 ${updateForm ? "" : "h-0 scale-y-0"} items-center justify-center gap-y-2`}
-            >
-              {message.content.length ? (
-                <p className={`text-center text-${message.type}-600`}>
-                  {message.content}
-                </p>
-              ) : null}
-              <div className="w-2/3">
-                <label htmlFor="">username</label>
-                <input
-                  className="border rounded border-secondary outline-none h-10 mt-1 w-full pl-1"
-                  type="text"
-                  name="newUsername"
-                  value={updateDetails.newUsername}
-                  placeholder="enter new username"
-                  onChange={handleDetailsChange}
-                />
-              </div>
-              <div className="w-2/3">
-                <label htmlFor="">password</label>
-                <input
-                  className="border rounded border-secondary outline-none h-10 mt-1 w-full pl-1"
-                  type="text"
-                  name="newPass"
-                  value={updateDetails.newPass}
-                  placeholder="enter new password"
-                  onChange={handleDetailsChange}
-                />
-              </div>
-              {/* <div className="w-2/3">
+          <form
+            onSubmit={handleUpdate}
+            className={`flex flex-col transition-all origin-top overflow-hidden duration-300 ${
+              updateForm ? "" : "h-0 scale-y-0"
+            } items-center justify-center gap-y-2`}
+          >
+            {message.content.length ? (
+              <p className={`text-center text-${message.type}-600`}>
+                {message.content}
+              </p>
+            ) : null}
+            <div className="w-[300px] sm:w-2/3">
+              <label htmlFor="">username</label>
+              <input
+                className="border rounded border-secondary outline-none h-10 mt-1 w-full pl-1"
+                type="text"
+                name="newUsername"
+                value={updateDetails.newUsername}
+                placeholder="enter new username"
+                onChange={handleDetailsChange}
+              />
+            </div>
+            <div className="w-[300px] sm:w-2/3">
+              <label htmlFor="">password</label>
+              <input
+                className="border rounded border-secondary outline-none h-10 mt-1 w-full pl-1"
+                type="text"
+                name="newPass"
+                value={updateDetails.newPass}
+                placeholder="enter new password"
+                onChange={handleDetailsChange}
+              />
+            </div>
+            {/* <div className="w-2/3">
                 <label htmlFor="">profile pic url</label>
                 <input
                   className="border rounded border-secondary outline-none h-10 mt-1 w-full pl-1"
@@ -212,14 +228,14 @@ const Profile = () => {
                   onChange={handleDetailsChange}
                 />
               </div> */}
-              <button
-                disabled = {updating}
-                className="bg-secondary w-2/3 py-2 text-white mt-4 rounded"
-                type="submit"
-              >
-                Update
-              </button>
-            </form>
+            <button
+              disabled={updating}
+              className="bg-secondary w-[300px] sm:w-2/3 py-2 text-white mt-4 rounded"
+              type="submit"
+            >
+              Update
+            </button>
+          </form>
         </section>
         <UserPosts />
       </section>

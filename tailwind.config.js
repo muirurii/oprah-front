@@ -7,10 +7,11 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                main: [" Poppins, BlinkMacSystemFont, Segoe UI, Roboto,sans-serif;"]
+                main: [" Poppins,sans-serif;"],
+                sec: ["Comforter Brush", "serif"]
             },
             colors: {
-                secondary: " rgb(90, 225, 200)",
+                secondary: " #fa0036",
             }
         },
     },

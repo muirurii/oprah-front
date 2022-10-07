@@ -13,7 +13,6 @@ const PostPage = ({ initialPost, recommended }) => {
 
   useEffect(()=>{
   setPost(initialPost)
-  console.log(initialPost.body.split('#'));
   },[initialPost]);
 
   const {
@@ -98,8 +97,8 @@ const PostPage = ({ initialPost, recommended }) => {
         title={initialPost.title}
       />
       <section className="mt-4 flex items-center lg:items-start text-sm font-light flex-col lg:flex-row justify-center gap-y-4 lg:gap-4 relative">
-        <section className="max-w-xl shadow-gray-300 shadow-sm rounded-md p-4 pb-6 relative">
-          <article className="flex justify-between items-start my-4 pr-2">
+        <section className="max-w-xl shadow-gray-300 shadow-sm rounded-md p-2 sm:px-4 pb-6 relative">
+          <article className="flex justify-between items-start my-4 pr-4">
             <p className="text-sm text-gray-400">
               <span>By {post.creator.username} </span>
               <span className="block pt-1">
@@ -109,7 +108,12 @@ const PostPage = ({ initialPost, recommended }) => {
             {user.isLogged && user.role === "ADMIN" ? (
               <button
                 onClick={toggleModule}
-                className="absolute top-2 right-1 bg-gray-50 h-fit"
+                onBlur={()=>{
+                  setTimeout(() => {
+                    setEditModule(false)
+                  }, 50);
+                } }
+                className="absolute top-4 right-1 h-fit"
               >
                 <svg
                   className="h-8 w-4"
@@ -188,7 +192,7 @@ const PostPage = ({ initialPost, recommended }) => {
             className="w-full h-[280px] rounded-md"
             alt={post.title.slice(0, 6)}
           />
-          <article className="py-4 break-words grid gap-2">
+          <article className="py-4 break-all grid gap-2">
              {post.body.split("#").map((t,i)=> <p key={t+ i}>{t}</p>)} 
             </article>
           <form onSubmit={handleCommenting} className="px-2 pb-2">
@@ -246,21 +250,21 @@ const PostPage = ({ initialPost, recommended }) => {
   );
 };
 
-export const getStaticPaths = async () => {
-  const res = await fetchData("posts", "GET");
-  const posts = await res.json();
+// export const getStaticPaths = async () => {
+//   const res = await fetchData("posts", "GET");
+//   const posts = await res.json();
 
-  const slugs = posts.map((post) => post.slug);
-  const paths = slugs.map((slug) => ({ params: { slug: slug.toString() } }));
+//   const slugs = posts.map((post) => post.slug);
+//   const paths = slugs.map((slug) => ({ params: { slug: slug.toString() } }));
 
-  return {
-    paths,
-    fallback: "blocking",
-  };
-};
+//   return {
+//     paths,
+//     fallback: "blocking",
+//   };
+// };
 
-export const getStaticProps = async (context) => {
-// export const getServerSideProps = async (context) => {
+// export const getStaticProps = async (context) => {
+export const getServerSideProps = async (context) => {
   const res = await fetchData(`posts/${context.params.slug}`);
 
   if (res.status !== 200) {

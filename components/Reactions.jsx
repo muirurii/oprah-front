@@ -122,7 +122,7 @@ const Reactions = ({ post }) => {
           </svg>
         ) : (
           <svg
-            className="w-4 h-4 mr-1 transition-colors duration-300 fill-red-600"
+            className="w-4 h-4 mr-1 transition-colors duration-300 fill-secondary"
             id="Capa_1"
             x="0px"
             y="0px"
