@@ -51,6 +51,8 @@ const Comment = ({ comment: initialComment, isSub }) => {
   const handleReply = async (e) => {
     e.preventDefault();
     if (!replyText.length) return;
+    if (fetching) return;
+    setFetching(true);
     try {
       const res = await fetchData(
         `comments/subcomment/${comment._id}`,
@@ -69,10 +71,12 @@ const Comment = ({ comment: initialComment, isSub }) => {
         setReplyForm(false);
         setShowSubcomments(true);
         setNewComment("");
+        setFetching(false);
       } else {
         throw new Error("Unable to reply");
       }
     } catch (error) {
+      setFetching(false);
       console.log(error.message);
     }
   };
@@ -205,18 +209,18 @@ const Comment = ({ comment: initialComment, isSub }) => {
               if (!replyForm) {
                 setTimeout(() => {
                   inputRef.current.focus();
-                }, 100);
+                }, 10);
               }
               setReplyForm(!replyForm);
             }}
             className="border-b border-gray-100"
           >
-            Reply
+          Reply
           </button>
         ) : null}
       </section>
       {user.isLogged && replyForm ? (
-        <form onSubmit={handleReply} className="flex items-end mb-4">
+        <form onSubmit={handleReply} className="flex border-b border-secondary w-fit items-end mb-4">
           <textarea
             ref={inputRef}
             value={replyText}
@@ -224,10 +228,12 @@ const Comment = ({ comment: initialComment, isSub }) => {
               setReplyText(e.target.value);
             }}
             placeholder="type a reply"
-            className="w-fit h-fit border-b border-secondary resize-none outline-none overflow-hidden"
+            className="w-full h-8 resize-none outline-none overflow-hidden"
           ></textarea>
-          <button type="submit" className="text-white bg-secondary p-2 rounded">
-            Reply
+          <button type="submit" className=" bg-white p-2 rounded">
+          <svg className="h-8 w-8 fill-black"  viewBox="0 0 20 20">
+              <path d="M19 16.685S16.775 6.953 8 6.953V2.969L1 9.542l7 6.69v-4.357c4.763-.001 8.516.421 11 4.81z"/>
+            </svg>
           </button>
         </form>
       ) : null}

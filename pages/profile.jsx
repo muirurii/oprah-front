@@ -14,11 +14,25 @@ const Profile = () => {
   } = useContext(Context);
   const [updateForm, setUpdateForm] = useState(false);
   const [updating, setUpdating] = useState(false);
+  const [previewState, setPreviewState] = useState("");
   const [updateDetails, setUpdateDetails] = useState({
     newUsername: user.username,
     newPass: "",
     picUrl: user.profilePic,
   });
+
+  const[fileInput,setFileInput] = useState("");
+  const[selectedFile,setSelectedFile] = useState("");
+
+  const handleFileInputChange = (e)=>{
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = ()=>{
+      setPreviewState(reader.result);
+    }
+
+  }
 
   const [message, setMessage] = useState({
     content: "",
@@ -217,17 +231,17 @@ const Profile = () => {
                 onChange={handleDetailsChange}
               />
             </div>
-            {/* <div className="w-2/3">
+            <div className="w-2/3">
                 <label htmlFor="">profile pic url</label>
                 <input
-                  className="border rounded border-secondary outline-none h-10 mt-1 w-full pl-1"
-                  type="text"
+                  className="border bg-red-300 rounded border-secondary outline-none h-10 mt-1 w-full pl-1"
+                  type="file"
                   name="picUrl"
-                  value={updateDetails.picUrl}
+                  value={fileInput}
                   placeholder="enter a url for your profile pic"
-                  onChange={handleDetailsChange}
+                  onChange={handleFileInputChange}
                 />
-              </div> */}
+              </div>
             <button
               disabled={updating}
               className="bg-secondary w-[300px] sm:w-2/3 py-2 text-white mt-4 rounded"
@@ -236,6 +250,9 @@ const Profile = () => {
               Update
             </button>
           </form>
+          {
+          // previewState && <img src={previewState} alt="PREVIEW" />
+          }
         </section>
         <UserPosts />
       </section>

@@ -28,7 +28,7 @@ const SubCommentContainer = ({ commentId, newComment }) => {
 
   return (
     <div className="">
-      {subComments.map((sub) => (
+      {subComments.sort((a,b)=> new Date(b.createdAt) - new Date(a.createdAt)  ,0).map((sub) => (
         <Comment comment={sub} key={sub._id} isSub={true} />
       ))}
     </div>
