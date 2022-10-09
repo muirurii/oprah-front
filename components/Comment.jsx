@@ -38,7 +38,7 @@ const Comment = ({ comment: initialComment, isSub }) => {
         user.token
       );
       const data = await res.json();
-      if(res.status === 200){
+      if (res.status === 200) {
         setLikes(data.likes);
       }
       setFetching(false);
@@ -90,30 +90,38 @@ const Comment = ({ comment: initialComment, isSub }) => {
       >
         <div className="flex gap-2 items-center">
           <div className="rounded-full">
-            <svg
-              className="h-6 w-6"
-              x="0px"
-              y="0px"
-              viewBox="0 0 512 512"
-              style={{ enableBackground: "new 0 0 512 512" }}
-              xmlSpace="preserve"
-            >
-              <g>
+            {!user.profilePic.length ? (
+              <svg
+                className="h-6 w-6"
+                x="0px"
+                y="0px"
+                viewBox="0 0 512 512"
+                style={{ enableBackground: "new 0 0 512 512" }}
+                xmlSpace="preserve"
+              >
                 <g>
-                  <path d="M256,0C114.608,0,0,114.608,0,256s114.608,256,256,256s256-114.608,256-256S397.392,0,256,0z M256,496    C123.664,496,16,388.336,16,256S123.664,16,256,16s240,107.664,240,240S388.336,496,256,496z" />
+                  <g>
+                    <path d="M256,0C114.608,0,0,114.608,0,256s114.608,256,256,256s256-114.608,256-256S397.392,0,256,0z M256,496    C123.664,496,16,388.336,16,256S123.664,16,256,16s240,107.664,240,240S388.336,496,256,496z" />
+                  </g>
                 </g>
-              </g>
-              <g>
                 <g>
-                  <path d="M257.408,106.256c-32.704,0-59.296,26.608-59.296,59.312s26.592,59.296,59.296,59.296    c32.704,0,59.312-26.592,59.312-59.296C316.72,132.864,290.112,106.256,257.408,106.256z M257.408,208.864    c-23.872,0-43.296-19.424-43.296-43.296s19.424-43.312,43.296-43.312s43.312,19.44,43.312,43.312S281.28,208.864,257.408,208.864z    " />
+                  <g>
+                    <path d="M257.408,106.256c-32.704,0-59.296,26.608-59.296,59.312s26.592,59.296,59.296,59.296    c32.704,0,59.312-26.592,59.312-59.296C316.72,132.864,290.112,106.256,257.408,106.256z M257.408,208.864    c-23.872,0-43.296-19.424-43.296-43.296s19.424-43.312,43.296-43.312s43.312,19.44,43.312,43.312S281.28,208.864,257.408,208.864z    " />
+                  </g>
                 </g>
-              </g>
-              <g>
                 <g>
-                  <path d="M314.112,252.256l-56.704,42.752l-56.704-42.752c-69.792,20.944-68.912,91.6-68.912,91.6h125.616h125.616    C383.024,343.856,383.904,273.2,314.112,252.256z M257.392,327.84H149.824c3.888-17.408,15.2-44.688,48.048-57.68l49.904,37.616    c2.848,2.144,6.24,3.216,9.632,3.216c3.392,0,6.784-1.072,9.632-3.216l49.904-37.632c33.008,13.024,44.256,40.272,48.096,57.696    H257.392z" />
+                  <g>
+                    <path d="M314.112,252.256l-56.704,42.752l-56.704-42.752c-69.792,20.944-68.912,91.6-68.912,91.6h125.616h125.616    C383.024,343.856,383.904,273.2,314.112,252.256z M257.392,327.84H149.824c3.888-17.408,15.2-44.688,48.048-57.68l49.904,37.616    c2.848,2.144,6.24,3.216,9.632,3.216c3.392,0,6.784-1.072,9.632-3.216l49.904-37.632c33.008,13.024,44.256,40.272,48.096,57.696    H257.392z" />
+                  </g>
                 </g>
-              </g>
-            </svg>
+              </svg>
+            ) : (
+              <img
+                src={user.profilePic}
+                alt={user.username}
+                className="h-6 w-6 rounded-full"
+              />
+            )}
           </div>
           <p className="">
             <span className="text-[10px] text-secondary">
@@ -121,12 +129,12 @@ const Comment = ({ comment: initialComment, isSub }) => {
             </span>
             <span className="text-[8px] block">
               {new Date(comment.createdAt).toLocaleString("en-GB", {
-                minute:"2-digit",
-                day:"2-digit",
-                month:"2-digit",
-                year:"numeric",
-                second:"2-digit",
-                hour:"2-digit"
+                minute: "2-digit",
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+                second: "2-digit",
+                hour: "2-digit",
               })}
             </span>
           </p>
@@ -215,12 +223,15 @@ const Comment = ({ comment: initialComment, isSub }) => {
             }}
             className="border-b border-gray-100"
           >
-          Reply
+            Reply
           </button>
         ) : null}
       </section>
       {user.isLogged && replyForm ? (
-        <form onSubmit={handleReply} className="flex border-b border-secondary w-fit items-end mb-4">
+        <form
+          onSubmit={handleReply}
+          className="flex border-b border-secondary w-fit items-end mb-4"
+        >
           <textarea
             ref={inputRef}
             value={replyText}
@@ -231,8 +242,8 @@ const Comment = ({ comment: initialComment, isSub }) => {
             className="w-full h-8 resize-none outline-none overflow-hidden"
           ></textarea>
           <button type="submit" className=" bg-white p-2 rounded">
-          <svg className="h-8 w-8 fill-black"  viewBox="0 0 20 20">
-              <path d="M19 16.685S16.775 6.953 8 6.953V2.969L1 9.542l7 6.69v-4.357c4.763-.001 8.516.421 11 4.81z"/>
+            <svg className="h-8 w-8 fill-black" viewBox="0 0 20 20">
+              <path d="M19 16.685S16.775 6.953 8 6.953V2.969L1 9.542l7 6.69v-4.357c4.763-.001 8.516.421 11 4.81z" />
             </svg>
           </button>
         </form>

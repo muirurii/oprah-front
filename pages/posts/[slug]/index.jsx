@@ -85,7 +85,7 @@ const PostPage = ({ initialPost, recommended }) => {
                 onBlur={() => {
                   setTimeout(() => {
                     setEditModule(false);
-                  }, 50);
+                  }, 1000);
                 }}
                 className="absolute top-4 right-1 h-fit"
               >

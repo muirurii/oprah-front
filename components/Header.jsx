@@ -66,7 +66,15 @@ const Header = () => {
         {user.isLogged ? (
           <li className="group absolute top-1/2 right-12 z-[40] -translate-y-1/2 flex items-center justify-center gap-x-4">
             <div className="h-9 w-9 flex items-center justify-center text-lg rounded-full border border-secondary relative after:absolute after:left-0 after:bottom-0 after:h-2 after:w-2 after:bg-secondary after:rounded-full cursor-pointer">
-              <span className="uppercase">{user.username.slice(0, 2)}</span>
+              {user.profilePic.length ? (
+                <img
+                  src={user.profilePic}
+                  alt={user.username}
+                  className="h-8 w-8 rounded-full"
+                />
+              ) : (
+                <span className="uppercase">{user.username.slice(0, 2)}</span>
+              )}
               <div className="hidden group-hover:block absolute text-sm top-full right-0 min-w-[240px] p-3 bg-white border border-gray-200 rounded">
                 <p className="text-center">Logged in as {user.username}</p>
                 <div className="mt-4 flex justify-center gap-x-3 font-light">
@@ -109,7 +117,7 @@ const Header = () => {
       </nav>
       <button
         onClick={() => setSmallMenu(!smallMenu)}
-        onBlur={()=>{
+        onBlur={() => {
           setTimeout(() => {
             setSmallMenu(false);
           }, 50);

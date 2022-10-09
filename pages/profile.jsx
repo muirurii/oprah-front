@@ -14,25 +14,23 @@ const Profile = () => {
   } = useContext(Context);
   const [updateForm, setUpdateForm] = useState(false);
   const [updating, setUpdating] = useState(false);
-  const [previewState, setPreviewState] = useState("");
   const [updateDetails, setUpdateDetails] = useState({
     newUsername: user.username,
     newPass: "",
     picUrl: user.profilePic,
   });
 
-  const[fileInput,setFileInput] = useState("");
-  const[selectedFile,setSelectedFile] = useState("");
+  const [previewState, setPreviewState] = useState("");
+  const [selectedFile, setSelectedFile] = useState("");
 
-  const handleFileInputChange = (e)=>{
+  const handleFileInputChange = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onloadend = ()=>{
+    reader.onloadend = () => {
       setPreviewState(reader.result);
-    }
-
-  }
+    };
+  };
 
   const [message, setMessage] = useState({
     content: "",
@@ -85,7 +83,7 @@ const Profile = () => {
       username: user.username,
       newUsername: updateDetails.newUsername,
       newPass: updateDetails.newPass,
-      picUrl: updateDetails.picUrl,
+      picUrl: previewState,
     };
     if (
       updateDetails.newUsername.length < 2 ||
@@ -105,13 +103,15 @@ const Profile = () => {
 
       if (res.status === 200) {
         setUser(dispatch, data);
+        setSelectedFile("");
         toggleMessage("updated", "green");
       } else {
         throw new Error(data.message);
       }
     } catch (error) {
-      toggleMessage(data.message);
+      toggleMessage("Unable to update");
       setUpdating(false);
+      setSelectedFile("");
       console.log(error);
     }
   };
@@ -131,30 +131,38 @@ const Profile = () => {
         <section className="h-fit min-h-[300px] pb-4 relative">
           <section className="flex items-center justify-center flex-col py-4">
             <div className="h-14 w-14 flex items-center justify-center gap-x-4">
-              <svg
-                className="h-14 w-14"
-                x="0px"
-                y="0px"
-                viewBox="0 0 512 512"
-                style={{ enableBackground: "new 0 0 512 512" }}
-                xmlSpace="preserve"
-              >
-                <g>
+              {user.profilePic.length ? (
+                <img
+                  src={user.profilePic}
+                  alt={user.username}
+                  className="h-14 w-14 rounded-full"
+                />
+              ) : (
+                <svg
+                  className="h-14 w-14"
+                  x="0px"
+                  y="0px"
+                  viewBox="0 0 512 512"
+                  style={{ enableBackground: "new 0 0 512 512" }}
+                  xmlSpace="preserve"
+                >
                   <g>
-                    <path d="M256,0C114.608,0,0,114.608,0,256s114.608,256,256,256s256-114.608,256-256S397.392,0,256,0z M256,496    C123.664,496,16,388.336,16,256S123.664,16,256,16s240,107.664,240,240S388.336,496,256,496z" />
+                    <g>
+                      <path d="M256,0C114.608,0,0,114.608,0,256s114.608,256,256,256s256-114.608,256-256S397.392,0,256,0z M256,496    C123.664,496,16,388.336,16,256S123.664,16,256,16s240,107.664,240,240S388.336,496,256,496z" />
+                    </g>
                   </g>
-                </g>
-                <g>
                   <g>
-                    <path d="M257.408,106.256c-32.704,0-59.296,26.608-59.296,59.312s26.592,59.296,59.296,59.296    c32.704,0,59.312-26.592,59.312-59.296C316.72,132.864,290.112,106.256,257.408,106.256z M257.408,208.864    c-23.872,0-43.296-19.424-43.296-43.296s19.424-43.312,43.296-43.312s43.312,19.44,43.312,43.312S281.28,208.864,257.408,208.864z    " />
+                    <g>
+                      <path d="M257.408,106.256c-32.704,0-59.296,26.608-59.296,59.312s26.592,59.296,59.296,59.296    c32.704,0,59.312-26.592,59.312-59.296C316.72,132.864,290.112,106.256,257.408,106.256z M257.408,208.864    c-23.872,0-43.296-19.424-43.296-43.296s19.424-43.312,43.296-43.312s43.312,19.44,43.312,43.312S281.28,208.864,257.408,208.864z    " />
+                    </g>
                   </g>
-                </g>
-                <g>
                   <g>
-                    <path d="M314.112,252.256l-56.704,42.752l-56.704-42.752c-69.792,20.944-68.912,91.6-68.912,91.6h125.616h125.616    C383.024,343.856,383.904,273.2,314.112,252.256z M257.392,327.84H149.824c3.888-17.408,15.2-44.688,48.048-57.68l49.904,37.616    c2.848,2.144,6.24,3.216,9.632,3.216c3.392,0,6.784-1.072,9.632-3.216l49.904-37.632c33.008,13.024,44.256,40.272,48.096,57.696    H257.392z" />
+                    <g>
+                      <path d="M314.112,252.256l-56.704,42.752l-56.704-42.752c-69.792,20.944-68.912,91.6-68.912,91.6h125.616h125.616    C383.024,343.856,383.904,273.2,314.112,252.256z M257.392,327.84H149.824c3.888-17.408,15.2-44.688,48.048-57.68l49.904,37.616    c2.848,2.144,6.24,3.216,9.632,3.216c3.392,0,6.784-1.072,9.632-3.216l49.904-37.632c33.008,13.024,44.256,40.272,48.096,57.696    H257.392z" />
+                    </g>
                   </g>
-                </g>
-              </svg>
+                </svg>
+              )}
             </div>
             <p>{user.username}</p>
             <button
@@ -203,6 +211,7 @@ const Profile = () => {
             className={`flex flex-col transition-all origin-top overflow-hidden duration-300 ${
               updateForm ? "" : "h-0 scale-y-0"
             } items-center justify-center gap-y-2`}
+            encType="multipart/form-data"
           >
             {message.content.length ? (
               <p className={`text-center text-${message.type}-600`}>
@@ -224,35 +233,45 @@ const Profile = () => {
               <label htmlFor="">password</label>
               <input
                 className="border rounded border-secondary outline-none h-10 mt-1 w-full pl-1"
-                type="text"
+                type="password"
                 name="newPass"
                 value={updateDetails.newPass}
                 placeholder="enter new password"
                 onChange={handleDetailsChange}
               />
             </div>
-            <div className="w-2/3">
-                <label htmlFor="">profile pic url</label>
+            <div className="w-[300px] sm:w-2/3">
+              <label className="block" htmlFor="">
+                profile picture
+              </label>
+              <div className="flex justify-start items-start gap-x-8">
                 <input
-                  className="border bg-red-300 rounded border-secondary outline-none h-10 mt-1 w-full pl-1"
+                  className="cursor-pointer w-24 file:w-full file:text-white file:h-full border rounded file:bg-black file:border-none file:rounded file:text-xs outline-none h-10 mt-1"
                   type="file"
                   name="picUrl"
-                  value={fileInput}
+                  value={selectedFile}
                   placeholder="enter a url for your profile pic"
                   onChange={handleFileInputChange}
                 />
+                {previewState ? (
+                  <img
+                    className="w-16 h-16 rounded"
+                    src={previewState}
+                    alt="PREVIEW"
+                  />
+                ) : (
+                  <p className="text-sm my-auto text-center">No file choosen</p>
+                )}
               </div>
+            </div>
             <button
               disabled={updating}
-              className="bg-secondary w-[300px] sm:w-2/3 py-2 text-white mt-4 rounded"
+              className={`${updating ? "bg-red-200 text-black" : "bg-secondary text-white"} w-[300px] sm:w-2/3 py-2 mt-4 rounded`}
               type="submit"
             >
-              Update
+             {updating ? "Updating..." : "Update"}
             </button>
           </form>
-          {
-          // previewState && <img src={previewState} alt="PREVIEW" />
-          }
         </section>
         <UserPosts />
       </section>

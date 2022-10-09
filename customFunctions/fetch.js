@@ -13,7 +13,6 @@ const fetchData = async(route, method, details, token) => {
         });
         return res;
     } catch (error) {
-        console.log(error.message)
         return error;
     }
 };
