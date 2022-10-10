@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import { Context } from "../context";
 
-const FormFields = ({ initial, buttonText, submitHandler,message }) => {
+const FormFields = ({ initial, buttonText, submitHandler,message ,isSubmitting}) => {
   const [data, setData] = useState({
     title: initial.title || "",
     image: initial.image || "",
@@ -82,10 +82,10 @@ const FormFields = ({ initial, buttonText, submitHandler,message }) => {
           ></textarea>
         </div>
         <button
-          className="p-2 bg-secondary rounded w-[300px] sm:w-[500px] text-white mt-2"
+          className={`p-2 ${isSubmitting ? "bg-red-300" : "bg-secondary"} rounded w-[300px] sm:w-[500px] text-white mt-2`}
           type="submit"
         >
-          {buttonText}
+          {isSubmitting ? "Preparing post" : buttonText}
         </button>
       </form>
     </section>

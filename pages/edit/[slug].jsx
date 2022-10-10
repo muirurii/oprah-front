@@ -5,6 +5,7 @@ import FormFields from "../../components/FormFields";
 import Meta from "../../components/Meta";
 import { Context } from "../../context";
 import fetchData from "../../customFunctions/fetch";
+import Loader from "../../components/Loader";
 
 const Edit = () => {
   const {
@@ -12,14 +13,16 @@ const Edit = () => {
   } = useContext(Context);
   const [message, setMessage] = useState("");
   const [post, setPost] = useState({});
-  const [fetching, setFetching] = useState(false);
+  const [fetchingPost, setFetchingPost] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const router = useRouter();
   const { slug } = router.query;
 
   useEffect(() => {
     const getPost = async () => {
-      if (fetching) return;
-      setFetching(true);
+      if (fetchingPost) return;
+      setFetchingPost(true);
       try {
         const res = await fetchData(`posts/${slug}`, "GET");
         const data = await res.json();
@@ -28,17 +31,19 @@ const Edit = () => {
         } else {
           throw new Error(data.message);
         }
-        setFetching(false);
+        setFetchingPost(false);
       } catch (error) {
         console.log(error);
         setMessage(error.message);
-        setFetching(false);
+        setFetchingPost(false);
       }
     };
     getPost();
   }, []);
 
   const submitHandler = async (data) => {
+    setIsSubmitting(true);
+    if(isSubmitting) return;
     const details = {
       oldTitle: post.title,
       newTitle: data.title,
@@ -56,11 +61,13 @@ const Edit = () => {
       const data = await res.json();
       if (res.status === 200) {
         router.push(`/posts/${data.slug}`);
+        setIsSubmitting(false);
       } else {
         throw new Error(data.message);
       }
     } catch (error) {
       setMessage(error.message);
+      setIsSubmitting(false);
       console.log(error);
     }
   };
@@ -68,7 +75,7 @@ const Edit = () => {
   return (
     <main>
       <Meta title="Update post" />
-      {fetching || !user.isLogged || user.role !== "ADMIN" ? (
+      {fetchingPost ? <Loader /> : !user.isLogged || user.role !== "ADMIN" ? (
         <div className="h-[400px] flex items-center justify-center">
           <Meta title="You are not logged in" />
           <Link href="/login">
@@ -83,6 +90,7 @@ const Edit = () => {
           buttonText="Update blog"
           message={message}
           submitHandler={submitHandler}
+          isSubmitting={isSubmitting}
         />
         </>
       )}

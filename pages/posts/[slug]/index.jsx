@@ -167,8 +167,8 @@ const PostPage = ({ initialPost, recommended }) => {
             alt={post.title.slice(0, 6)}
           />
           <article className="py-4 break-all grid gap-2">
-            {post.body.split("#").map((t, i) => (
-              <p key={t + i}>{t}</p>
+            {post.body.split("#").map((text, index) => (
+              <p key={text + index}>{text}</p>
             ))}
           </article>
           <div className="min-h-[100px]">

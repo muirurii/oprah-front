@@ -12,9 +12,13 @@ const Admin = () => {
   } = useContext(Context);
 
   const [message, setMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const router = useRouter();
   const submitHandler = async (data) => {
+    setIsSubmitting(true);
+    if(isSubmitting) return;
+
     const { title, body, image, categories } = data;
     const details = {
       title,
@@ -28,11 +32,13 @@ const Admin = () => {
       const data = await res.json();
       if (res.status === 200) {
         router.push(`/posts/${data.slug}`);
+        setIsSubmitting(false);
       } else {
         throw new Error(data.message);
       }
     } catch (error) {
       setMessage(error.message);
+      setIsSubmitting(false);
       console.log(error.message);
     }
   };
@@ -55,6 +61,7 @@ const Admin = () => {
             buttonText="Add blog"
             message={message}
             submitHandler={submitHandler}
+            isSubmitting={isSubmitting}
           />
         </>
       )}

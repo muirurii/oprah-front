@@ -85,11 +85,8 @@ const Profile = () => {
       newPass: updateDetails.newPass,
       picUrl: previewState,
     };
-    if (
-      updateDetails.newUsername.length < 2 ||
-      updateDetails.newPass.length < 2
-    ) {
-      return toggleMessage("Please fill all fields", "red");
+    if (updateDetails.newUsername.length < 2) {
+      return toggleMessage("Please enter a username", "error");
     }
 
     if (updating) return;
@@ -104,12 +101,12 @@ const Profile = () => {
       if (res.status === 200) {
         setUser(dispatch, data);
         setSelectedFile("");
-        toggleMessage("updated", "green");
+        toggleMessage("updated", "success");
       } else {
         throw new Error(data.message);
       }
     } catch (error) {
-      toggleMessage("Unable to update");
+      toggleMessage(error.message || "Unable to update", "error");
       setUpdating(false);
       setSelectedFile("");
       console.log(error);
@@ -213,11 +210,13 @@ const Profile = () => {
             } items-center justify-center gap-y-2`}
             encType="multipart/form-data"
           >
-            {message.content.length ? (
-              <p className={`text-center text-${message.type}-600`}>
+              <p
+                className={`text-center h-5 ${
+                  message.type === "error" ? "text-red-600" : "text-green-600"
+                }`}
+              >
                 {message.content}
               </p>
-            ) : null}
             <div className="w-[300px] sm:w-2/3">
               <label htmlFor="">username</label>
               <input
@@ -266,10 +265,12 @@ const Profile = () => {
             </div>
             <button
               disabled={updating}
-              className={`${updating ? "bg-red-200 text-black" : "bg-secondary text-white"} w-[300px] sm:w-2/3 py-2 mt-4 rounded`}
+              className={`${
+                updating ? "bg-red-200 text-black" : "bg-secondary text-white"
+              } w-[300px] sm:w-2/3 py-2 mt-4 rounded`}
               type="submit"
             >
-             {updating ? "Updating..." : "Update"}
+              {updating ? "Updating..." : "Update"}
             </button>
           </form>
         </section>
