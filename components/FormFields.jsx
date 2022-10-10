@@ -30,7 +30,7 @@ const FormFields = ({ initial, buttonText, submitHandler,message }) => {
           <label htmlFor="title">Title</label>
           <input
             required
-            className="h-10 border border-secondary outline-none rounded pl-1"
+            className="h-10 border border-black focus:border-secondary outline-none rounded pl-1"
             type="text"
             id="title"
             placeholder="post title"
@@ -43,7 +43,7 @@ const FormFields = ({ initial, buttonText, submitHandler,message }) => {
           <label htmlFor="image">Image</label>
           <input
             required
-            className="h-10 border border-secondary outline-none rounded pl-1"
+            className="h-10 border border-black focus:border-secondary outline-none rounded pl-1"
             type="text"
             id="image"
             placeholder="image url"
@@ -56,7 +56,7 @@ const FormFields = ({ initial, buttonText, submitHandler,message }) => {
           <label htmlFor="category">Category</label>
           <select
             required
-            className="h-10 border border-secondary outline-none rounded pl-1"
+            className="h-10 border border-black focus:border-secondary outline-none rounded pl-1"
             name="categories"
             id="category"
             value={data.category}
@@ -72,7 +72,7 @@ const FormFields = ({ initial, buttonText, submitHandler,message }) => {
           <label htmlFor="body">Body</label>
           <textarea
             required
-            className="border border-secondary outline-none rounded pl-1"
+            className="border border-black focus:border-secondary outline-none rounded pl-1"
             rows="7"
             id="body"
             placeholder="post body"

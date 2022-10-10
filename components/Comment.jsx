@@ -70,8 +70,10 @@ const Comment = ({ comment: initialComment, isSub }) => {
         setReplyText("");
         setReplyForm(false);
         setShowSubcomments(true);
-        setNewComment("");
         setFetching(false);
+        setTimeout(() => {
+          setNewComment("");
+        }, 500);
       } else {
         throw new Error("Unable to reply");
       }
@@ -82,7 +84,7 @@ const Comment = ({ comment: initialComment, isSub }) => {
   };
 
   return (
-    <section className="relative">
+    <section className="relative mt-2">
       <section
         className={`w-fit min-w-[200px] ${
           isSub ? "bg-gray-50 ml-2" : null
@@ -92,7 +94,7 @@ const Comment = ({ comment: initialComment, isSub }) => {
           <div className="rounded-full">
             {!user.profilePic.length ? (
               <svg
-                className="h-6 w-6"
+                className="h-7 w-7"
                 x="0px"
                 y="0px"
                 viewBox="0 0 512 512"
@@ -119,11 +121,11 @@ const Comment = ({ comment: initialComment, isSub }) => {
               <img
                 src={user.profilePic}
                 alt={user.username}
-                className="h-6 w-6 rounded-full"
+                className="h-7 w-7 rounded-full"
               />
             )}
           </div>
-          <p className="">
+          <p className="leading-normal">
             <span className="text-[10px] text-secondary">
               @{comment.user[0].username}
             </span>
@@ -139,13 +141,13 @@ const Comment = ({ comment: initialComment, isSub }) => {
             </span>
           </p>
         </div>
-        <p className="text-sm font-light pt-2 max-w-xs sm:max-w-sm md:max-w-md">
+        <p className="text-sm font-light pt-2 break-all max-w-xs sm:max-w-sm md:max-w-md">
           {comment.body}
         </p>
         <div className="py-2 flex items-start justify-start">
           <span
             onClick={handleLikeComment}
-            className="cursor-pointer text-gray-400 mr-2 leading-none text-sm inline-flex"
+            className="cursor-pointer text-gray-400 mr-2 leading-none text-xs inline-flex items-center"
           >
             {!hasLiked ? (
               <svg
@@ -181,7 +183,7 @@ const Comment = ({ comment: initialComment, isSub }) => {
             )}
             {likes.length}
           </span>
-          <span className="cursor-pointer text-gray-400 mr-2 leading-none text-sm pr-3 inline-flex">
+          <span className="cursor-pointer text-gray-400 mr-2 leading-none text-xs inline-flex items-center">
             <svg
               className="w-4 h-4 mr-1"
               stroke="currentColor"
@@ -200,14 +202,14 @@ const Comment = ({ comment: initialComment, isSub }) => {
       <section
         className={`${
           isSub ? "ml-2" : null
-        } text-xs font-lighter flex items-start justify-start gap-x-6 mb-2`}
+        } text-xs font-lighter flex items-start justify-start gap-x-6 mb-0`}
       >
         {comment.subComments.length ? (
           <button
             onClick={() => setShowSubcomments(!showSubcomments)}
-            className="border-b border-gray-100"
+            className="hover:text-secondary"
           >
-            {!showSubcomments ? "View replies" : "Hide replies"}
+            {!showSubcomments ? "view replies" : "hide replies"}
           </button>
         ) : null}
 
@@ -221,16 +223,16 @@ const Comment = ({ comment: initialComment, isSub }) => {
               }
               setReplyForm(!replyForm);
             }}
-            className="border-b border-gray-100"
+            className="hover:text-secondary"
           >
-            Reply
+           {replyForm ? "cancel" : "reply" } 
           </button>
         ) : null}
       </section>
       {user.isLogged && replyForm ? (
         <form
           onSubmit={handleReply}
-          className="flex border-b border-secondary w-fit items-end mb-4"
+          className="flex w-fit items-end my-2 border-b relative"
         >
           <textarea
             ref={inputRef}
@@ -239,10 +241,10 @@ const Comment = ({ comment: initialComment, isSub }) => {
               setReplyText(e.target.value);
             }}
             placeholder="type a reply"
-            className="w-full h-8 resize-none outline-none overflow-hidden"
+            className="w-full h-8 resize-none pr-6 border-b border-black focus:border-secondary outline-none overflow-hidden"
           ></textarea>
-          <button type="submit" className=" bg-white p-2 rounded">
-            <svg className="h-8 w-8 fill-black" viewBox="0 0 20 20">
+          <button type="submit" className="rounded absolute top-1/2 -translate-y-1/2 right-0 bg-white">
+            <svg className="h-6 w-6 fill-secondary" viewBox="0 0 20 20">
               <path d="M19 16.685S16.775 6.953 8 6.953V2.969L1 9.542l7 6.69v-4.357c4.763-.001 8.516.421 11 4.81z" />
             </svg>
           </button>

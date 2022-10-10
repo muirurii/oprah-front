@@ -24,16 +24,15 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-white fixed top-0 text-sm left-0 w-screen z-10 flex items-center justify-between px-4 sm:px-12 shadow shadow-gray-100 h-[70px]">
-      <h1 className="text-2xl font-bold bg-white h-full w-full flex items-center justify-start text-secondary font-sec">
+    <header className="bg-white fixed top-0 text-sm left-0 w-screen z-10 flex items-center justify-between pr-4 sm:px-12 shadow shadow-gray-100 h-[70px]">
+      <h1 className="text-2xl font-bold bg-white relative pl-4 sm:p-0 z-50 h-full w-full flex items-center justify-start text-secondary font-sec">
         <span className="text-black">O</span>prah
       </h1>
       <nav>
         <ul
-          onClick={() => setSmallMenu(false)}
           className={`${
-            smallMenu ? "translate-y-0 border-l border-t" : " -translate-y-full"
-          } -z-10  flex transition-all duration-300 sm:transform-none sm:transition-none flex-col sm:flex-row gap-y-1 bg-white border-gray-300 sm:border-none sm:bg-transparent w-[300px] h-screen sm:h-full sm:w-full p-8 pt-14 sm:p-0 sm:pr-40 absolute z-20 sm:[position:unset] top-full right-0 items-start sm:items-center`}
+            smallMenu ? "translate-y-0 border-l" : " -translate-y-hideMenu"
+          } z-10  flex transition-all duration-300 sm:transform-none sm:transition-none flex-col sm:flex-row gap-y-1 bg-white border-gray-300  sm:border-none sm:bg-transparent w-[300px] h-screen sm:h-full sm:w-full p-8 pt-14 sm:p-0 sm:pr-40 absolute sm:[position:unset] top-[72px] right-0 items-start sm:items-center`}
         >
           <li className="mr-4 hover:text-secondary transition-colors duration-300">
             <Link href="/">Home</Link>
@@ -64,7 +63,7 @@ const Header = () => {
           ) : null}
         </ul>
         {user.isLogged ? (
-          <li className="group absolute top-1/2 right-12 z-[40] -translate-y-1/2 flex items-center justify-center gap-x-4">
+          <li className="group absolute top-1/2 right-12 z-[60] -translate-y-1/2 flex items-center justify-center gap-x-4">
             <div className="h-9 w-9 flex items-center justify-center text-lg rounded-full border border-secondary relative after:absolute after:left-0 after:bottom-0 after:h-2 after:w-2 after:bg-secondary after:rounded-full cursor-pointer">
               {user.profilePic.length ? (
                 <img
@@ -95,8 +94,7 @@ const Header = () => {
           </li>
         ) : (
           <ul
-            onClick={() => setSmallMenu(false)}
-            className="absolute top-0 right-2 sm:right-8 flex items-center h-full"
+            className="absolute bg-white z-50 top-0 right-2 sm:right-8 flex items-center h-full"
           >
             <Link href="/login">
               <a>
@@ -120,7 +118,7 @@ const Header = () => {
         onBlur={() => {
           setTimeout(() => {
             setSmallMenu(false);
-          }, 50);
+          }, 500);
         }}
         className="sm:hidden absolute -bottom-8 z-30 h-9 p-1 right-4 rounded-br rounded-bl bg-white"
       >

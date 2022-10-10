@@ -85,12 +85,13 @@ const CommentContainer = ({ postId, updatePost }) => {
           </p>
         )}
       </form>
+      <h2 className="text-sm">Comments</h2>
       {comments.length ? (
         comments.sort((a,b)=> new Date(b.createdAt) - new Date(a.createdAt)  ,0).map((comm) => {
           return <Comment comment={comm} key={comm._id} />;
         })
       ) : (
-        <p className="p-2">{fetching ? "Loading comments" : "No comments"}</p>
+        <p className="p-2 text-xs">{fetching ? "Loading comments" : "No comments"}</p>
       )}
     </section>
   );

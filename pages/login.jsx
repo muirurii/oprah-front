@@ -46,7 +46,7 @@ const LogIn = () => {
 
   return (
     <div className="w-full h-screen flex items-center justify-center">
-      <Meta title={"Log in"} />
+      <Meta title="Log in" />
         <form className="max-w-[400px] sm:w-[500px] rounded-lg" onSubmit={handleLogIn}>
           <h2 className="text-2xl text-center mb-8">Login</h2>
           {err.length ? <p className="text-sm text-red-600 text-center pb-2">{err}</p> : null} 
@@ -55,7 +55,7 @@ const LogIn = () => {
               <div className="flex items-center">
                 <input
                   type="text"
-                  placeholder="Email Address"
+                  placeholder="username"
                   className="
                     w-full
                     border
@@ -74,7 +74,7 @@ const LogIn = () => {
               <div className="flex items-center">
                 <input
                   type="password"
-                  placeholder="Password"
+                  placeholder="password"
                   className="
                     w-full
                     border

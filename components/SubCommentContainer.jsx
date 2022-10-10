@@ -21,6 +21,7 @@ const SubCommentContainer = ({ commentId, newComment }) => {
   }, []);
 
   useEffect(() => {
+    console.log(newComment);
     if (Object.values(newComment).length) {
       setSubComments([...subComments, newComment]);
     }
@@ -29,7 +30,9 @@ const SubCommentContainer = ({ commentId, newComment }) => {
   return (
     <div className="">
       {subComments.sort((a,b)=> new Date(b.createdAt) - new Date(a.createdAt)  ,0).map((sub) => (
-        <Comment comment={sub} key={sub._id} isSub={true} />
+        <div  key={sub._id} className="pb-2 md:pl-2">
+        <Comment comment={sub} isSub={true} />
+        </div>
       ))}
     </div>
   );

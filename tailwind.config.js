@@ -12,6 +12,12 @@ module.exports = {
             },
             colors: {
                 secondary: " #fa0036",
+            },
+            translate: {
+                hideMenu: "calc(100% + 70px)",
+            },
+            height: {
+                commentOutline: "calc(100% - 8px)"
             }
         },
     },

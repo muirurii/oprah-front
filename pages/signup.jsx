@@ -77,7 +77,7 @@ const SignUp = () => {
             <div className="flex items-center">
               <input
                 type="password"
-                placeholder="password"
+                placeholder="enter a password"
                 className="
                     w-full
                     border

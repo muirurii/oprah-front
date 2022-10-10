@@ -172,7 +172,6 @@ const PostPage = ({ initialPost, recommended }) => {
             ))}
           </article>
           <div className="min-h-[100px]">
-            <p className="px-4 pt-2"> Comments </p>
             <div className="p-4 flex flex-col gap-4">
               <CommentContainer postId={post._id} updatePost={updatePost} />
             </div>

@@ -221,7 +221,7 @@ const Profile = () => {
             <div className="w-[300px] sm:w-2/3">
               <label htmlFor="">username</label>
               <input
-                className="border rounded border-secondary outline-none h-10 mt-1 w-full pl-1"
+                className="border rounded border-black focus:border-secondary outline-none h-10 mt-1 w-full pl-1"
                 type="text"
                 name="newUsername"
                 value={updateDetails.newUsername}
@@ -232,7 +232,7 @@ const Profile = () => {
             <div className="w-[300px] sm:w-2/3">
               <label htmlFor="">password</label>
               <input
-                className="border rounded border-secondary outline-none h-10 mt-1 w-full pl-1"
+                className="border rounded border-black focus:border-secondary outline-none h-10 mt-1 w-full pl-1"
                 type="password"
                 name="newPass"
                 value={updateDetails.newPass}
