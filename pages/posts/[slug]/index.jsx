@@ -181,7 +181,6 @@ const PostPage = ({ initialPost, recommended }) => {
           <h2 className="bg-secondary text-white p-4"> Read also </h2>
           <div className="flex flex-col w-full">
             {recommended
-              .filter((p) => p._id !== post._id)
               .map((post) => (
                 <MoreCard key={post._id} post={post} />
               ))}

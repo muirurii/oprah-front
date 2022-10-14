@@ -38,9 +38,12 @@ const Header = () => {
             <Link href="/">Home</Link>
           </li>
           <li className="mr-4 relative group">
-            <span className=" hover:text-secondary transition-colors duration-300 cursor-pointer">
+            <Link href="/blogs">
+              <a>
+            <span className="hover:text-secondary transition-colors duration-300 cursor-pointer">
               Blogs
-            </span>
+            </span></a>
+            </Link>
             <ul className="flex sm:hidden pl-2 py-2 sm:absolute top-[102%] left-0  sm:group-hover:flex flex-col gap-y-1 h-fit sm:p-6 bg-white sm:shadow-md rounded-sm">
               <li className="border-b border-gray-200 hover:border-secondary transition-colors duration-300">
                 <Link href="/lifestyle">Lifestyle</Link>

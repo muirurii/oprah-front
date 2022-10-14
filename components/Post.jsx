@@ -12,9 +12,12 @@ const Post = ({ post }) => {
           alt="blog"
         />
         <div className="p-4">
-          <p className="mb-1 text-xs">{new Date(post.createdAt).toLocaleDateString("en-GB",{
+          <div className="mb-1 flex items-center justify-between text-xs">
+            <p>{new Date(post.createdAt).toLocaleDateString("en-GB",{
             dateStyle:"full"
           })}</p>
+          <p>By {post.creator.username}</p>
+          </div>
           <h1 className="text-lg font-medium text-gray-900 mb-3">
             {post.title.slice(0,100)} {post.title.length > 100 ? '...' : null}
           </h1>

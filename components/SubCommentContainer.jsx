@@ -21,7 +21,6 @@ const SubCommentContainer = ({ commentId, newComment }) => {
   }, []);
 
   useEffect(() => {
-    console.log(newComment);
     if (Object.values(newComment).length) {
       setSubComments([...subComments, newComment]);
     }
