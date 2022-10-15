@@ -44,7 +44,7 @@ const Header = () => {
               Blogs
             </span></a>
             </Link>
-            <ul className="flex sm:hidden pl-2 py-2 sm:absolute top-[102%] left-0  sm:group-hover:flex flex-col gap-y-1 h-fit sm:p-6 bg-white sm:shadow-md rounded-sm">
+            {/* <ul className="flex sm:hidden pl-2 py-2 sm:absolute top-[102%] left-0  sm:group-hover:flex flex-col gap-y-1 h-fit sm:p-6 bg-white sm:shadow-md rounded-sm">
               <li className="border-b border-gray-200 hover:border-secondary transition-colors duration-300">
                 <Link href="/lifestyle">Lifestyle</Link>
               </li>
@@ -54,7 +54,7 @@ const Header = () => {
               <li className="border-b border-gray-200 hover:border-secondary transition-colors duration-300">
                 <Link href="/fashion">Fashion</Link>
               </li>
-            </ul>
+            </ul> */}
           </li>
           <li className="mr-4 hover:text-secondary transition-colors duration-300">
             <Link href="/about">About</Link>

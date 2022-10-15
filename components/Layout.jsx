@@ -35,6 +35,7 @@ const Layout = ({ children }) => {
       setLoading(true);
     });
     Router.events.on("routeChangeComplete", () => {
+      window.scrollTo(0,0);
       setLoading(false);
     });
   }, []);
@@ -59,16 +60,20 @@ const Layout = ({ children }) => {
     }
   };
 
-  return !loading && !gettingUser ? (
-    <section className="overflow-x-hidden font-main pt-20">
-      <Header />
-      {children}
-      <Footer />
-    </section>
-  ) : (
-    <div className="flex items-center justify-center h-screen w-screen bg-white">
-      <Loader/>
-    </div>
+  return (
+    <>
+      {gettingUser ? (
+        <section className="pt-[70px]">
+          <Loader />
+        </section>
+      ) : (
+        <section className="overflow-x-hidden font-main pt-20">
+          <Header />
+          {loading ? <Loader /> : children}
+          <Footer />
+        </section>
+      )}
+    </>
   );
 };
 

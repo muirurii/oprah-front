@@ -7,7 +7,7 @@ const Post = ({ post }) => {
     <section className="p-4 mx-ato w-[320px] sm:w-[400px]">
       <div className="h-fit border-2 border-gray-100 border-opacity-60 rounded-lg overflow-hidden">
         <img
-          className="lg:h-48 md:h-36 w-full object-cover object-center"
+          className="h-40 md:h-48 w-full object-cover object-center"
           src={post.image}
           alt="blog"
         />

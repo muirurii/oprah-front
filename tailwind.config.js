@@ -17,7 +17,7 @@ module.exports = {
                 hideMenu: "calc(100% + 70px)",
             },
             height: {
-                commentOutline: "calc(100% - 8px)"
+                loader: "calc(100vh - 100px)"
             }
         },
     },

@@ -100,7 +100,7 @@ const Blogs = ({ posts: initialPosts }) => {
     <main>
       <Meta title="Blogs" />
       <h1 className="text-3xl pt-8 pl-4">Blogs</h1>
-      <section className="bg-red-00 mt-4 flex items-start justify-end px-4">
+      <section className="bg-red-00 mt-6 flex items-start justify-center sm:justify-start px-4">
         <section className="relative">
           <button
             onClick={() => setShowSortMenu(!showSortMenu)}
@@ -252,7 +252,7 @@ const Blogs = ({ posts: initialPosts }) => {
           className="flex items-center justify-center relative"
         >
           <input
-            className="h-9 w-64 border border-r-0 border-secondary rounded-bl rounded-tl outline-none pl-4 peer focus:border-2 focus:border-r-0"
+            className="h-9 w-54 sm:w-64 border border-r-0 border-secondary rounded-bl rounded-tl outline-none pl-4 peer focus:border-2 focus:border-r-0"
             type="text"
             placeholder="search blogs"
             value={search}

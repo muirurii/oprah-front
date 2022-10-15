@@ -20,7 +20,7 @@ const Profile = () => {
     picUrl: user.profilePic,
   });
 
-  const [previewState, setPreviewState] = useState("");
+  const [previewState, setPreviewState] = useState(user.profilePic);
   const [selectedFile, setSelectedFile] = useState("");
 
   const handleFileInputChange = (e) => {
@@ -207,7 +207,7 @@ const Profile = () => {
             onSubmit={handleUpdate}
             className={`flex flex-col transition-all origin-top overflow-hidden duration-300 ${
               updateForm ? "" : "h-0 scale-y-0"
-            } items-center justify-center gap-y-2`}
+            } items-center justify-center gap-y-3`}
             encType="multipart/form-data"
           >
               <p
@@ -243,13 +243,13 @@ const Profile = () => {
               <label className="block" htmlFor="">
                 profile picture
               </label>
-              <div className="flex justify-start items-start gap-x-8">
+              <div className="flex justify-start items-start mt-1 gap-x-8">
                 <input
                   className="cursor-pointer w-24 file:w-full file:text-white file:h-full border rounded file:bg-black file:border-none file:rounded file:text-xs outline-none h-10 mt-1"
                   type="file"
                   name="picUrl"
                   value={selectedFile}
-                  placeholder="enter a url for your profile pic"
+                  placeholder="e"
                   onChange={handleFileInputChange}
                 />
                 {previewState ? (

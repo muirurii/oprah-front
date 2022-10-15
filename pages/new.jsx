@@ -16,8 +16,9 @@ const Admin = () => {
 
   const router = useRouter();
   const submitHandler = async (data) => {
-    setIsSubmitting(true);
     if(isSubmitting) return;
+    setIsSubmitting(true);
+    console.log(data);
 
     const { title, body, image, categories } = data;
     const details = {
@@ -43,7 +44,7 @@ const Admin = () => {
     }
   };
   return (
-    <main className="min-h-screen">
+    <main className="">
       {!user.isLogged || user.role !== "ADMIN" ? (
         <div className="h-[400px] flex items-center justify-center">
           <Meta title="You are not logged in" />

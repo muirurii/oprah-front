@@ -44,6 +44,8 @@ const Edit = () => {
   const submitHandler = async (data) => {
     setIsSubmitting(true);
     if(isSubmitting) return;
+    setMessage("");
+    
     const details = {
       oldTitle: post.title,
       newTitle: data.title,
@@ -51,6 +53,7 @@ const Edit = () => {
       newCategories: data.categories,
       newBody: data.body,
     };
+
     try {
       const res = await fetchData(
         `posts/${post.slug}`,
@@ -66,7 +69,7 @@ const Edit = () => {
         throw new Error(data.message);
       }
     } catch (error) {
-      setMessage(error.message);
+      setMessage("unable to update");
       setIsSubmitting(false);
       console.log(error);
     }
