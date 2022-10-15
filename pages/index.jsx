@@ -6,7 +6,7 @@ import fetchData from "../customFunctions/fetch";
 export default function Home({latest,featured}) {
   return (
     <div className="py-8 min-h-screen w-screen">
-      <Meta title="Oprah | Home"/>
+      <Meta title="Orpah | Home"/>
       <div className="gap-y-12 flex flex-col items-center justify-center hero">
         <h2 className="text-xl sm:text-2xl py-4 px-4 max-w-[600px]">
        <span className="text-secondary">“ </span> 
