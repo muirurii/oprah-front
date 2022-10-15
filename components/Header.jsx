@@ -26,7 +26,7 @@ const Header = () => {
   return (
     <header className="bg-white fixed top-0 text-sm left-0 w-screen z-10 flex items-center justify-between pr-4 sm:px-12 shadow shadow-gray-100 h-[70px]">
       <h1 className="text-2xl font-bold bg-white relative pl-4 sm:p-0 z-50 h-full w-full flex items-center justify-start text-secondary font-sec">
-        <span className="text-black">O</span>prah
+        <span className="text-black">O</span>rpah
       </h1>
       <nav>
         <ul
