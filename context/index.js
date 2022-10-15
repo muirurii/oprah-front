@@ -3,15 +3,15 @@ import { userReducer } from "./reducers/userReducers";
 
 const initialState = {
   user: {
-    isLogged:false,
-    _id: '', 
-    username: '',
-    token:"",
-    bookmarks: [], 
+    isLogged: false,
+    _id: "",
+    username: "",
+    token: "",
+    bookmarks: [],
     likes: [],
-    bookmarks:[],
+    bookmarks: [],
     profilePic: "",
-},
+  },
 };
 
 export const Context = createContext({});
@@ -32,5 +32,5 @@ export const Provider = ({ children }) => {
   );
   const value = { state, dispatch };
 
-  return <Context.Provider value={value}>{children}</Context.Provider>;
+  return <Context.Provider value={value}> {children} </Context.Provider>;
 };

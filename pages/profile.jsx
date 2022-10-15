@@ -190,7 +190,7 @@ const Profile = () => {
               <div className="absolute top-1/2 -translate-y-1/2 right-4">
                 <svg
                   className={`h-8 w-4 transition-all duration-300 ${
-                    updateForm ? "fill-secondary rotate-[180deg]" : "fill-black"
+                    updateForm ? "fill-secondary rotate-180" : "fill-black"
                   }`}
                   x="0px"
                   y="0px"
