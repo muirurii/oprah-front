@@ -8,6 +8,10 @@ import { Context } from "../../../context";
 import Link from "next/link";
 import CommentContainer from "../../../components/CommentContainer";
 
+import { marked } from "marked";
+import createDOMpurify from "dompurify";
+import {JSDOM} from "jsdom";
+
 const PostPage = ({ initialPost, recommended }) => {
   const [post, setPost] = useState(initialPost);
 
@@ -74,7 +78,7 @@ const PostPage = ({ initialPost, recommended }) => {
         <section className="max-w-xl shadow-gray-300 shadow-sm rounded-md p-2 sm:px-4 pb-6 relative">
           <article className="flex justify-between items-start my-4 pr-4">
             <p className="text-sm text-gray-400">
-              <span>By {post.creator.username} </span>
+              <span className="text-normal font-bold text-secondary">By {post.creator.username} </span>
               <span className="block pt-1">
                 {new Date(post.createdAt).toLocaleDateString()}
               </span>
@@ -160,16 +164,21 @@ const PostPage = ({ initialPost, recommended }) => {
             ) : null}
             <Reactions post={post} />
           </article>
-          <h1 className="font-bold text-xl pb-2"> {post.title} </h1>
+          <h1 className="font-bold text-3xl pb-2"> {post.title} </h1>
           <img
             src={post.image}
             className="w-full h-[280px] rounded-md"
             alt={post.title.slice(0, 6)}
           />
-          <article className="py-4 break-all grid gap-2">
-            {post.body.split("#").map((text, index) => (
+          <article dangerouslySetInnerHTML={{__html:post.body}}
+          className="py-4 break-all grid gap-2 
+          prose prose-sm prose-img:rounded-sm
+          prose-img:h-64 prose-img:w-full prose-p:m-0
+          ">
+            {/* {post.body.split("#").map((text, index) => (
               <p key={text + index}>{text}</p>
-            ))}
+            ))} */}
+            {/* {post.body} */}
           </article>
           <div className="min-h-[100px]">
             <div className="p-4 flex flex-col gap-4">
@@ -215,9 +224,19 @@ export const getServerSideProps = async (context) => {
   }
   const data = await res.json();
 
+  const window = new JSDOM("").window
+
+  const DOMPurify = createDOMpurify(window);
+
+  const markdown = DOMPurify.sanitize(marked(data.post.body));
+  console.log(markdown.charCodeAt('<p></p>'))
+  console.log(markdown)
+
   return {
     props: {
-      initialPost: data.post,
+      initialPost: {...data.post,
+        body:markdown
+      },
       recommended: data.recommended,
       // revalidate: 2,
     },

@@ -52,6 +52,7 @@ const Edit = () => {
       newImage: data.image,
       newCategories: data.categories,
       newBody: data.body,
+      newExcerpt:data.excerpt
     };
 
     try {

@@ -32,10 +32,10 @@ const Layout = ({ children }) => {
 
   useEffect(() => {
     Router.events.on("routeChangeStart", () => {
+      window.scrollTo(0,0);
       setLoading(true);
     });
     Router.events.on("routeChangeComplete", () => {
-      window.scrollTo(0,0);
       setLoading(false);
     });
   }, []);

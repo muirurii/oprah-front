@@ -1,7 +1,7 @@
 import fetchData from "../customFunctions/fetch";
 import PostsContainer from "../components/PostsContainer";
 import Meta from "../components/Meta";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const sorts = {
   latest: {
@@ -33,11 +33,12 @@ const sorts = {
 let timeout;
 
 const Blogs = ({ posts: initialPosts }) => {
-  const [recentSearches, setRecentSearches] = useState([]);
+  const [posts, setPosts] = useState(initialPosts);
+  const [sorting, setSorting] = useState(false);
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("latest");
-  const [posts, setPosts] = useState(initialPosts);
   const [showSortMenu, setShowSortMenu] = useState(false);
+  const searchInput = useRef();
   const blogsPerPage = 6;
 
   useEffect(() => {
@@ -50,8 +51,10 @@ const Blogs = ({ posts: initialPosts }) => {
 
   const handleSort = async (e) => {
     e.preventDefault();
+    if(sorting) return;
+    setSorting(true);
     const { sortProp, sortValue } = sorts[sort];
-    setShowSortMenu(false);
+
     try {
       const res = await fetchData(
         `posts?sortProp=${sortProp}&sortValue=${sortValue}`
@@ -59,8 +62,13 @@ const Blogs = ({ posts: initialPosts }) => {
       const data = await res.json();
       if (res.status === 200) {
         setPosts(data.posts);
-      }
-    } catch (error) {}
+      } 
+      setShowSortMenu(false);
+      setSorting(false);
+    } catch (error) {
+      setSorting(false);
+      setShowSortMenu(false);
+    }
   };
 
   const updateSort = (e) => {
@@ -124,7 +132,7 @@ const Blogs = ({ posts: initialPosts }) => {
             </svg>
           </button>
           {showSortMenu && (
-            <section className="absolute top-full left-0 w-64 pb-2 bg-white shadow-sm shadow-gray-400 rounded overflow-hidden">
+            <section className="absolute top-full z-[3] left-0 w-64 pb-2 bg-white shadow-sm shadow-gray-400 rounded overflow-hidden">
               <h3 className="p-2 mb-2 text-center bg-secondary text-white">
                 Sort blogs by
               </h3>
@@ -140,6 +148,7 @@ const Blogs = ({ posts: initialPosts }) => {
                         type="radio"
                         name="sort"
                         id="latest"
+                        checked = {sort === "latest"} 
                       />
                       <label htmlFor="latest" className="text-xs font-lighter">
                         Latest first
@@ -153,6 +162,7 @@ const Blogs = ({ posts: initialPosts }) => {
                         type="radio"
                         name="sort"
                         id="old"
+                        checked = {sort === "oldest"} 
                       />
                       <label htmlFor="old" className="text-xs font-lighter">
                         Old blogs first
@@ -173,6 +183,7 @@ const Blogs = ({ posts: initialPosts }) => {
                         type="radio"
                         name="sort"
                         id="mostViewed"
+                        checked = {sort === "mostViewed"} 
                       />
                       <label htmlFor="mostViewed" className="text-xs font-lighter">
                         Most viewed first
@@ -186,6 +197,7 @@ const Blogs = ({ posts: initialPosts }) => {
                         type="radio"
                         name="sort"
                         id="leastViewed"
+                        checked = {sort === "leastViewed"} 
                       />
                       <label htmlFor="leastViewed" className="text-xs font-lighter">
                         Least viewed first
@@ -206,6 +218,7 @@ const Blogs = ({ posts: initialPosts }) => {
                         type="radio"
                         name="sort"
                         id="mostLiked"
+                        checked = {sort === "mostLiked"} 
                       />
                       <label htmlFor="mostLiked" className="text-xs font-lighter">
                         Most liked first
@@ -219,6 +232,7 @@ const Blogs = ({ posts: initialPosts }) => {
                         type="radio"
                         name="sort"
                         id="leastLiked"
+                        checked = {sort === "leastLiked"} 
                       />
                       <label htmlFor="leastLiked" className="text-xs font-lighter">
                         Least liked first
@@ -229,9 +243,16 @@ const Blogs = ({ posts: initialPosts }) => {
                 <div className="flex px-2 my-2 items-center justify-between">
                   <button
                     type="submit"
-                    className="bg-secondary text-white py-2 px-4 rounded text-sm transition-opacity duration-300 hover:opacity-70"
+                    className={`
+                      ${
+                        sorting ? "bg-red-300" : "bg-secondary"
+                      }
+                    text-white py-2 px-4
+                      rounded 
+                      text-sm transition-all duration-300 hover:opacity-70
+                      `}
                   >
-                    Apply changes
+                   {sorting ? "Applying changes..." : "Apply changes"} 
                   </button>
                   <button
                     onClick={() => setShowSortMenu(false)}
@@ -249,18 +270,21 @@ const Blogs = ({ posts: initialPosts }) => {
         </section>
         <form
           onSubmit={handleSearchSubmit}
+          onFocus={()=> setShowSortMenu(false)}
           className="flex items-center justify-center relative"
         >
           <input
-            className="h-9 w-54 sm:w-64 border border-r-0 border-secondary rounded-bl rounded-tl outline-none pl-4 peer focus:border-2 focus:border-r-0"
+            className="h-9 transition-all duration-300 w-12 focus:w-48 focus:sm:w-80 border border-r-0 border-secondary rounded-bl rounded-tl outline-none pl-4 peer focus:border-2 focus:border-r-0"
             type="text"
             placeholder="search blogs"
             value={search}
             onChange={handleSearchInput}
+            ref={searchInput}
           />
           <button
-            className="border peer-focus:border-2 peer-focus:border-l-0 border-l-0 border-secondary rounded-tr rounded-br h-9 px-1 flex items-center justify-center"
+            className="border transition-all duration-300 peer-focus:border-2 peer-focus:border-l-0 border-l-0 border-secondary rounded-tr rounded-br h-9 px-1 flex items-center justify-center"
             type="submit"
+            onClick={()=>searchInput.current.focus()}
           >
             <svg
               className="h-5 w-5"

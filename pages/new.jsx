@@ -20,10 +20,11 @@ const Admin = () => {
     setIsSubmitting(true);
     console.log(data);
 
-    const { title, body, image, categories } = data;
+    const { title, body, image, categories,excerpt } = data;
     const details = {
       title,
       body,
+      excerpt,
       image,
       categories,
     };

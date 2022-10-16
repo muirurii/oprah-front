@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useState } from "react";
 
 const FormFields = ({
@@ -9,8 +10,8 @@ const FormFields = ({
 }) => {
   const [data, setData] = useState({
     title: initial.title || "",
-    // image: initial.image || "",
     categories: initial.category ? initial.category[0] : "",
+    excerpt: initial.excerpt || "",
     body: initial.body || "",
   });
 
@@ -74,9 +75,11 @@ const FormFields = ({
             onChange={handleFileInputChange}
           />
           {previewState ? (
-            <img
-              className="w-36 h-28 rounded"
+            <Image
+              className="rounded"
               src={previewState}
+              height="120px"
+              width="144px"
               alt="PREVIEW"
             />
           ) : (
@@ -99,6 +102,20 @@ const FormFields = ({
             <option value="lifestyle">Lifestyle</option>
             <option value="technology">Tech</option>
           </select>
+        </div>
+        <div className="flex flex-col gap-y-1 w-[300px] sm:w-[500px]">
+        <label htmlFor="excerpt">Excerpt</label>
+        <input type="text"
+          className="h-10 border border-black focus:border-secondary
+          outline-none rounded pl-1"
+          id="excerpt"
+          placeholder="post excerpt"
+          name="excerpt"
+          value={data.excerpt}
+          onChange={handleChange}
+          minLength={100}
+          maxLength={120}
+          />
         </div>
         <div className="flex flex-col gap-y-1 w-[300px] sm:w-[500px]">
           <label htmlFor="body">Body</label>
