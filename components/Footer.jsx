@@ -79,8 +79,8 @@ const Footer = () => {
         </article>
       </section>
       <section className="bg-white">
-        <article className="container mx-auto py-2 px-5 flex items-center sm:justify-between flex-wrap flex-col sm:flex-row">
-          <p className="text-center text-black sm:text-left">
+        <article className="py-2 px-5">
+          <p className="text-center text-black md:text-left">
             Crafted by 
             <a
               className="underline ml-1 text-secondary"
