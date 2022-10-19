@@ -67,6 +67,10 @@ const PostPage = ({ initialPost, recommended }) => {
     }
   };
 
+  const goBack = ()=>{
+    router.back();
+  }
+
   return (
     <main className="py-4 px-2 sm:p-4 mb-8" key={post._id}>
       <Meta
@@ -74,8 +78,9 @@ const PostPage = ({ initialPost, recommended }) => {
         keywords={post.title.slice(0, 100)}
         title={initialPost.title}
       />
+      <button onClick={goBack} className="bg-secondary text-white py-2 px-3">Back</button>
       <section className="mt-4 flex items-center lg:items-start text-sm font-light flex-col lg:flex-row justify-center gap-y-4 lg:gap-4 relative">
-        <section className="max-w-xl shadow-gray-300 shadow-sm rounded-md p-2 sm:px-4 pb-6 relative">
+        <section className="max-w-xl md:w-[600px] shadow-gray-300 shadow-sm rounded-md p-2 sm:px-4 pb-6 relative">
           <article className="flex justify-between items-start my-4 pr-4">
             <p className="text-sm text-gray-400">
               <span className="text-normal font-bold text-secondary">By {post.creator.username} </span>
@@ -230,7 +235,7 @@ export const getServerSideProps = async (context) => {
 
   const markdown = DOMPurify.sanitize(marked(data.post.body));
   console.log(markdown.charCodeAt('<p></p>'))
-  console.log(markdown)
+  // console.log(markdown)
 
   return {
     props: {

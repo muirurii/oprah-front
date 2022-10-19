@@ -19,7 +19,7 @@ const Header = () => {
   const handleLogOut = async () => {
     try {
       const res = await fetchData("auth/logout", "GET");
-      router.push("/");
+      router.push("/login");
       resetUser(dispatch);
     } catch (error) {}
   };

@@ -3,6 +3,8 @@ import PostsContainer from "../components/PostsContainer";
 import Meta from "../components/Meta";
 import { useState, useEffect, useRef } from "react";
 
+let onInputTimeout;
+
 const sorts = {
   latest: {
     sortProp: "createdAt",
@@ -96,7 +98,11 @@ const Blogs = ({ posts: initialPosts }) => {
   };
 
   const handleSearchInput = (e) => {
+    clearTimeout(onInputTimeout);
     setSearch(e.target.value);
+   onInputTimeout = setTimeout(()=>{
+    handleSearch(e.target.value);
+    },1000)
   };
 
   const handleFromRecent = (e) => {
@@ -127,7 +133,7 @@ const Blogs = ({ posts: initialPosts }) => {
     <main>
       <Meta title="Blogs" />
       <h1 className="text-3xl pt-8 pl-4">Blogs</h1>
-      <section className="mt-6 flex items-start justify-center md:justify-start px-4">
+      <section className="mt-6 flex items-start justify-center md:justify-start px-4 gap-x-2">
         <section className="relative">
           <button
             onClick={() => setShowSortMenu(!showSortMenu)}
@@ -306,6 +312,7 @@ const Blogs = ({ posts: initialPosts }) => {
             className="h-9 transition-all duration-300
             w-48
             sm:w-80
+            md:w-96
             border border-r-0 border-secondary rounded-bl rounded-tl outline-none pl-4 peer focus:border-2 focus:border-r-0"
             type="text"
             placeholder="search blogs"
@@ -347,7 +354,7 @@ const Blogs = ({ posts: initialPosts }) => {
                 recentSearch.map((s, i) => {
                   return (
                     <li
-                      key={i * Math.round(Math.random() * 234)}
+                      key={i * Math.random()}
                       className="group flex relative py-1 px-2 cursor-pointer text-sm text-gray-600 hover:bg-gray-100"
                     >
                       <span

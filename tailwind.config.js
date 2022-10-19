@@ -17,7 +17,8 @@ module.exports = {
                 hideMenu: "calc(100% + 70px)",
             },
             height: {
-                loader: "calc(100vh - 100px)"
+                loader: "calc(100vh - 100px)",
+                screenLessHeader: "calc(100vh - 70px)",
             }
         },
     },

@@ -14,8 +14,9 @@ const SignUp = () => {
     repeatPassword: "",
   });
 
-  const {dispatch} = useContext(Context);
-  const [err,setErr] = useState("");
+  const { dispatch } = useContext(Context);
+  const [err, setErr] = useState("");
+  const [creatingAccount, setCreatingAccount] = useState(false);
   const router = useRouter();
 
   const handleFormChange = (value) => {
@@ -24,38 +25,52 @@ const SignUp = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    if(formData.username < 2 || formData.password.length < 2 || formData.repeatPassword.length < 2){
+    if (
+      formData.username < 2 ||
+      formData.password.length < 2 ||
+      formData.repeatPassword.length < 2
+    ) {
       return setErr("Please fill in all fields");
     }
-    if(formData.password !== formData.repeatPassword){
+    if (formData.password !== formData.repeatPassword) {
       return setErr("Passwords don't match!");
     }
     setErr("");
-
+    setCreatingAccount(true);
     const details = {
-        username:formData.username,
-        password:formData.password,
-        repeatPassword:formData.repeatPassword
-      }
-    const res =  await fetchData('users/register',"POST",details);
-    const data = await res.json();
-    
-    if(res.status === 200){
-        setUser(dispatch,data);
+      username: formData.username,
+      password: formData.password,
+      repeatPassword: formData.repeatPassword,
+    };
+    try {
+      const res = await fetchData("users/register", "POST", details);
+      const data = await res.json();
+      if (res.status === 200) {
+        setUser(dispatch, data);
         setErr("");
         router.push("/");
-    }else{
-      setErr(data.message);
+        setCreatingAccount(false);
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      setErr(error.message);
+      setCreatingAccount(false);
     }
   };
 
   return (
-    <div className="w-full h-screen flex items-center justify-center">
-      <Meta title={"Signup"} />
-      <form className="max-w[400px] sm:w-[500px] rounded-lg" onSubmit={handleFormSubmit}>
+    <div className="w-full h-screenLessHeader flex items-center justify-center">
+      <Meta title="Signup" />
+      <form
+        className="w-full max-w-[500px] rounded-lg"
+        onSubmit={handleFormSubmit}
+      >
         <h2 className="text-2xl text-center mb-8">Create account</h2>
         <div className="px-2 pb-10">
-         {err.length ? <p className="text-sm text-red-600 text-center pb-2">{err}</p> : null} 
+          {err.length ? (
+            <p className="text-sm text-red-600 text-center pb-2">{err}</p>
+          ) : null}
           <div className="w-full mb-4">
             <div className="flex items-center">
               <input
@@ -104,7 +119,6 @@ const SignUp = () => {
                     py-2
                     focus:outline-none
                     border-black focus:border-secondary"
-                  
                 onChange={(e) =>
                   handleFormChange({ repeatPassword: e.target.value })
                 }
@@ -122,17 +136,21 @@ const SignUp = () => {
           </p>
           <button
             type="submit"
-            className="
+            className={`
                 w-full
                 py-2
                 mt-8
                 rounded-full
-                bg-secondary
+                ${
+                  creatingAccount
+                    ? "bg-red-300 pointer-events-none"
+                    : "bg-secondary"
+                }
                 text-white
                 focus:outline-none
-              "
+              `}
           >
-            Create
+            {creatingAccount ? "Creating..." : "Create Account"}
           </button>
         </div>
       </form>

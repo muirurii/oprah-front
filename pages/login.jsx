@@ -1,14 +1,14 @@
-import Link from 'next/link';
+import Link from "next/link";
 import Meta from "../components/Meta";
-import { useState } from 'react';
-import fetchData from '../customFunctions/fetch';
-import {setUser} from "../context/actions/userActions";
-import { Context } from '../context';
-import { useContext } from 'react';
-import { useRouter } from 'next/router';
+import { useState } from "react";
+import fetchData from "../customFunctions/fetch";
+import { setUser } from "../context/actions/userActions";
+import { Context } from "../context";
+import { useContext } from "react";
+import { useRouter } from "next/router";
 
 const LogIn = () => {
-  const {dispatch} = useContext(Context);
+  const { dispatch } = useContext(Context);
   const router = useRouter();
 
   const [formData, setFormData] = useState({
@@ -16,47 +16,56 @@ const LogIn = () => {
     password: "",
   });
 
-  const [err,setErr] = useState("");
+  const [err, setErr] = useState("");
+  const [loggingIn, setLoggingIn] = useState(false);
 
-  const handleLogIn = async(e)=>{
+  const handleLogIn = async (e) => {
     e.preventDefault();
 
-    if(formData.username.length < 2 || formData.password < 2){
-      return setErr("Please fill in all fields")
+    if (formData.username.length < 2 || formData.password < 2) {
+      return setErr("Please fill in all fields");
     }
 
     const details = {
-      username:formData.username,
-      password:formData.password
-    }
+      username: formData.username.trim(),
+      password: formData.password,
+    };
 
     setErr("");
+    setLoggingIn(true);
+    try {
+      const res = await fetchData("users/login", "POST", details);
+      const data = await res.json();
 
-    const res = await fetchData('users/login',"POST",details);
-    const data = await res.json();
-
-    if(res.status === 200){
-      setUser(dispatch,data);
-      setErr("");
-      router.push("/")
-    }else{
-      setErr(data.message)
+      if (res.status === 200) {
+        setUser(dispatch, data);
+        setLoggingIn(false);
+        setErr("");
+        router.push("/");
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      setLoggingIn(false);
+      setErr(error.message);
     }
-  }
+  };
 
   return (
-    <div className="w-full h-screen flex items-center justify-center">
+    <div className="w-full h-screenLessHeader flex items-center justify-center">
       <Meta title="Log in" />
-        <form className="max-w-[400px] sm:w-[500px] rounded-lg" onSubmit={handleLogIn}>
-          <h2 className="text-2xl text-center mb-8">Login</h2>
-          {err.length ? <p className="text-sm text-red-600 text-center pb-2">{err}</p> : null} 
-          <div className="px-2 pb-10">
-            <div className="w-full mb-4">
-              <div className="flex items-center">
-                <input
-                  type="text"
-                  placeholder="username"
-                  className="
+      <form className="w-full max-w-[500px] rounded-lg" onSubmit={handleLogIn}>
+        <h2 className="text-2xl text-center mb-8">Login</h2>
+        {err.length ? (
+          <p className="text-sm text-red-600 text-center pb-2">{err}</p>
+        ) : null}
+        <div className="px-2 pb-10">
+          <div className="w-full mb-4">
+            <div className="flex items-center">
+              <input
+                type="text"
+                placeholder="username"
+                className="
                     w-full
                     border
                     border-black
@@ -66,16 +75,18 @@ const LogIn = () => {
                     py-2
                     focus:outline-none
                   "
-                  onChange={(e)=> setFormData({...formData,username:e.target.value})}
-                />
-              </div>
+                onChange={(e) =>
+                  setFormData({ ...formData, username: e.target.value })
+                }
+              />
             </div>
-            <div className="w-full mb-4">
-              <div className="flex items-center">
-                <input
-                  type="password"
-                  placeholder="password"
-                  className="
+          </div>
+          <div className="w-full mb-4">
+            <div className="flex items-center">
+              <input
+                type="password"
+                placeholder="password"
+                className="
                     w-full
                     border
                     border-black
@@ -85,31 +96,39 @@ const LogIn = () => {
                     py-2
                     focus:outline-none
                   "
-                  onChange={(e)=> setFormData({...formData,password:e.target.value})}
-                />
-              </div>
+                onChange={(e) =>
+                  setFormData({ ...formData, password: e.target.value })
+                }
+              />
             </div>
-            <p className='text-sm'>Create account
-           <Link href={"/signup"}><a className='mx-1 inline-block border-b border-secondary text-secondary'>here</a></Link>  
-            if you do not have one</p>
-            <button
-              type="submit"
-              className="
+          </div>
+          <p className="text-sm">
+            Create account
+            <Link href={"/signup"}>
+              <a className="mx-1 inline-block border-b border-secondary text-secondary">
+                here
+              </a>
+            </Link>
+            if you do not have one
+          </p>
+          <button
+            type="submit"
+            className={`
                 w-full
                 py-2
                 mt-8
                 rounded-full
-                bg-secondary
+                ${loggingIn ? "bg-red-300 pointer-events-none" : "bg-secondary"}
                 text-gray-100
                 focus:outline-none
-              "
-            >
-              Login
-            </button>
-          </div>
-        </form>
-      </div>
-  )
-}
+              `}
+          >
+            {loggingIn ? "Logging in.." : "Login"}
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+};
 
 export default LogIn;
