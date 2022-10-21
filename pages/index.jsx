@@ -31,6 +31,12 @@ export default function Home({latest,featured}) {
 
 export const getServerSideProps = async () =>{
     const res = await fetchData('posts/featured',"GET");
+
+    if(res.status !== 200){
+      return {
+        notFound:true
+      }
+    }
     const posts = await res.json();
 
     return{

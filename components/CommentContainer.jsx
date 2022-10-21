@@ -39,7 +39,7 @@ const CommentContainer = ({ postId, updatePost }) => {
       if (res.status === 200) {
         const data = await res.json();
         setComments([...comments, data.comment]);
-        updatePost(data.post);
+        updatePost(data.comment._id);
         setComment("");
       }
     } catch (e) {

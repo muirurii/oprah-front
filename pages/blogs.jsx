@@ -132,7 +132,7 @@ const Blogs = ({ posts: initialPosts }) => {
   return (
     <main>
       <Meta title="Blogs" />
-      <h1 className="text-3xl pt-8 pl-4">Blogs</h1>
+      <h1 className="text-3xl pt-8 px-4">Blogs</h1>
       <section className="mt-6 flex items-start justify-center md:justify-start px-4 gap-x-2">
         <section className="relative">
           <button
@@ -310,9 +310,8 @@ const Blogs = ({ posts: initialPosts }) => {
         >
           <input
             className="h-9 transition-all duration-300
-            w-48
-            sm:w-80
-            md:w-96
+            w-52
+            sm:w-72
             border border-r-0 border-secondary rounded-bl rounded-tl outline-none pl-4 peer focus:border-2 focus:border-r-0"
             type="text"
             placeholder="search blogs"

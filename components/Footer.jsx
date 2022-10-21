@@ -61,7 +61,7 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link href={"/Technology"}>
+                <Link href={"/technology"}>
                   <a className="text-gray-400 hover:text-secondary transition-colors duration-300">
                     Technology
                   </a>

@@ -10,7 +10,7 @@ import CommentContainer from "../../../components/CommentContainer";
 
 import { marked } from "marked";
 import createDOMpurify from "dompurify";
-import {JSDOM} from "jsdom";
+import { JSDOM } from "jsdom";
 
 const PostPage = ({ initialPost, recommended }) => {
   const [post, setPost] = useState(initialPost);
@@ -19,8 +19,8 @@ const PostPage = ({ initialPost, recommended }) => {
     setPost(initialPost);
   }, [initialPost]);
 
-  const updatePost = (post) => {
-    setPost(post);
+  const updatePost = (id) => {
+    setPost({...post,comments:[...post.comments,id]});
   };
 
   const {
@@ -57,7 +57,6 @@ const PostPage = ({ initialPost, recommended }) => {
       );
       const data = await res.json();
       if (res.status === 200) {
-        console.log(data.message);
         router.push("/");
       } else {
         throw new Error(data.message);
@@ -67,23 +66,27 @@ const PostPage = ({ initialPost, recommended }) => {
     }
   };
 
-  const goBack = ()=>{
+  const goBack = () => {
     router.back();
-  }
+  };
 
   return (
     <main className="py-4 px-2 sm:p-4 mb-8" key={post._id}>
       <Meta
-        description={post.body.slice(0, 100)}
-        keywords={post.title.slice(0, 100)}
+        description={post.excerpt.slice(0, 50)}
+        keywords={post.excerpt.split(" ").join()}
         title={initialPost.title}
       />
-      <button onClick={goBack} className="bg-secondary text-white py-2 px-3">Back</button>
+      <button
+        onClick={goBack}
+        className="bg-secondary text-white py-2 px-3 text-sm rounded"
+      >
+        Go Back
+      </button>
       <section className="mt-4 flex items-center lg:items-start text-sm font-light flex-col lg:flex-row justify-center gap-y-4 lg:gap-4 relative">
-        <section className="max-w-xl md:w-[600px] shadow-gray-300 shadow-sm rounded-md p-2 sm:px-4 pb-6 relative">
-          <article className="flex justify-between items-start my-4 pr-4">
+        <section className="w-full max-w-xl md:max-w-[600px] shadow-gray-300 shadow-sm rounded-md p-2 sm:px-4 pb-6 relative">
+          <article className={`flex justify-between items-start my-4 ${user.role === "ADMIN" ? "pr-4" : null}`}>
             <p className="text-sm text-gray-400">
-              <span className="text-normal font-bold text-secondary">By {post.creator.username} </span>
               <span className="block pt-1">
                 {new Date(post.createdAt).toLocaleDateString()}
               </span>
@@ -169,22 +172,31 @@ const PostPage = ({ initialPost, recommended }) => {
             ) : null}
             <Reactions post={post} />
           </article>
+          <article className="mb-4">
+            <span className="text-normal font-bold text-secondary">
+                By {post.creator.username}
+              </span>
+              {post.creator.profilePic.length ? (
+                <img
+                  src={post.creator.profilePic}
+                  alt={post.creator.username}
+                  className="inline-block ml-2 rounded-full h-8 w-8"
+                />
+              ) : null}
+            </article>
           <h1 className="font-bold text-3xl pb-2"> {post.title} </h1>
           <img
             src={post.image}
-            className="w-full h-[280px] rounded-md"
+            className="w-full mt-4 h-[280px] rounded-md"
             alt={post.title.slice(0, 6)}
           />
-          <article dangerouslySetInnerHTML={{__html:post.body}}
-          className="py-4 break-all grid gap-2 
+          <article
+            dangerouslySetInnerHTML={{ __html: post.body }}
+            className="py-4 break-all grid gap-2 
           prose prose-sm prose-img:rounded-sm
           prose-img:h-64 prose-img:w-full prose-p:m-0
-          ">
-            {/* {post.body.split("#").map((text, index) => (
-              <p key={text + index}>{text}</p>
-            ))} */}
-            {/* {post.body} */}
-          </article>
+          "
+          ></article>
           <div className="min-h-[100px]">
             <div className="p-4 flex flex-col gap-4">
               <CommentContainer postId={post._id} updatePost={updatePost} />
@@ -194,10 +206,9 @@ const PostPage = ({ initialPost, recommended }) => {
         <article className="min-w-[33%] max-w-xl lg:max-w-md shadow-sm rounded overflow-hidden shadow-gray-200">
           <h2 className="bg-secondary text-white p-4"> Read also </h2>
           <div className="flex flex-col w-full">
-            {recommended
-              .map((post) => (
-                <MoreCard key={post._id} post={post} />
-              ))}
+            {recommended.map((post) => (
+              <MoreCard key={post._id} post={post} />
+            ))}
           </div>
         </article>
       </section>
@@ -229,21 +240,14 @@ export const getServerSideProps = async (context) => {
   }
   const data = await res.json();
 
-  const window = new JSDOM("").window
-
+  const window = new JSDOM("").window;
   const DOMPurify = createDOMpurify(window);
-
   const markdown = DOMPurify.sanitize(marked(data.post.body));
-  console.log(markdown.charCodeAt('<p></p>'))
-  // console.log(markdown)
 
   return {
     props: {
-      initialPost: {...data.post,
-        body:markdown
-      },
+      initialPost: { ...data.post, body: markdown },
       recommended: data.recommended,
-      // revalidate: 2,
     },
   };
 };

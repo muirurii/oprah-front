@@ -1,8 +1,6 @@
 import PostsContainer from '../components/PostsContainer';
 import Meta from "../components/Meta";
 import fetchData from '../customFunctions/fetch';
-import { useRouter } from 'next/router';
-import { redirect } from 'next/dist/server/api-utils';
 
 const Category = ({posts,heading}) => {
   return (

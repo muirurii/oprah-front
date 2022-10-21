@@ -31,7 +31,6 @@ const FormFields = ({
     reader.readAsDataURL(file);
     reader.onloadend = () => {
       setPreviewState(reader.result);
-      console.log(reader.result);
     };
   };
 
@@ -46,11 +45,11 @@ const FormFields = ({
 
   return (
     <section className="my-8 flex justify-center w-screen">
-      <form onSubmit={handleSubmit} className="grid gap-1">
+      <form onSubmit={handleSubmit} className="grid gap-y-1">
         {message.length ? (
           <p className="text-center text-red-600">{message}</p>
         ) : null}
-        <div className="flex flex-col gap-y-1 w-[300px] sm:w-[500px]">
+        <div className="flex flex-col gap-y-2 mt-1 w-[300px] sm:w-[500px]">
           <label htmlFor="title">Title</label>
           <input
             required
@@ -63,7 +62,7 @@ const FormFields = ({
             onChange={handleChange}
           />
         </div>
-        <div className="flex flex-col gap-y-1 w-[300px] sm:w-[500px]">
+        <div className="flex flex-col gap-y-2 mt-1 w-[300px] sm:w-[500px]">
           <label htmlFor="image">Image</label>
           <div className="flex items-start justify-start gap-x-2">
           <input
@@ -87,7 +86,7 @@ const FormFields = ({
           )}
           </div>
         </div>
-        <div className="flex flex-col gap-y-1 w-[300px] sm:w-[500px]">
+        <div className="flex flex-col gap-y-2 mt-1 w-[300px] sm:w-[500px]">
           <label htmlFor="category">Category</label>
           <select
             required
@@ -103,7 +102,7 @@ const FormFields = ({
             <option value="technology">Tech</option>
           </select>
         </div>
-        <div className="flex flex-col gap-y-1 w-[300px] sm:w-[500px]">
+        <div className="flex flex-col gap-y-2 mt-1 w-[300px] sm:w-[500px]">
         <label htmlFor="excerpt">Excerpt</label>
         <input type="text"
           className="h-10 border border-black focus:border-secondary
@@ -117,7 +116,7 @@ const FormFields = ({
           maxLength={120}
           />
         </div>
-        <div className="flex flex-col gap-y-1 w-[300px] sm:w-[500px]">
+        <div className="flex flex-col gap-y-2 mt-1 w-[300px] sm:w-[500px]">
           <label htmlFor="body">Body</label>
           <textarea
             required

@@ -123,7 +123,7 @@ const Profile = () => {
   return user.isLogged ? (
     <main className="mb-8 text-sm">
       <Meta title={user.username} />
-      <h1 className="text-3xl py-8 pl-4">Profile</h1>
+      <h1 className="text-3xl py-8 px-4">Profile</h1>
       <section className="grid gap-8 lg:grid-cols-2">
         <section className="h-fit min-h-[300px] pb-4 relative">
           <section className="flex items-center justify-center flex-col py-4">

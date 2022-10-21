@@ -24,7 +24,7 @@ const Comment = ({ comment: initialComment, isSub }) => {
     } else {
       setHasLiked(false);
     }
-  }, [likes, user]);
+  }, [likes, user.isLogged,user._id]);
 
   const handleLikeComment = async () => {
     if (!user.isLogged) return;
@@ -92,7 +92,7 @@ const Comment = ({ comment: initialComment, isSub }) => {
       >
         <div className="flex gap-2 items-center">
           <div className="rounded-full">
-            {!user.profilePic.length ? (
+            {!comment.user.profilePic.length ? (
               <svg
                 className="h-7 w-7"
                 x="0px"
@@ -119,15 +119,15 @@ const Comment = ({ comment: initialComment, isSub }) => {
               </svg>
             ) : (
               <img
-                src={user.profilePic}
-                alt={user.username}
+                src={comment.user.profilePic}
+                alt={comment.user.username}
                 className="h-7 w-7 rounded-full"
               />
             )}
           </div>
           <p className="leading-normal">
             <span className="text-[10px] text-secondary">
-              @{comment.user[0].username}
+              @{comment.user.username}
             </span>
             <span className="text-[8px] block">
               {new Date(comment.createdAt).toLocaleString("en-GB", {
