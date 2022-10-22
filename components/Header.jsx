@@ -27,7 +27,11 @@ const Header = () => {
   return (
     <header className="bg-white fixed top-0 text-sm left-0 w-screen z-10 flex items-center justify-between pr-4 sm:px-12 shadow shadow-gray-100 h-[70px]">
       <h1 className="text-2xl font-bold bg-white relative pl-4 sm:p-0 z-50 h-full w-full flex items-center justify-start text-secondary font-sec">
-        <span className="text-black">O</span>rpah
+        <Link href="/">
+        <a>
+          <span className="text-black">O</span>rpah
+        </a>
+        </Link>
       </h1>
       <nav>
         <ul
@@ -68,7 +72,7 @@ const Header = () => {
         </ul>
         {user.isLogged ? (
           <li className="group absolute top-1/2 right-12 z-[60] -translate-y-1/2 flex items-center justify-center gap-x-4">
-            <div className="h-9 w-9 flex items-center justify-center text-lg rounded-full border border-secondary relative after:absolute after:left-0 after:bottom-0 after:h-2 after:w-2 after:bg-secondary after:rounded-full cursor-pointer">
+            <div className="h-9 w-9 flex items-center justify-center text-lg rounded-full border border-black relative after:absolute after:left-0 after:bottom-0 after:h-2 after:w-2 after:bg-secondary after:rounded-full cursor-pointer">
               {user.profilePic.length ? (
                 <Image
                   src={user.profilePic}
