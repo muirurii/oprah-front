@@ -267,7 +267,7 @@ const Profile = () => {
               disabled={updating}
               className={`${
                 updating ? "bg-red-200 text-black" : "bg-secondary text-white"
-              } w-[300px] sm:w-2/3 py-2 mt-4 rounded`}
+              } w-[300px] sm:w-2/3 py-2 mt-4 rounded-full`}
               type="submit"
             >
               {updating ? "Updating..." : "Update"}

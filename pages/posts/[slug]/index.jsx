@@ -84,10 +84,10 @@ const PostPage = ({ initialPost, recommended }) => {
         Go Back
       </button>
       <section className="mt-4 flex items-center lg:items-start text-sm font-light flex-col lg:flex-row justify-center gap-y-4 lg:gap-4 relative">
-        <section className="w-full max-w-xl md:max-w-[600px] shadow-gray-300 shadow-sm rounded-md p-2 sm:px-4 pb-6 relative">
+        <section className="w-full max-w-xl md:max-w-[600px] rounded-md pt-2 sm:px-4 pb-6 relative">
           <article className={`flex justify-between items-start my-4 ${user.role === "ADMIN" ? "pr-4" : null}`}>
             <p className="text-sm text-gray-400">
-              <span className="block pt-1">
+              <span className="block">
                 {new Date(post.createdAt).toLocaleDateString()}
               </span>
             </p>
@@ -197,14 +197,12 @@ const PostPage = ({ initialPost, recommended }) => {
           prose-img:h-64 prose-img:w-full prose-p:m-0
           "
           ></article>
-          <div className="min-h-[100px]">
-            <div className="p-4 flex flex-col gap-4">
+            <div className="py-4 flex flex-col gap-4">
               <CommentContainer postId={post._id} updatePost={updatePost} />
             </div>
-          </div>
         </section>
         <article className="min-w-[33%] max-w-xl lg:max-w-md shadow-sm rounded overflow-hidden shadow-gray-200">
-          <h2 className="bg-secondary text-white p-4"> Read also </h2>
+          <h2 className="bg-secondary text-white pl-4 py-3"> Read also </h2>
           <div className="flex flex-col w-full">
             {recommended.map((post) => (
               <MoreCard key={post._id} post={post} />

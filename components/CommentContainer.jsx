@@ -58,7 +58,7 @@ const CommentContainer = ({ postId, updatePost }) => {
 
   return (
     <section>
-      <form onSubmit={handleCommenting} className="px-2 pb-2">
+      <form onSubmit={handleCommenting} className="pb-2">
         <textarea
           onChange={(e) => setComment(e.target.value)}
           value={comment}
@@ -85,14 +85,17 @@ const CommentContainer = ({ postId, updatePost }) => {
           </p>
         )}
       </form>
-      <h2 className="text-sm">Comments</h2>
+      <section className="shadow-sm rounded overflow-hidden min-h-[200px] shadow-gray-200">
+      <h2 className="text-sm py-3 pl-4 bg-secondary text-white">Comments</h2>
+          <article className="pb-6">
       {comments.length ? (
         comments.sort((a,b)=> new Date(b.createdAt) - new Date(a.createdAt)  ,0).map((comm) => {
           return <Comment comment={comm} key={comm._id} />;
         })
       ) : (
         <p className="p-2 text-xs">{fetching ? "Loading comments" : "No comments"}</p>
-      )}
+      )}</article>
+      </section>
     </section>
   );
 };

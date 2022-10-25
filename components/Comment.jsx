@@ -84,13 +84,18 @@ const Comment = ({ comment: initialComment, isSub }) => {
   };
 
   return (
-    <section className="relative mt-2">
+    <section 
+    className={`
+    relative py-4 ${!isSub && comment.subComments.length && showSubcomments ? 
+      "relative after:absolute after:left-1 after:top-16 after:bottom-4 last:bottom-0 after:w-1 after:bg-gray-200"
+     : null}
+    ${!isSub ? " border-b border-gray-200 last:border-none px-2 last:pb-0" : "mt-2 ml-2 bg-gray-50 rounded pb-0"}`}>
       <section
-        className={`w-fit min-w-[200px] ${
-          isSub ? "bg-gray-50 ml-2" : null
-        } shadow shadow-gray-200 rounded-md py-1 mb-2 px-5`}
+        className={`w-full max-w-[600px] ${
+          isSub ? "" : "py-1"
+        } rounded mb-2`}
       >
-        <div className="flex gap-2 items-center">
+        <article className="flex gap-2 items-center pl-2">
           <div className="rounded-full">
             {!comment.user.profilePic.length ? (
               <svg
@@ -140,11 +145,12 @@ const Comment = ({ comment: initialComment, isSub }) => {
               })}
             </span>
           </p>
-        </div>
+        </article>
+        <article className={`${isSub ? "pl-12" : "pl-9"}`}>
         <p className="text-sm font-light pt-2 break-all max-w-xs sm:max-w-sm md:max-w-md">
           {comment.body}
         </p>
-        <div className="py-2 flex items-start justify-start">
+        <div className="pt-3 flex items-start justify-start">
           <span
             onClick={handleLikeComment}
             className="cursor-pointer text-gray-400 mr-2 leading-none text-xs inline-flex items-center"
@@ -198,11 +204,12 @@ const Comment = ({ comment: initialComment, isSub }) => {
             {comment.subComments.length}
           </span>
         </div>
+        </article>
       </section>
       <section
         className={`${
-          isSub ? "ml-2" : null
-        } text-xs font-lighter flex items-start justify-start gap-x-6 mb-0`}
+          isSub ? "ml-12" : "ml-9"
+        } text-xs font-lighter flex items-start justify-start gap-x-6`}
       >
         {comment.subComments.length ? (
           <button
@@ -232,7 +239,9 @@ const Comment = ({ comment: initialComment, isSub }) => {
       {user.isLogged && replyForm ? (
         <form
           onSubmit={handleReply}
-          className="flex w-fit items-end my-2 border-b relative"
+          className={`${
+            isSub ? "ml-12" : "ml-9"
+          } flex w-full max-w-[200px] items-end my-2 border-b relative`}
         >
           <textarea
             ref={inputRef}

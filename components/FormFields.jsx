@@ -132,7 +132,7 @@ const FormFields = ({
         <button
           className={`p-2 ${
             isSubmitting ? "bg-red-300" : "bg-secondary"
-          } rounded w-[300px] sm:w-[500px] text-white mt-2`}
+          } rounded-full w-[300px] sm:w-[500px] text-white mt-2`}
           type="submit"
         >
           {isSubmitting ? "Preparing post" : buttonText}
