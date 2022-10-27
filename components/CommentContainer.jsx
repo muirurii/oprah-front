@@ -25,7 +25,7 @@ const CommentContainer = ({ postId, updatePost }) => {
       }
     };
     getComments();
-  }, []);
+  }, [postId]);
 
   const sendComment = async (details) => {
     try {
@@ -85,7 +85,7 @@ const CommentContainer = ({ postId, updatePost }) => {
           </p>
         )}
       </form>
-      <section className="shadow-sm rounded overflow-hidden min-h-[200px] shadow-gray-200">
+      <section className="shadow-sm rounded overflow-hidden min-h-[100px] shadow-gray-200">
       <h2 className="text-sm py-3 pl-4 bg-secondary text-white">Comments</h2>
           <article className="pb-6">
       {comments.length ? (

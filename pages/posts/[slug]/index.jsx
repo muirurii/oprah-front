@@ -83,7 +83,7 @@ const PostPage = ({ initialPost, recommended }) => {
       >
         Go Back
       </button>
-      <section className="mt-4 flex items-center lg:items-start text-sm font-light flex-col lg:flex-row justify-center gap-y-4 lg:gap-4 relative">
+      <section className="mt-4 flex items-center lg:items-start text-sm font-light flex-col lg:flex-row justify-center gap-y-4 lg:gap-8 relative">
         <section className="w-full max-w-xl md:max-w-[600px] rounded-md pt-2 sm:px-4 pb-6 relative">
           <article className={`flex justify-between items-start my-4 ${user.role === "ADMIN" ? "pr-4" : null}`}>
             <p className="text-sm text-gray-400">

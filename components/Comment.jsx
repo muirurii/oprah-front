@@ -2,6 +2,7 @@ import { useContext, useState, useEffect, useRef } from "react";
 import { Context } from "../context";
 import fetchData from "../customFunctions/fetch";
 import SubCommentContainer from "./SubCommentContainer";
+import Image from "next/image";
 
 const Comment = ({ comment: initialComment, isSub }) => {
   const {
@@ -85,18 +86,18 @@ const Comment = ({ comment: initialComment, isSub }) => {
 
   return (
     <section 
-    className={`
+    className={` border-b border-gray-200 last:border-none
     relative py-4 ${!isSub && comment.subComments.length && showSubcomments ? 
-      "relative after:absolute after:left-1 after:top-16 after:bottom-4 last:bottom-0 after:w-1 after:bg-gray-200"
+      "relative after:absolute after:left-2 after:top-16 after:bottom-4 last:bottom-0 after:w-[2px] after:bg-gray-200"
      : null}
-    ${!isSub ? " border-b border-gray-200 last:border-none px-2 last:pb-0" : "mt-2 ml-2 bg-gray-50 rounded pb-0"}`}>
+    ${!isSub ? "px-2 last:pb-0" : null}
+    ${isSub && comment.subComments.length && showSubcomments ? "pb-0" : null}
+    `}>
       <section
-        className={`w-full max-w-[600px] ${
-          isSub ? "" : "py-1"
-        } rounded mb-2`}
+        className={`w-full max-w-[600px] rounded mb-2`}
       >
         <article className="flex gap-2 items-center pl-2">
-          <div className="rounded-full">
+          <>
             {!comment.user.profilePic.length ? (
               <svg
                 className="h-7 w-7"
@@ -123,13 +124,15 @@ const Comment = ({ comment: initialComment, isSub }) => {
                 </g>
               </svg>
             ) : (
-              <img
+              <Image
                 src={comment.user.profilePic}
                 alt={comment.user.username}
-                className="h-7 w-7 rounded-full"
+                className="rounded-full"
+                width="28px"
+                height="28px"
               />
             )}
-          </div>
+          </>
           <p className="leading-normal">
             <span className="text-[10px] text-secondary">
               @{comment.user.username}
@@ -146,7 +149,7 @@ const Comment = ({ comment: initialComment, isSub }) => {
             </span>
           </p>
         </article>
-        <article className={`${isSub ? "pl-12" : "pl-9"}`}>
+        <article className={`${isSub ? "pl-12" : "pl-11"}`}>
         <p className="text-sm font-light pt-2 break-all max-w-xs sm:max-w-sm md:max-w-md">
           {comment.body}
         </p>
@@ -208,7 +211,7 @@ const Comment = ({ comment: initialComment, isSub }) => {
       </section>
       <section
         className={`${
-          isSub ? "ml-12" : "ml-9"
+          isSub ? "ml-12" : "ml-11"
         } text-xs font-lighter flex items-start justify-start gap-x-6`}
       >
         {comment.subComments.length ? (
@@ -240,7 +243,7 @@ const Comment = ({ comment: initialComment, isSub }) => {
         <form
           onSubmit={handleReply}
           className={`${
-            isSub ? "ml-12" : "ml-9"
+            isSub ? "ml-12" : "ml-11"
           } flex w-full max-w-[200px] items-end my-2 border-b relative`}
         >
           <textarea
@@ -250,9 +253,9 @@ const Comment = ({ comment: initialComment, isSub }) => {
               setReplyText(e.target.value);
             }}
             placeholder="type a reply"
-            className="w-full h-8 resize-none pr-6 border-b border-black focus:border-secondary outline-none overflow-hidden"
+            className="w-full bg-transparent h-8 resize-none pr-6 border-b border-black focus:border-secondary outline-none overflow-hidden"
           ></textarea>
-          <button type="submit" className="rounded absolute top-1/2 -translate-y-1/2 right-0 bg-white">
+          <button type="submit" className="rounded absolute top-1/2 -translate-y-1/2 right-0 bg-transparent">
             <svg className="h-6 w-6 fill-secondary" viewBox="0 0 20 20">
               <path d="M19 16.685S16.775 6.953 8 6.953V2.969L1 9.542l7 6.69v-4.357c4.763-.001 8.516.421 11 4.81z" />
             </svg>

@@ -31,14 +31,12 @@ const SubCommentContainer = ({ commentId, newComment }) => {
   }, [newComment]);
 
   return (
-    <div className="">
+    <>
       { !loadingReplies ? subComments.sort((a,b)=> new Date(b.createdAt) - new Date(a.createdAt)  ,0).map((sub) => (
-        <div  key={sub._id} className="pb-2">
-        <Comment comment={sub} isSub={true} />
-        </div>
+        <Comment key={sub._id} comment={sub} isSub={true} />
       ))
       : <div className="border-2 rounded-full border-black border-t-secondary border-r-secondary h-6 w-6 my-4 ml-8 animate-spin"></div>}
-    </div>
+    </>
   );
 };
 
