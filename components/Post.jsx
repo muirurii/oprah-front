@@ -5,7 +5,7 @@ import Reactions from "./Reactions";
 const Post = ({ post }) => {
   return (
     <section className="p-4 mx-ato w-[320px] sm:w-[400px]">
-      <div className="h-fit border-2 border-gray-100 border-opacity-60 rounded-lg overflow-hidden">
+      <div className="h-fit border border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
         <Image
           className="h-40 md:h-48 w-full object-cover object-center"
           height={"160px"}
@@ -21,7 +21,7 @@ const Post = ({ post }) => {
               })}
             </p>
             <div className="flex items-center justify-end gap-x-2">
-              <p className="text-normal font-bold text-secondary">
+              <p className="text-normal text-secondary">
                 By {post.creator.username}
               </p>
               {post.creator.profilePic.length ? (

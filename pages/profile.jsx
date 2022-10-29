@@ -125,7 +125,7 @@ const Profile = () => {
       <Meta title={user.username} />
       <h1 className="text-3xl py-8 px-4">Profile</h1>
       <section className="grid gap-8 lg:grid-cols-2">
-        <section className="h-fit min-h-[300px] pb-4 relative">
+        <section className="h-fit min-h-[100px] pb-4 relative">
           <section className="flex items-center justify-center flex-col py-4">
             <div className="h-14 w-14 flex items-center justify-center gap-x-4">
               {user.profilePic.length ? (
@@ -212,7 +212,7 @@ const Profile = () => {
           >
               <p
                 className={`text-center h-5 ${
-                  message.type === "error" ? "text-red-600" : "text-green-600"
+                  message.type === "error" ? "text-red-600" : "text-secondary"
                 }`}
               >
                 {message.content}

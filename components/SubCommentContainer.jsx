@@ -4,7 +4,7 @@ import fetchData from "../customFunctions/fetch";
 
 const SubCommentContainer = ({ commentId, newComment }) => {
   const [subComments, setSubComments] = useState([]);
-  const [loadingReplies,setLoadingReplies] = useState(false);
+  const [loadingReplies, setLoadingReplies] = useState(false);
 
   useEffect(() => {
     const getReplies = async () => {
@@ -22,7 +22,7 @@ const SubCommentContainer = ({ commentId, newComment }) => {
       }
     };
     getReplies();
-  }, []);
+  }, [commentId]);
 
   useEffect(() => {
     if (Object.values(newComment).length) {
@@ -32,10 +32,13 @@ const SubCommentContainer = ({ commentId, newComment }) => {
 
   return (
     <>
-      { !loadingReplies ? subComments.sort((a,b)=> new Date(b.createdAt) - new Date(a.createdAt)  ,0).map((sub) => (
-        <Comment key={sub._id} comment={sub} isSub={true} />
-      ))
-      : <div className="border-2 rounded-full border-black border-t-secondary border-r-secondary h-6 w-6 my-4 ml-8 animate-spin"></div>}
+      {!loadingReplies ? (
+        subComments
+          .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt), 0)
+          .map((sub) => <Comment key={sub._id} comment={sub} isSub={true} />)
+      ) : (
+        <div className="border-2 rounded-full border-black border-t-secondary border-r-secondary h-6 w-6 my-4 ml-8 animate-spin"></div>
+      )}
     </>
   );
 };

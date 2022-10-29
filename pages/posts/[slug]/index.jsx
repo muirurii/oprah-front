@@ -20,7 +20,7 @@ const PostPage = ({ initialPost, recommended }) => {
   }, [initialPost]);
 
   const updatePost = (id) => {
-    setPost({...post,comments:[...post.comments,id]});
+    setPost({ ...post, comments: [...post.comments, id] });
   };
 
   const {
@@ -85,10 +85,16 @@ const PostPage = ({ initialPost, recommended }) => {
       </button>
       <section className="mt-4 flex items-center lg:items-start text-sm font-light flex-col lg:flex-row justify-center gap-y-4 lg:gap-8 relative">
         <section className="w-full max-w-xl md:max-w-[600px] rounded-md pt-2 sm:px-4 pb-6 relative">
-          <article className={`flex justify-between items-start my-4 ${user.role === "ADMIN" ? "pr-4" : null}`}>
+          <article
+            className={`flex justify-between items-start my-4 ${
+              user.role === "ADMIN" ? "pr-4" : null
+            }`}
+          >
             <p className="text-sm text-gray-400">
               <span className="block">
-                {new Date(post.createdAt).toLocaleDateString()}
+                {new Date(post.createdAt).toLocaleDateString("en-GB", {
+                  dateStyle: "medium",
+                })}
               </span>
             </p>
             {user.isLogged && user.role === "ADMIN" ? (
@@ -99,7 +105,7 @@ const PostPage = ({ initialPost, recommended }) => {
                     setEditModule(false);
                   }, 1000);
                 }}
-                className="absolute top-4 right-1 h-fit"
+                className="absolute top-4 right-0 h-fit"
               >
                 <svg
                   className="h-8 w-4"
@@ -173,17 +179,15 @@ const PostPage = ({ initialPost, recommended }) => {
             <Reactions post={post} />
           </article>
           <article className="mb-4">
-            <span className="text-normal font-bold text-secondary">
-                By {post.creator.username}
-              </span>
-              {post.creator.profilePic.length ? (
-                <img
-                  src={post.creator.profilePic}
-                  alt={post.creator.username}
-                  className="inline-block ml-2 rounded-full h-8 w-8"
-                />
-              ) : null}
-            </article>
+            <span className="text-secondary">By {post.creator.username}</span>
+            {post.creator.profilePic.length ? (
+              <img
+                src={post.creator.profilePic}
+                alt={post.creator.username}
+                className="inline-block ml-2 rounded-full h-8 w-8"
+              />
+            ) : null}
+          </article>
           <h1 className="font-bold text-3xl pb-2"> {post.title} </h1>
           <img
             src={post.image}
@@ -197,11 +201,11 @@ const PostPage = ({ initialPost, recommended }) => {
           prose-img:h-64 prose-img:w-full prose-p:m-0
           "
           ></article>
-            <div className="py-4 flex flex-col gap-4">
-              <CommentContainer postId={post._id} updatePost={updatePost} />
-            </div>
+          <div className="py-4 flex flex-col gap-4">
+            <CommentContainer postId={post._id} updatePost={updatePost} />
+          </div>
         </section>
-        <article className="min-w-[33%] max-w-xl lg:max-w-md shadow-sm rounded overflow-hidden shadow-gray-200">
+        <article className="min-w-[33%] max-w-xl lg:max-w-md rounded overflow-hidden border border-gray-100">
           <h2 className="bg-secondary text-white pl-4 py-3"> Read also </h2>
           <div className="flex flex-col w-full">
             {recommended.map((post) => (

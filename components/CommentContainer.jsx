@@ -8,6 +8,7 @@ import { Context } from "../context";
 const CommentContainer = ({ postId, updatePost }) => {
   const [comments, setComments] = useState([]);
   const [fetching, setFetching] = useState(true);
+  const [commenting, setCommenting] = useState(false);
   const [comment, setComment] = useState("");
   const {
     state: { user },
@@ -28,6 +29,8 @@ const CommentContainer = ({ postId, updatePost }) => {
   }, [postId]);
 
   const sendComment = async (details) => {
+    if(commenting) return;
+    setCommenting(true);
     try {
       const res = await fetchData(
         `comments/comment/${postId}`,
@@ -42,7 +45,9 @@ const CommentContainer = ({ postId, updatePost }) => {
         updatePost(data.comment._id);
         setComment("");
       }
+      setCommenting(false);
     } catch (e) {
+      setCommenting(false);
       console.log(e);
     }
   };
@@ -64,15 +69,17 @@ const CommentContainer = ({ postId, updatePost }) => {
           value={comment}
           required
           rows={5}
-          className="border min-h-[80px] rounded outline-none pl-2 focus:border-secondary transition-colors duration-300 border-black w-full"
+          className="border resize-none overflow-hidden min-h-[80px] rounded outline-none pl-2 focus:border-secondary transition-colors duration-300 border-black w-full"
           placeholder="Leave your reply..."
         ></textarea>
         {user.isLogged ? (
           <button
             type="submit"
-            className="inline-block rounded text-white my-2 py-2 px-3 bg-secondary"
+            className="block w-fit ml-auto rounded text-white relative -top-8 right-[2px]"
           >
-            comment
+                       <svg className={`h-6 w-6 ${comment.length && !commenting ? "fill-black" : "fill-gray-400"}`} viewBox="0 0 20 20">
+              <path d="M19 16.685S16.775 6.953 8 6.953V2.969L1 9.542l7 6.69v-4.357c4.763-.001 8.516.421 11 4.81z" />
+            </svg>
           </button>
         ) : (
           <p className="text-sm font-light">
@@ -85,7 +92,7 @@ const CommentContainer = ({ postId, updatePost }) => {
           </p>
         )}
       </form>
-      <section className="shadow-sm rounded overflow-hidden min-h-[100px] shadow-gray-200">
+      <section className="rounded overflow-hidden min-h-[100px] border border-gray-100">
       <h2 className="text-sm py-3 pl-4 bg-secondary text-white">Comments</h2>
           <article className="pb-6">
       {comments.length ? (

@@ -30,8 +30,8 @@ const UserPosts = () => {
   }, []);
 
   return (
-    <section className="w-full">
-      <section className="border border-gray-50">
+    <section className="w-full px-2">
+      <section className="border border-gray-100">
         <div
           className={`flex relative after:absolute after:h-[1px] after:left-0 ${
             tab === "likes" ? "" : "after:translate-x-full"
@@ -39,13 +39,13 @@ const UserPosts = () => {
         >
           <h1
             onClick={() => setTab("likes")}
-            className={`py-2 text-md hover:bg-gray-50 cursor-pointer text-center w-1/2 border-b border-gray-200`}
+            className={`py-2 text-md hover:bg-gray-50 cursor-pointer text-center w-1/2 border-b border-gray-100`}
           >
             Liked Posts ({likes.length})
           </h1>
           <h1
             onClick={() => setTab("bookmarks")}
-            className={`py-2 text-md hover:bg-gray-50 cursor-pointer text-center w-1/2 border-b border-gray-200`}
+            className={`py-2 text-md hover:bg-gray-50 cursor-pointer text-center w-1/2 border-b border-gray-100`}
           >
             Bookmarks ({bookmarks.length})
           </h1>

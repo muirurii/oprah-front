@@ -86,11 +86,11 @@ const Comment = ({ comment: initialComment, isSub }) => {
 
   return (
     <section 
-    className={` border-b border-gray-200 last:border-none
+    className={`
     relative py-4 ${!isSub && comment.subComments.length && showSubcomments ? 
       "relative after:absolute after:left-2 after:top-16 after:bottom-4 last:bottom-0 after:w-[2px] after:bg-gray-200"
      : null}
-    ${!isSub ? "px-2 last:pb-0" : null}
+    ${!isSub ? "px-2 last:pb-0 border-b border-gray-100 last:border-none" : null}
     ${isSub && comment.subComments.length && showSubcomments ? "pb-0" : null}
     `}>
       <section
@@ -256,7 +256,7 @@ const Comment = ({ comment: initialComment, isSub }) => {
             className="w-full bg-transparent h-8 resize-none pr-6 border-b border-black focus:border-secondary outline-none overflow-hidden"
           ></textarea>
           <button type="submit" className="rounded absolute top-1/2 -translate-y-1/2 right-0 bg-transparent">
-            <svg className="h-6 w-6 fill-secondary" viewBox="0 0 20 20">
+            <svg className={`h-6 w-6 ${replyText.length && !fetching ? "fill-black" : "fill-gray-400"}`} viewBox="0 0 20 20">
               <path d="M19 16.685S16.775 6.953 8 6.953V2.969L1 9.542l7 6.69v-4.357c4.763-.001 8.516.421 11 4.81z" />
             </svg>
           </button>
