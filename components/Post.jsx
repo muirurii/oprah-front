@@ -1,34 +1,28 @@
 import Link from "next/link";
-import Image from "next/image";
 import Reactions from "./Reactions";
+import useRelativeTime from "../customFunctions/useRelativeTime";
 
 const Post = ({ post }) => {
+  const relativeTime = useRelativeTime(post.createdAt);
+
   return (
     <section className="p-4 mx-ato w-[320px] sm:w-[400px]">
       <div className="h-fit border border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
-        <Image
-          className="h-40 md:h-48 w-full object-cover object-center"
-          height={"160px"}
-          width="400px"
+        <img
+          className="h-40 w-full object-cover object-center"
           src={post.image}
           alt="blog"
         />
         <div className="p-4 pt-0">
           <div className="mb-1 flex items-center justify-between text-xs">
-            <p>
-              {new Date(post.createdAt).toLocaleDateString("en-GB", {
-                dateStyle: "medium",
-              })}
-            </p>
+            <p>{relativeTime}</p>
             <div className="flex items-center justify-end gap-x-2">
               <p className="text-normal text-secondary">
                 By {post.creator.username}
               </p>
               {post.creator.profilePic.length ? (
-                <Image
-                  className="rounded-full"
-                  width="32px"
-                  height="32px"
+                <img
+                  className="rounded-full h-8 w-8"
                   src={post.creator.profilePic}
                   alt={post.creator.username}
                 />

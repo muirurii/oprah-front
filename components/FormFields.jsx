@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { useState } from "react";
 
 const FormFields = ({
@@ -74,11 +73,9 @@ const FormFields = ({
             onChange={handleFileInputChange}
           />
           {previewState ? (
-            <Image
-              className="rounded"
+            <img
+              className="rounded h-32 w-40"
               src={previewState}
-              height="120px"
-              width="144px"
               alt="PREVIEW"
             />
           ) : (

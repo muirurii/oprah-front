@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useContext, useState, useEffect } from "react";
 import Meta from "../components/Meta";
 import UserPosts from "../components/UserPosts";

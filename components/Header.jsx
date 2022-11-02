@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
@@ -74,12 +73,10 @@ const Header = () => {
           <li className="group absolute top-1/2 right-12 z-[60] -translate-y-1/2 flex items-center justify-center gap-x-4">
             <div className="h-9 w-9 flex items-center justify-center text-lg rounded-full border border-black relative after:absolute after:left-0 after:bottom-0 after:h-2 after:w-2 after:bg-secondary after:rounded-full cursor-pointer">
               {user.profilePic.length ? (
-                <Image
+                <img
                   src={user.profilePic}
                   alt={user.username}
-                  className="rounded-full"
-                  width="32px"
-                  height="32px"
+                  className="h-8 w-8 rounded-full"
                 />
               ) : (
                 <span className="uppercase">{user.username.slice(0, 2)}</span>

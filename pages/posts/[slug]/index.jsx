@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import Meta from "../../../components/Meta";
 import MoreCard from "../../../components/MoreCard";
 import fetchData from "../../../customFunctions/fetch";
+import useRelativeTime from "../../../customFunctions/useRelativeTime";
 import Reactions from "../../../components/Reactions";
 import { useState, useEffect, useContext } from "react";
 import { Context } from "../../../context";
@@ -14,6 +15,7 @@ import { JSDOM } from "jsdom";
 
 const PostPage = ({ initialPost, recommended }) => {
   const [post, setPost] = useState(initialPost);
+  const relativeTime = useRelativeTime(post.createdAt);
 
   useEffect(() => {
     setPost(initialPost);
@@ -91,11 +93,7 @@ const PostPage = ({ initialPost, recommended }) => {
             }`}
           >
             <p className="text-sm text-gray-400">
-              <span className="block">
-                {new Date(post.createdAt).toLocaleDateString("en-GB", {
-                  dateStyle: "medium",
-                })}
-              </span>
+              <span className="block">{relativeTime}</span>
             </p>
             {user.isLogged && user.role === "ADMIN" ? (
               <button
@@ -199,7 +197,7 @@ const PostPage = ({ initialPost, recommended }) => {
             className="py-4 break-all grid gap-2 
           prose prose-sm prose-img:rounded-sm
           prose-img:h-64 prose-img:w-full prose-p:m-0
-          "
+          prose-blockquote:border-secondary"
           ></article>
           <div className="py-4 flex flex-col gap-4">
             <CommentContainer postId={post._id} updatePost={updatePost} />

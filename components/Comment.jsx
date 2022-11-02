@@ -1,8 +1,8 @@
 import { useContext, useState, useEffect, useRef } from "react";
 import { Context } from "../context";
 import fetchData from "../customFunctions/fetch";
+import useRelativeTime from "../customFunctions/useRelativeTime";
 import SubCommentContainer from "./SubCommentContainer";
-import Image from "next/image";
 
 const Comment = ({ comment: initialComment, isSub }) => {
   const {
@@ -18,6 +18,7 @@ const Comment = ({ comment: initialComment, isSub }) => {
   const [replyText, setReplyText] = useState("");
   const [newComment, setNewComment] = useState({});
   const inputRef = useRef();
+  const relativeTime = useRelativeTime(comment.createdAt);
 
   useEffect(() => {
     if (user.isLogged && likes.some((like) => like === user._id)) {
@@ -25,7 +26,7 @@ const Comment = ({ comment: initialComment, isSub }) => {
     } else {
       setHasLiked(false);
     }
-  }, [likes, user.isLogged,user._id]);
+  }, [likes, user.isLogged, user._id]);
 
   const handleLikeComment = async () => {
     if (!user.isLogged) return;
@@ -85,17 +86,20 @@ const Comment = ({ comment: initialComment, isSub }) => {
   };
 
   return (
-    <section 
-    className={`
-    relative py-4 ${!isSub && comment.subComments.length && showSubcomments ? 
-      "relative after:absolute after:left-2 after:top-16 after:bottom-4 last:bottom-0 after:w-[2px] after:bg-gray-200"
-     : null}
-    ${!isSub ? "px-2 last:pb-0 border-b border-gray-100 last:border-none" : null}
+    <section
+      className={`
+    relative py-4 ${
+      !isSub && comment.subComments.length && showSubcomments
+        ? "relative after:absolute after:left-2 after:top-16 after:bottom-4 last:bottom-0 after:w-[2px] after:bg-gray-200"
+        : null
+    }
+    ${
+      !isSub ? "px-2 last:pb-0 border-b border-gray-100 last:border-none" : null
+    }
     ${isSub && comment.subComments.length && showSubcomments ? "pb-0" : null}
-    `}>
-      <section
-        className={`w-full max-w-[600px] rounded mb-2`}
-      >
+    `}
+    >
+      <section className={`w-full max-w-[600px] rounded mb-2`}>
         <article className="flex gap-2 items-center pl-2">
           <>
             {!comment.user.profilePic.length ? (
@@ -124,12 +128,10 @@ const Comment = ({ comment: initialComment, isSub }) => {
                 </g>
               </svg>
             ) : (
-              <Image
+              <img
                 src={comment.user.profilePic}
                 alt={comment.user.username}
-                className="rounded-full"
-                width="28px"
-                height="28px"
+                className="rounded-full h-7 w-7"
               />
             )}
           </>
@@ -137,76 +139,67 @@ const Comment = ({ comment: initialComment, isSub }) => {
             <span className="text-[10px] text-secondary">
               @{comment.user.username}
             </span>
-            <span className="text-[8px] block">
-              {new Date(comment.createdAt).toLocaleString("en-GB", {
-                minute: "2-digit",
-                day: "2-digit",
-                month: "2-digit",
-                year: "numeric",
-                second: "2-digit",
-                hour: "2-digit",
-              })}
-            </span>
+            <span className="text-[8px] block">{relativeTime}</span>
           </p>
         </article>
         <article className={`${isSub ? "pl-12" : "pl-11"}`}>
-        <p className="text-sm font-light pt-2 break-all max-w-xs sm:max-w-sm md:max-w-md">
-          {comment.body}
-        </p>
-        <div className="pt-3 flex items-start justify-start">
-          <span
-            onClick={handleLikeComment}
-            className="cursor-pointer text-gray-400 mr-2 leading-none text-xs inline-flex items-center"
-          >
-            {!hasLiked ? (
-              <svg
-                className="w-4 h-4 mr-1 fill-gray-400 transition-colors duration-300"
-                x="0px"
-                y="0px"
-                viewBox="0 0 485.3 485.3"
-                style={{ enableBackground: "new 0 0 485.3 485.3" }}
-                xmlSpace="preserve"
-              >
-                <g>
+          <p className="text-sm font-light pt-2 break-all max-w-xs sm:max-w-sm md:max-w-md">
+            {comment.body}
+          </p>
+          <div className="pt-3 flex items-start justify-start">
+            <span
+              onClick={handleLikeComment}
+              className="cursor-pointer text-gray-400 mr-2 leading-none text-xs inline-flex items-center"
+            >
+              {!hasLiked ? (
+                <svg
+                  className="w-4 h-4 mr-1 fill-gray-400 transition-colors duration-300"
+                  x="0px"
+                  y="0px"
+                  viewBox="0 0 485.3 485.3"
+                  style={{ enableBackground: "new 0 0 485.3 485.3" }}
+                  xmlSpace="preserve"
+                >
                   <g>
                     <g>
-                      <path d="M349.6,28.95c-36.3,0-70.5,14.2-96.2,39.9l-10.6,10.6L232,68.65c-25.7-25.7-59.9-39.9-96.2-39.9     c-36.2,0-70.3,14.1-96,39.8S0,128.35,0,164.65s14.2,70.4,39.9,96.1l190.5,190.5l0.4,0.4c3.3,3.3,7.7,4.9,12,4.9     c4.4,0,8.8-1.7,12.1-5l190.5-190.5c25.7-25.7,39.9-59.8,39.9-96.1s-14.1-70.5-39.8-96.1C419.9,43.05,385.8,28.95,349.6,28.95z      M421.2,236.75l-178.3,178.4L64.2,236.45c-19.2-19.2-29.8-44.7-29.9-71.9c0-27.1,10.5-52.6,29.7-71.8     c19.2-19.1,44.7-29.7,71.7-29.7c27.2,0,52.7,10.6,72,29.9l22.9,22.9c6.4,6.4,17.8,6.4,24.3,0l22.8-22.8     c19.2-19.2,44.8-29.8,71.9-29.8s52.6,10.6,71.8,29.8c19.2,19.2,29.8,44.7,29.7,71.9C451.1,192.05,440.5,217.55,421.2,236.75z" />
+                      <g>
+                        <path d="M349.6,28.95c-36.3,0-70.5,14.2-96.2,39.9l-10.6,10.6L232,68.65c-25.7-25.7-59.9-39.9-96.2-39.9     c-36.2,0-70.3,14.1-96,39.8S0,128.35,0,164.65s14.2,70.4,39.9,96.1l190.5,190.5l0.4,0.4c3.3,3.3,7.7,4.9,12,4.9     c4.4,0,8.8-1.7,12.1-5l190.5-190.5c25.7-25.7,39.9-59.8,39.9-96.1s-14.1-70.5-39.8-96.1C419.9,43.05,385.8,28.95,349.6,28.95z      M421.2,236.75l-178.3,178.4L64.2,236.45c-19.2-19.2-29.8-44.7-29.9-71.9c0-27.1,10.5-52.6,29.7-71.8     c19.2-19.1,44.7-29.7,71.7-29.7c27.2,0,52.7,10.6,72,29.9l22.9,22.9c6.4,6.4,17.8,6.4,24.3,0l22.8-22.8     c19.2-19.2,44.8-29.8,71.9-29.8s52.6,10.6,71.8,29.8c19.2,19.2,29.8,44.7,29.7,71.9C451.1,192.05,440.5,217.55,421.2,236.75z" />
+                      </g>
                     </g>
                   </g>
-                </g>
-              </svg>
-            ) : (
+                </svg>
+              ) : (
+                <svg
+                  className="w-4 h-4 mr-1 transition-colors duration-300 fill-secondary"
+                  id="Capa_1"
+                  x="0px"
+                  y="0px"
+                  viewBox="0 0 544.582 544.582"
+                  style={{ enableBackground: "new 0 0 485.3 485.3" }}
+                  xmlSpace="preserve"
+                >
+                  <g>
+                    <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839   C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876   c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" />
+                  </g>
+                </svg>
+              )}
+              {likes.length}
+            </span>
+            <span className="cursor-pointer text-gray-400 mr-2 leading-none text-xs inline-flex items-center">
               <svg
-                className="w-4 h-4 mr-1 transition-colors duration-300 fill-secondary"
-                id="Capa_1"
-                x="0px"
-                y="0px"
-                viewBox="0 0 544.582 544.582"
-                style={{ enableBackground: "new 0 0 485.3 485.3" }}
-                xmlSpace="preserve"
+                className="w-4 h-4 mr-1"
+                stroke="currentColor"
+                strokeWidth="2"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                viewBox="0 0 24 24"
               >
-                <g>
-                  <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839   C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876   c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" />
-                </g>
+                <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
               </svg>
-            )}
-            {likes.length}
-          </span>
-          <span className="cursor-pointer text-gray-400 mr-2 leading-none text-xs inline-flex items-center">
-            <svg
-              className="w-4 h-4 mr-1"
-              stroke="currentColor"
-              strokeWidth="2"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              viewBox="0 0 24 24"
-            >
-              <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
-            </svg>
-            {comment.subComments.length}
-          </span>
-        </div>
+              {comment.subComments.length}
+            </span>
+          </div>
         </article>
       </section>
       <section
@@ -235,7 +228,7 @@ const Comment = ({ comment: initialComment, isSub }) => {
             }}
             className="hover:text-secondary"
           >
-           {replyForm ? "cancel" : "reply" } 
+            {replyForm ? "cancel" : "reply"}
           </button>
         ) : null}
       </section>
@@ -255,8 +248,16 @@ const Comment = ({ comment: initialComment, isSub }) => {
             placeholder="type a reply"
             className="w-full bg-transparent h-8 resize-none pr-6 border-b border-black focus:border-secondary outline-none overflow-hidden"
           ></textarea>
-          <button type="submit" className="rounded absolute top-1/2 -translate-y-1/2 right-0 bg-transparent">
-            <svg className={`h-6 w-6 ${replyText.length && !fetching ? "fill-black" : "fill-gray-400"}`} viewBox="0 0 20 20">
+          <button
+            type="submit"
+            className="rounded absolute top-1/2 -translate-y-1/2 right-0 bg-transparent"
+          >
+            <svg
+              className={`h-6 w-6 ${
+                replyText.length && !fetching ? "fill-black" : "fill-gray-400"
+              }`}
+              viewBox="0 0 20 20"
+            >
               <path d="M19 16.685S16.775 6.953 8 6.953V2.969L1 9.542l7 6.69v-4.357c4.763-.001 8.516.421 11 4.81z" />
             </svg>
           </button>
