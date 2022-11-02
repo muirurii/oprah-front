@@ -37,7 +37,7 @@ const SubCommentContainer = ({ commentId, newComment }) => {
           .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt), 0)
           .map((sub) => <Comment key={sub._id} comment={sub} isSub={true} />)
       ) : (
-        <div className="border-2 rounded-full border-black border-t-secondary border-r-secondary h-6 w-6 my-4 ml-8 animate-spin"></div>
+        <div className="border-2 rounded-full border-black border-t-secondary border-r-secondary h-5 w-5 my-4 ml-12 animate-spin"></div>
       )}
     </>
   );
