@@ -6,7 +6,7 @@ const Post = ({ post }) => {
   const relativeTime = useRelativeTime(post.createdAt);
 
   return (
-    <section className="p-4 mx-ato w-[320px] sm:w-[400px]">
+    <section className="p-4 min-w-[320px] max-w-[400px]">
       <div className="h-fit border border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
         <img
           className="h-40 w-full object-cover object-center mb-2"

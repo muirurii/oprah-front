@@ -6,6 +6,8 @@ import { Context } from "../context";
 import { setUser } from "../context/actions/userActions";
 import fetchData from "../customFunctions/fetch";
 
+let timeout;
+
 const Profile = () => {
   const {
     state: { user },
@@ -36,7 +38,7 @@ const Profile = () => {
     type: "",
   });
 
-  let timeout;
+
 
   const toggleMessage = (content, type) => {
     clearTimeout(timeout);

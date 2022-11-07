@@ -165,7 +165,7 @@ const Blogs = ({ posts: initialPosts }) => {
                 <div className="pl-0">
                   <p className="text-sm pl-2">Time posted</p>
                   <div className="py-2 pl-2">
-                    <fieldset className="p-1 flex items-center justify-start gap-x-2">
+                    <fieldset className="p-1 flex items-center justify-start gap-x-3">
                       <input
                         onChange={updateSort}
                         value="latest"
@@ -306,13 +306,14 @@ const Blogs = ({ posts: initialPosts }) => {
         <form
           onSubmit={handleSearchSubmit}
           onFocus={() => setShowSortMenu(false)}
-          className="flex items-center justify-center relative"
+          className="flex w-[288px] sm:w-[320px] items-center justify-center relative"
         >
           <input
             className="h-9 transition-all duration-300
-            w-52
-            sm:w-72
-            border border-r-0 border-secondary rounded-bl rounded-tl outline-none pl-4 peer focus:border-2 focus:border-r-0"
+            w-full
+            border border-r-0 border-secondary
+            rounded-bl rounded-tl outline-none
+            pl-4 peer focus:border-2 focus:border-r-0"
             type="text"
             placeholder="search blogs"
             value={search}
@@ -346,7 +347,7 @@ const Blogs = ({ posts: initialPosts }) => {
               </g>
             </svg>}
           </button>
-         {showRecent ? <div className="absolute z-[2] top-full bg-white rounded border border-gray-200 left-0 right-0 origin-top min-h-[60px] mt-1">
+         {showRecent ? <div className="absolute z-[2] top-full bg-white rounded border border-gray-100 left-0 right-0 origin-top min-h-[60px] mt-1">
             <h3 className="text-center py-2">Recent searches</h3>
             <ul>
               {recentSearch.length ? (
@@ -354,14 +355,14 @@ const Blogs = ({ posts: initialPosts }) => {
                   return (
                     <li
                       key={i * Math.random()}
-                      className="group flex relative py-1 px-2 cursor-pointer text-sm text-gray-600 hover:bg-gray-100"
+                      className="group flex relative py-1 pl-2 cursor-pointer text-sm text-gray-600"
                     >
                       <span
                         onClick={handleFromRecent}
                         className="block w-full mr-4 truncate hover:text-clip hover:whitespace-normal"
                       >{s}</span>
                       <button
-                        className="hidden absolute left-full top-0 p-1 h-full border-l border-gray-200 bg-gray-100 group-hover:block text-secondary rounded-tr rounded-br"
+                        className="hidden group-hover:block text-secondary float-right mr-2 h-full rounded-tr rounded-br"
                         onClick={()=> removeRecent(i)}
                       >x</button>
                     </li>

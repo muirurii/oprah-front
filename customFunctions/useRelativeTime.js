@@ -6,7 +6,7 @@ const msPerHour = msPerMinute * 60;
 const msPerDay = msPerHour * 24;
 
 const useRelativeTime = (time) => {
-    const [relativeTime, setRelativeTime] = useState(0);
+    const [relativeTime, setRelativeTime] = useState("");
 
     useEffect(() => {
         const current = Date.now();
