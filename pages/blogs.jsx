@@ -359,7 +359,7 @@ const Blogs = ({ posts: initialPosts }) => {
                     >
                       <span
                         onClick={handleFromRecent}
-                        className="block w-full mr-4 truncate hover:text-clip hover:whitespace-normal"
+                        className="block mr-6 w-full mr-4 truncate hover:text-clip hover:whitespace-normal"
                       >{s}</span>
                       <button
                         className="hidden group-hover:block text-secondary float-right mr-2 h-full rounded-tr rounded-br"

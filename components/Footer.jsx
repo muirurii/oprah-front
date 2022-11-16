@@ -80,16 +80,13 @@ const Footer = () => {
       </section>
       <section className="bg-white">
         <article className="py-2 px-5">
-          <p className="text-center text-black md:text-left">
-            Crafted by 
-            <a
-              className="underline ml-1 text-secondary"
-              href="https://peterngugi.netlify.app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Peter
-            </a>
+          <p className="flex items-center justify-center text-black md:text-left">
+           <span>Crafted by</span>
+            <a className="inline-block ml-2 text-secondary overflow-hidden relative z-10 my-link
+                after:absolute after:-left-2 after:bottom-0 after:h-[1px] after:bg-secondary after:w-full
+                after:-z-20" href="https://peterngugi.netlify.app " target="_blank ">
+                    Peter
+                </a>
           </p>
         </article>
       </section>

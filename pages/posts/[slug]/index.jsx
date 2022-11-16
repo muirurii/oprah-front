@@ -124,9 +124,9 @@ const PostPage = ({ initialPost, recommended }) => {
             {editModule && user.isLogged && user.role === "ADMIN" ? (
               <div className="absolute top-2 right-5 text-sm px-4 py-6 gap-y-2 grid w-32 rounded shadow bg-white shadow-gray-300">
                 <Link href={"/edit/[slug]"} as={`/edit/${post.slug}`}>
-                  <a className="py-1 flex items-center justify-start w-full gap-x-2 border-b border-gray-400 hover:border-secondary hover:text-secondary transition-colors duration-300">
+                  <a className="py-1 flex items-center justify-start w-full gap-x-2 border-b border-gray-400 hover:border-secondary hover:text-secondary group transition-colors duration-300">
                     <svg
-                      className="h-4 w-4"
+                      className="h-4 w-4 group-hover:fill-secondary"
                       x="0px"
                       y="0px"
                       viewBox="0 0 64 64"
@@ -145,10 +145,10 @@ const PostPage = ({ initialPost, recommended }) => {
                 </Link>
                 <button
                   onClick={handleDelete}
-                  className="py-1 flex items-center justify-start w-full gap-x-2 border-b border-gray-400 hover:border-secondary hover:text-secondary transition-colors duration-300"
+                  className="py-1 flex items-center justify-start w-full gap-x-2 border-b border-gray-400 hover:border-secondary hover:text-secondary group transition-colors duration-300"
                 >
                   <svg
-                    className="h-4 w-4"
+                    className="h-4 w-4 group-hover:fill-secondary"
                     x="0px"
                     y="0px"
                     viewBox="0 0 330 330"

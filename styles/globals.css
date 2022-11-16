@@ -50,4 +50,16 @@
             clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%)
         }
     }
+    .my-link::after {
+        animation: link 1500ms infinite linear alternate-reverse;
+    }
+    @keyframes link {
+        50% {
+            transform: scaleX(0.5);
+        }
+        100% {
+            background-color: #000;
+            left: calc(100% + 8px);
+        }
+    }
 }
