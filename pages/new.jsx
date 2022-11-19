@@ -57,7 +57,7 @@ const Admin = () => {
       ) : (
         <>
           <Meta title="Add a blog" />
-          <h1 className="text-3xl pt-4 text-center">New blog post</h1>
+          <h1 className="text-3xl pt-4 pl-4">New blog post</h1>
           <FormFields
             initial={{}}
             buttonText="Add blog"

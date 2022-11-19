@@ -1,4 +1,20 @@
 import { useState } from "react";
+import MdEditor from "md-editor-rt";
+import "md-editor-rt/lib/style.css";
+
+// MdEditor.ModalToolbar({key:Math.random()})
+// console.log(MdEditor.NormalToolbar)
+// MdEditor.NormalToolbar({onClick:(e)=> console.log(e.target)})
+
+// MdEditor.config({
+//   markedRenderer(renderer) {
+//     renderer.link = (href, title, text) => {
+//       return `<a href="${href}" title="${title}" target="_blank">${text}</a>`;
+//     };
+
+//     return renderer;
+//   },
+// });
 
 const FormFields = ({
   initial,
@@ -7,15 +23,15 @@ const FormFields = ({
   message,
   isSubmitting,
 }) => {
+  const [body, setBody] = useState(initial.body || "");
   const [data, setData] = useState({
     title: initial.title || "",
     categories: initial.category ? initial.category[0] : "",
     excerpt: initial.excerpt || "",
-    body: initial.body || "",
   });
 
   const [previewState, setPreviewState] = useState(initial.image || "");
-  const [selectedFile,setSelectedFile] = useState("");
+  const [selectedFile, setSelectedFile] = useState("");
 
   const handleChange = (e) => {
     setData({
@@ -38,12 +54,13 @@ const FormFields = ({
     if (data.categories.length < 1 || !previewState) return;
     submitHandler({
       ...data,
-      image: previewState
+      body,
+      image: previewState,
     });
   };
 
   return (
-    <section className="my-8 flex justify-center w-screen">
+    <section className="my-8 flex justify-start px-4 w-screen">
       <form onSubmit={handleSubmit} className="grid gap-y-1">
         {message.length ? (
           <p className="text-center text-red-600">{message}</p>
@@ -64,23 +81,23 @@ const FormFields = ({
         <div className="flex flex-col gap-y-2 mt-1 w-[300px] sm:w-[500px]">
           <label htmlFor="image">Image</label>
           <div className="flex items-start justify-start gap-x-2">
-          <input
-            className="cursor-pointer w-24 file:w-full file:text-white file:h-full border rounded file:bg-black file:border-none file:rounded file:text-xs outline-none h-10 mt-1"
-            type="file"
-            name="picUrl"
-            value={selectedFile}
-            placeholder="enter a url for your profile pic"
-            onChange={handleFileInputChange}
-          />
-          {previewState ? (
-            <img
-              className="rounded h-32 w-40"
-              src={previewState}
-              alt="PREVIEW"
+            <input
+              className="cursor-pointer w-24 file:w-full file:text-white file:h-full border rounded file:bg-black file:border-none file:rounded file:text-xs outline-none h-10 mt-1"
+              type="file"
+              name="picUrl"
+              value={selectedFile}
+              placeholder="enter a url for your profile pic"
+              onChange={handleFileInputChange}
             />
-          ) : (
-            <p className="text-sm my-auto text-center">No file choosen</p>
-          )}
+            {previewState ? (
+              <img
+                className="rounded h-32 w-40"
+                src={previewState}
+                alt="PREVIEW"
+              />
+            ) : (
+              <p className="text-sm my-auto text-center">No file choosen</p>
+            )}
           </div>
         </div>
         <div className="flex flex-col gap-y-2 mt-1 w-[300px] sm:w-[500px]">
@@ -100,22 +117,23 @@ const FormFields = ({
           </select>
         </div>
         <div className="flex flex-col gap-y-2 mt-1 w-[300px] sm:w-[500px]">
-        <label htmlFor="excerpt">Excerpt</label>
-        <input type="text"
-          className="h-10 border border-black focus:border-secondary
+          <label htmlFor="excerpt">Excerpt</label>
+          <input
+            type="text"
+            className="h-10 border border-black focus:border-secondary
           outline-none rounded pl-1"
-          id="excerpt"
-          placeholder="post excerpt"
-          name="excerpt"
-          value={data.excerpt}
-          onChange={handleChange}
-          minLength={100}
-          maxLength={120}
+            id="excerpt"
+            placeholder="post excerpt"
+            name="excerpt"
+            value={data.excerpt}
+            onChange={handleChange}
+            minLength={100}
+            maxLength={120}
           />
         </div>
-        <div className="flex flex-col gap-y-2 mt-1 w-[300px] sm:w-[500px]">
+        <div className="flex flex-col gap-y-2 mt-1">
           <label htmlFor="body">Body</label>
-          <textarea
+          {/* <textarea
             required
             className="border border-black focus:border-secondary outline-none rounded pl-1"
             rows="7"
@@ -124,7 +142,25 @@ const FormFields = ({
             name="body"
             value={data.body}
             onChange={handleChange}
-          ></textarea>
+          ></textarea> */}
+          <div className="
+          overflow-x-scroll lg:overflow-x-hidden w-screen
+          ">
+            <div className="w-fit py-2 mr-6">
+              <MdEditor
+                language="en-US"
+                toolbarsExclude={[
+                  "github",
+                  "catalog",
+                  "htmlPreview",
+                  "prettier",
+                ]}
+                noUploadImg={true}
+                modelValue={body}
+                onChange={setBody}
+              />
+            </div>
+          </div>
         </div>
         <button
           className={`p-2 ${

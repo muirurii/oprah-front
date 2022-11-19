@@ -88,7 +88,7 @@ const Edit = () => {
         </div>
       ) : (
         <>
-        <h1 className="text-3xl pt-4 text-center">Edit blog post</h1>
+        <h1 className="text-3xl pt-4 pl-4">Edit blog post</h1>
         <FormFields
           initial={post}
           buttonText="Update blog"
