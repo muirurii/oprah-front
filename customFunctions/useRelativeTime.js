@@ -14,7 +14,7 @@ const useRelativeTime = (time) => {
         const elapsed = current - previous;
 
         if (elapsed < msPerMinute) {
-            const seconds = Math.round(elapsed / 1000);
+            const seconds = Math.round(elapsed / 1000) || 1;
             const amount = `${seconds} second${isPlural(seconds)} ago`;
             setRelativeTime(amount);
         } else if (elapsed < msPerHour) {

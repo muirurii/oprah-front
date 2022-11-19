@@ -1,5 +1,6 @@
 import { useReducer, createContext } from "react";
 import { userReducer } from "./reducers/userReducers";
+import { menuReducer } from "./reducers/menuReducers";
 
 const initialState = {
   user: {
@@ -12,6 +13,7 @@ const initialState = {
     bookmarks: [],
     profilePic: "",
   },
+  menu: false,
 };
 
 export const Context = createContext({});
@@ -21,13 +23,13 @@ const combineReducers =
   (state, action) => {
     for (let i = 0; i < reducers.length; i++) {
       state = reducers[i](state, action);
-      return state;
     }
+    return state;
   };
 
 export const Provider = ({ children }) => {
   const [state, dispatch] = useReducer(
-    combineReducers(userReducer),
+    combineReducers(userReducer,menuReducer),
     initialState
   );
   const value = { state, dispatch };

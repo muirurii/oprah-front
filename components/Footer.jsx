@@ -1,6 +1,11 @@
 import Link from "next/link";
+import { useContext } from "react";
+import { Context } from "../context";
 
 const Footer = () => {
+
+  const {state:{menu}} = useContext(Context);
+  
   return (
     <footer className="text-gray-200 bg-black text-sm font-light">
       <section className="px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
@@ -78,7 +83,7 @@ const Footer = () => {
           </div>
         </article>
       </section>
-      <section className="bg-white">
+      <section className={`bg-white z-50 ${menu ? "fixed bottom-0 w-screen translate-x-full origin-right banner" : null}`}>
         <article className="py-2 px-5">
           <p className="flex items-center justify-center text-black md:text-left">
            <span>Crafted by</span>
