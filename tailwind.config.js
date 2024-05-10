@@ -8,7 +8,8 @@ module.exports = {
         extend: {
             fontFamily: {
                 main: [" Poppins,sans-serif;"],
-                sec: ["Comforter Brush", "serif"]
+                secondary: ["Comforter Brush", "serif"],
+                sec: ["Allura", "cursive"]
             },
             colors: {
                 secondary: " #fa0036",

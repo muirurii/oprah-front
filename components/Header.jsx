@@ -2,15 +2,37 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import { Context } from "../context";
-import {toggleMenu} from "../context/actions/menuActions"
+import { toggleMenu } from "../context/actions/menuActions";
 import { resetUser } from "../context/actions/userActions";
 import fetchData from "../customFunctions/fetch";
+import {
+  BiLogoFacebook,
+  BiLogoInstagram,
+  BiLogoPinterestAlt,
+  BiLogoTwitter,
+  BiX,
+} from "react-icons/bi";
 
 let smallMenuTimeout;
 
+const HeaderLink = ({ link, text }) => {
+  return (
+    <Link className="" href={link}>
+      <a
+        className="block py-6 w-full text-center border-b border-slate-400 hover:text-secondary transition-colors duration-300
+      cursor-pointer relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:transition-all after:duration-300 after:pointer-events-none after:bg-secondary after:scale-0 after:origin-center after:hover:scale-100
+      
+      "
+      >
+        {text}
+      </a>
+    </Link>
+  );
+};
+
 const Header = () => {
   const {
-    state: { user,menu },
+    state: { user, menu },
     dispatch,
   } = useContext(Context);
 
@@ -24,45 +46,64 @@ const Header = () => {
     } catch (error) {}
   };
 
-  const handleToggleMenu = ()=>{
-   toggleMenu(dispatch);
-  }
+  const handleToggleMenu = () => {
+    toggleMenu(dispatch);
+  };
 
   return (
-    <header className="bg-white fixed top-0 text-sm left-0 w-screen z-10 flex items-center justify-between pr-4 sm:px-12 shadow shadow-gray-100 h-[70px]">
-      <h1 className="text-2xl font-bold bg-white relative z-50 pl-4 sm:p-0 h-full w-full flex items-center justify-start text-secondary font-sec">
+    <header className="bg-white fixed top-0 text-sm left-0 w-screen z-10 flex items-center justify-between pr-4 sm:px-12 shadow shadow-gray-100 h-[120px]">
+      <h1 className="text-3xl  bg-white relative z-50 pl-4 sm:p-0 h-full w-full flex items-center justify-start text-secondary font-sec">
         <Link href="/">
           <a>
             <span className="text-black">O</span>rpah
           </a>
         </Link>
       </h1>
-      <nav className="hidden sm:block">
-        <ul
-          className={`z-10  flex gap-y-1 sm:bg-transparent pr-48 items-center`}
-        >
-          <li className="mr-4 hover:text-secondary transition-colors duration-300">
-            <Link href="/">Home</Link>
-          </li>
-          <li className="mr-4 relative group">
-            <Link href="/blogs">
-              <a>
-                <span className="hover:text-secondary transition-colors duration-300 cursor-pointer">
-                  Blogs
-                </span>
-              </a>
-            </Link>
-          </li>
-          <li className="mr-4 hover:text-secondary transition-colors duration-300">
-            <Link href="/about">About</Link>
-          </li>
-          {user.isLogged && user.role === "ADMIN" ? (
-            <li className="w-16 hover:text-secondary transition-colors duration-300">
-              <Link href="/new">Add new</Link>
-            </li>
-          ) : null}
-        </ul>
-      </nav>
+      {/* <nav className="hidden sm:block"> */}
+      <div className="fixed top-[120px] left-0 w-screen min-h-screen pointer-events-none flex justify-center">
+        <div className="flex max-w-[1500px] w-full h-fit">
+          <nav className="z-10 w-full border flex justify-center ">
+            <ul
+              className={`  h0-[calc(100vh - 120px)] flex flex-col
+              items-ceter pt-4 w-full bg-white shadow-md border-l-[32px] border-secondary shadow-slate-600 pointer-events-auto`}
+            >
+              <li className="w-full py-4 px-2 flex items-center justify-evenly">
+                <BiLogoInstagram className="w-12 h-12 cursor-pointer hover:fill-secondary" />
+                <BiLogoFacebook className="w-12 h-12 cursor-pointer hover:fill-secondary" />
+                <BiLogoTwitter className="w-12 h-12 cursor-pointer hover:fill-secondary" />
+                <BiLogoPinterestAlt className="w-12 h-12 cursor-pointer hover:fill-secondary" />
+              </li>
+              <li className="px-4 py-16">
+                <p className="text-secondary font-sec text-6xl text-center">
+                  Exploring Worlds Through Words
+                </p>
+              </li>
+              <li className="w-full">
+                <HeaderLink link={"/"} text={"Home"} />
+              </li>
+              <li className="w-full">
+                <HeaderLink link={"blogs"} text={"Blogs"} />
+              </li>
+              <li className="w-full">
+                <HeaderLink link={"about"} text={"About"} />
+              </li>
+              <li className="w-full">
+                <HeaderLink link={"about"} text={"Contact"} />
+              </li>
+              {user.isLogged && user.role === "ADMIN" ? (
+                <li className="w-full">
+                  <HeaderLink link={"new"} text={"New Blog"} />
+                </li>
+              ) : null}
+            </ul>
+          </nav>
+          <img
+            className="w-1/2"
+            src="https://images.pexels.com/photos/1449667/pexels-photo-1449667.jpeg?auto=compress&cs=tinysrgb&w=1024"
+            alt=""
+          />
+        </div>
+      </div>
       <button
         onClick={handleToggleMenu}
         className="sm:hidden absolute -bottom-8 z-40 h-9 p-1 right-0 rounded-bl bg-white"
@@ -92,12 +133,12 @@ const Header = () => {
         className={`absolute sm:hidden overflow-hidden top-0 right-0 shadow-gray-100 shadow-md rounded-bl-full 
       ${menu ? "h-screen pt-[100px] px-4 rounded-bl-none" : "h-0"}
        w-screen transition-all duration-500 z-30 bg-white`}
-       onClick={() => {
-        clearTimeout(smallMenuTimeout);
-        smallMenuTimeout = setTimeout(() => {
-          handleToggleMenu();
-        }, 500);
-      }}
+        onClick={() => {
+          clearTimeout(smallMenuTimeout);
+          smallMenuTimeout = setTimeout(() => {
+            handleToggleMenu();
+          }, 500);
+        }}
       >
         <ul className="grid gap-y-2">
           <li className="border-b border-gray-300 max-w-lg pl-1 pb-1 hover:text-secondary transition-colors duration-300">
@@ -117,14 +158,11 @@ const Header = () => {
           <li className="border-b border-gray-300 max-w-lg pl-1 pb-1 hover:text-secondary transition-colors duration-300">
             <Link href="/profile">Profile</Link>
           </li>
-           {
-             user.isLogged ?
-          <li className="border-b border-gray-300 max-w-lg pl-1 pb-1 hover:text-secondary transition-colors duration-300">
-             <button
-            onClick={handleLogOut}
-            >Log out</button> 
-          </li>: null
-           }
+          {user.isLogged ? (
+            <li className="border-b border-gray-300 max-w-lg pl-1 pb-1 hover:text-secondary transition-colors duration-300">
+              <button onClick={handleLogOut}>Log out</button>
+            </li>
+          ) : null}
         </ul>
       </nav>
       {user.isLogged ? (
