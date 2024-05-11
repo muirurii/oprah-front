@@ -32,7 +32,7 @@ const Layout = ({ children }) => {
 
   useEffect(() => {
     Router.events.on("routeChangeStart", () => {
-      window.scrollTo(0,0);
+      window.scrollTo(0, 0);
       setLoading(true);
     });
     Router.events.on("routeChangeComplete", () => {
@@ -67,7 +67,7 @@ const Layout = ({ children }) => {
           <Loader />
         </section>
       ) : (
-        <section className="overflow-x-hidden font-main pt-20">
+        <section className="overflow-x-hidden font-main pt-[140px]">
           <Header />
           {loading ? <Loader /> : children}
           <Footer />

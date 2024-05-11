@@ -7,12 +7,11 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                main: [" Poppins,sans-serif;"],
-                secondary: ["Comforter Brush", "serif"],
-                sec: ["Allura", "cursive"]
+                main: ["Teachers", "sans-serif"],
+                sec: ["Quicksand", "cursive"]
             },
             colors: {
-                secondary: " #fa0036",
+                secondary: "#fa0036",
             },
             translate: {
                 hideMenu: "calc(100% + 70px)",

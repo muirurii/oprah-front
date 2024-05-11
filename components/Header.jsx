@@ -18,11 +18,11 @@ import {
 
 let smallMenuTimeout;
 
-const HeaderLink = ({ link, text }) => {
+const HeaderLink = ({ link, text, handleToggleMenu }) => {
   return (
-    <Link className="" href={link}>
+    <Link onClick={() => handleToggleMenu()} className="" href={link}>
       <a
-        className="block py-3 md:py-6 w-full text-center border-b border-slate-400 hover:text-secondary transition-colors duration-300
+        className="block py-3 md:py-6 w-full text-center border-b border-slate-400 hover:text-secondary transition-colors duration-300 uppercase
       cursor-pointer relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:transition-all after:duration-300 after:pointer-events-none after:bg-secondary after:scale-0 after:origin-center after:hover:scale-100 hover:border-transparent
       "
       >
@@ -52,6 +52,25 @@ const Header = () => {
     toggleMenu(dispatch);
   };
 
+  const getGreeting = (username) => {
+    const currentTime = new Date();
+    const currentHour = currentTime.getHours();
+
+    let greeting;
+
+    if (currentHour >= 5 && currentHour < 12) {
+      greeting = `Good morning, ${username}! Rise and shine, time to conquer the day!`;
+    } else if (currentHour >= 12 && currentHour < 18) {
+      greeting = `Good afternoon, ${username}! Afternoon delight! Ready for some productivity?`;
+    } else if (currentHour >= 18 && currentHour < 22) {
+      greeting = `Good evening, ${username}! Time to unwind and relax like a boss!`;
+    } else {
+      greeting = `Hello, ${username}! What adventures await us tonight?`;
+    }
+
+    return greeting;
+  };
+
   return (
     <header className="bg-white fixed top-0 text-sm left-0 w-screen z-10 flex items-center justify-between pr-4 sm:px-12 shadow shadow-gray-100 h-[120px]">
       <h1 className="text-3xl  bg-white relative z-50 pl-4 sm:p-0 h-full w-full flex items-center justify-tart text-secondary font-sec">
@@ -74,20 +93,40 @@ const Header = () => {
             >
               <div className="w-full">
                 <li className="w-full">
-                  <HeaderLink link={"/"} text={"Home"} />
+                  <HeaderLink
+                    handleToggleMenu={handleToggleMenu}
+                    link={"/"}
+                    text={"Home"}
+                  />
                 </li>
                 <li className="w-full">
-                  <HeaderLink link={"blogs"} text={"Blogs"} />
+                  <HeaderLink
+                    handleToggleMenu={handleToggleMenu}
+                    link={"blogs"}
+                    text={"Blogs"}
+                  />
                 </li>
                 <li className="w-full">
-                  <HeaderLink link={"about"} text={"About"} />
+                  <HeaderLink
+                    handleToggleMenu={handleToggleMenu}
+                    link={"about"}
+                    text={"About"}
+                  />
                 </li>
                 <li className="w-full">
-                  <HeaderLink link={"about"} text={"Contact"} />
+                  <HeaderLink
+                    handleToggleMenu={handleToggleMenu}
+                    link={"about"}
+                    text={"Contact"}
+                  />
                 </li>
                 {user.isLogged && user.role === "ADMIN" ? (
                   <li className="w-full">
-                    <HeaderLink link={"new"} text={"New Blog"} />
+                    <HeaderLink
+                      handleToggleMenu={handleToggleMenu}
+                      link={"new"}
+                      text={"New Blog"}
+                    />
                   </li>
                 ) : null}
               </div>
@@ -122,7 +161,7 @@ const Header = () => {
           )}
         </div>
         {user.isLogged ? (
-          <li className="group absolute top-1/2 right-4 sm:right-12 z-[60] -translate-y-1/2 flex items-center justify-center gap-x-4">
+          <li className="group font-light absolute top-1/2 right-4 sm:right-12 z-[60] -translate-y-1/2 flex items-center justify-center gap-x-4">
             <div className="h-9 w-9 flex items-center justify-center text-lg rounded-full border border-black relative after:absolute after:left-0 after:bottom-0 after:h-2 after:w-2 after:bg-secondary after:rounded-full cursor-pointer">
               {user.profilePic.length ? (
                 <img
@@ -133,17 +172,26 @@ const Header = () => {
               ) : (
                 <span className="uppercase">{user.username.slice(0, 2)}</span>
               )}
-              <div className="hidden group-hover:block absolute text-sm top-full right-0 min-w-[240px] p-3 bg-white border border-gray-200 rounded">
-                <p className="text-center">Logged in as {user.username}</p>
-                <div className="mt-4 flex justify-center gap-x-3 font-light">
+              <div className="hidden group-hover:block absolute text-sm top-full right-0 min-w-[240px] md:min-w-[350px] bg-white border border-secondary rounded">
+                <p className="text-center px-2 py-4 font-light bg-secondary text-white">
+                  Logged in as {user.username}
+                </p>
+                <img
+                  src={user.profilePic}
+                  alt=""
+                  className="mx-auto w-16 h-16 md:w-32 md:h-32 rounded-full my-6"
+                />
+                <p className="p-4 text-center">{getGreeting(user.username)}</p>
+                <div className="mt-4 flex justify-evenly gap-x-3 pb-4 px-4">
                   <button
                     onClick={handleLogOut}
-                    className="border transition-colors duration-300 hover:text-white hover:bg-secondary border-secondary py-2 px-3 rounded text-xs"
+                    className="border border-transparent transition-colors duration-300 text-white hover:text-black hover:bg-white hover:border-black
+                     bg-slate-700 py-2 px-5 md:py-3 md:px-6 rounded"
                   >
                     Log out
                   </button>
                   <Link href="/profile">
-                    <a className="border border-secondary hover:bg-white hover:text-black transition-colors duration-300 bg-secondary py-2 px-3 rounded text-xs text-white">
+                    <a className="border border-secondary hover:bg-white hover:text-black transition-colors duration-300 bg-secondary py-2 px-5 md:py-3 md:px-6 rounded text-white">
                       Profile
                     </a>
                   </Link>
@@ -155,14 +203,14 @@ const Header = () => {
           <ul className="absolute z-50 bg-white top-0 right-2 sm:right-8 flex items-center h-full">
             <Link href="/login">
               <a>
-                <li className="mr-4 text-white hover:text-black bg-secondary hover:bg-white border border-secondary rounded py-2 px-3 transition-colors duration-300">
+                <li className="mr-4 text-white hover:text-black bg-secondary hover:bg-white border border-secondary rounded py-2 px-5 transition-colors duration-300 md:py-3 md:px-6">
                   Log In
                 </li>
               </a>
             </Link>
             <Link href="/signup">
               <a>
-                <li className="mr-4 border border-secondary rounded py-2 px-3 hover:text-secondary transition-colors duration-300">
+                <li className="mr-4 border border-secondary rounded py-2 px-5 hover:text-secondary transition-colors duration-300 md:py-3 md:px-6">
                   Sign Up
                 </li>
               </a>
