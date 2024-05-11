@@ -72,6 +72,14 @@
         }
     }
 
+    .h::after {
+        clip-path: polygon(0 0, 0% 100%, 100% 0);
+    }
+
+    .h::before {
+        clip-path: polygon(100% 100%, 0% 100%, 100% 0);
+    }
+
     .my-link::after {
         animation: link 1500ms infinite linear alternate-reverse;
     }
