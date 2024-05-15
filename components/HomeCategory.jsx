@@ -1,10 +1,15 @@
-import PostsContainer from "./PostsContainer";
+import Heading from "./Heading";
+import Post from "./Post";
 
 const HomeCategory = ({ posts, heading }) => {
   return (
     <div>
-      <h1 className="text-3xl text-bold p-4">{heading}</h1>
-      <PostsContainer posts={posts} />
+      <Heading text={heading} />
+      <section className="my-6 grid md:grid-cols-2 xl:grid-cols-3 gap-y-16 gap-x-4">
+        {posts.map((post) => (
+          <Post key={post._id} post={post} />
+        ))}
+      </section>
     </div>
   );
 };

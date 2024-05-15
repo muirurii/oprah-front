@@ -89,7 +89,7 @@ const Header = () => {
           <nav className="z-10 w-full border flex justify-center ">
             <ul
               className={`  h0-[calc(100vh - 120px)] flex flex-col
-              items-ceter justify-between pt-4 w-full bg-white shadow-md border-l-8 md:border-l-[32px] border-secondary shadow-slate-300`}
+              items-center justify-between pt-4 w-full bg-white shadow-md border-l-8 md:border-l-[32px] border-secondary shadow-slate-300`}
             >
               <div className="w-full">
                 <li className="w-full">
@@ -130,12 +130,7 @@ const Header = () => {
                   </li>
                 ) : null}
               </div>
-              <div className="w-full h-full flex flex-col justify-evenly items-center gap-y-3 md:gap-y-6 p-2 md:p-4">
-                <li className="">
-                  <p className="text-secondary font-sec text-3xl md:text-6xl text-center">
-                    Exploring Worlds Through Words
-                  </p>
-                </li>
+              <div className="w-full h-full flex flex-col justify-evenly items-center p-2 md:p-4">
                 <li className="w-full flex items-center justify-evenly">
                   <BiLogoInstagram className="w-6 md:w-12 h-6 md:h-10 cursor-pointer hover:fill-secondary" />
                   <BiLogoFacebook className="w-6 md:w-12 h-6 md:h-10 cursor-pointer hover:fill-secondary" />
