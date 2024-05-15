@@ -6,14 +6,16 @@ const Post = ({ post }) => {
   const relativeTime = useRelativeTime(post.createdAt);
 
   return (
-    <section className="p-4 min-w-[320px] max-w-[400px]">
-      <div className="h-fit border border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
-        <img
-          className="h-40 w-full object-cover object-center mb-2"
-          src={post.image}
-          alt="blog"
-        />
-        <div className="p-4 pt-0">
+    <section className="px-4 group cursor-pointer max-w-[700px]">
+      <div className="h-fit border border-slate-300 border-opacity-60 rounded-lg overflow-hidden">
+        <div className="h-64 overflow-hidden">
+          <img
+            className="h-64 w-full object-cover mb-2 group-hover:scale-110 transition-transform duration-300"
+            src={post.image}
+            alt="blog"
+          />
+        </div>
+        <div className="px-4 py-8 ">
           <div className="mb-1 flex items-center justify-between text-xs">
             <p>{relativeTime}</p>
             <div className="flex items-center justify-end gap-x-2">
@@ -29,8 +31,8 @@ const Post = ({ post }) => {
               ) : null}
             </div>
           </div>
-          <h1 className="text-lg font-medium text-gray-900 mb-3">
-            {post.title.slice(0, 100)} {post.title.length > 100 ? "..." : null}
+          <h1 className="text-lg font-sec font-semibold text-gray-900 mb-3">
+            {post.title.slice(0, 20)} {post.title.length > 100 ? "..." : null}
           </h1>
           <p className="leading-relaxed text-sm font-light mb-3 break-all">
             {post.excerpt.slice(0, 100)}...
