@@ -1,43 +1,15 @@
-import { BiSearch, BiSearchAlt, BiSearchAlt2 } from "react-icons/bi";
 import HomeCategory from "../components/HomeCategory";
-import HomeCatLink from "../components/HomeCatLink";
 import Meta from "../components/Meta";
 import fetchData from "../customFunctions/fetch";
-
-const sections = [
-  {
-    heading: "Explore Diverse Topics",
-    content:
-      "Dive into a world of diverse topics, from technology trends to creative writing tips.",
-  },
-  {
-    heading: "Engage with Expert Insights",
-    content:
-      "Gain valuable insights from industry experts and thought leaders in every field.",
-  },
-  {
-    heading: "Stay Updated and Informed",
-    content:
-      "Stay updated with the latest news, trends, and insights shaping our world today.",
-  },
-  {
-    heading: "Join Our Community",
-    content:
-      "Join a vibrant community of like-minded individuals passionate about learning and growth.",
-  },
-  {
-    heading: "Start Your Journey",
-    content:
-      "Start your journey of discovery, learning, and empowerment with us today!",
-  },
-];
+import HomeCards from "../components/HomeCard";
+import { BiSearch } from "react-icons/bi";
 
 export default function Home({ latest, featured }) {
   return (
     <div className="py-8 w-screen">
       <Meta title="Orpah | Home" />
-      <div className=" min-h-scren pt-16 gap-y-12 flex flex-col items-center justify-center hero">
-        <h2 className="text-2xl text-center font-sec sm:text-5xl leading-3 font-semibold py-4 px-4 max-w-[600px]">
+      <div className="pt-16 gap-y-12 flex flex-col items-center justify-center hero">
+        <h2 className="text-2xl text-center font-sec sm:text-5xl font-semibold py-4 px-4 max-w-[600px]">
           <p>Unleashing the Hero Within, Inspire, Empower, Conquer!</p>
         </h2>
         <form className="flex items-center justify-center max-w-[700px] w-full px-2">
@@ -54,28 +26,21 @@ export default function Home({ latest, featured }) {
         <div className=""></div>
       </div>
       <section
-        className="py-8 flex justify-evenly items-center mb-48 h relative 
-      after:absolute after:top-8 after:left-8 after:h-24 after:w-24 after:bg-secondary
-      before:absolute before:-bottom-40 before:right-8 before:h-24 before:w-24 before:bg-secondary
+        className="py-8 flex justify-evenly items-s h relative 
+      after:absolute after:top-8 after:left-2 after:h-16 md:after:h-24 md:after:w-24 md:before:h-24 after:w-16 after:bg-secondary
+      before:absolute before:bottom-0  before:right-2 before:h-16 before:w-16 before:bg-secondary
       "
       >
         <img
-          className="h-[700px] w-[400px] object-cover rounded-xl relative top-48"
+          className="h-[900px] w-[400px] object-cover rounded-xl relative top-48 hidden xl:block"
           src="https://images.pexels.com/photos/5965896/pexels-photo-5965896.jpeg?auto=compress&cs=tinysrgb&w=600"
           alt=""
         />
-        <section>
-          {sections.map((section, index) => (
-            <section key={index} className="py-4">
-              <h1 className="text-secondary text-2xl font-sec pb-4">
-                {section.heading}
-              </h1>
-              <p className="max-w-[300px]">{section.content}</p>
-            </section>
-          ))}
+        <section className="py-16 mx-12">
+          <HomeCards />
         </section>
         <img
-          className="h-[700px] w-[400px] object-cover rounded-xl"
+          className="h-[900px] w-[400px] md :h-[600px] md:w-[300px] object-cover rounded-xl hidden md:block"
           src="https://images.pexels.com/photos/3771127/pexels-photo-3771127.jpeg?auto=compress&cs=tinysrgb&w=600"
           alt=""
         />
