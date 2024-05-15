@@ -82,7 +82,7 @@ const Header = () => {
       </h1>
       <div
         className={`fixed top-[120px] left-0 w-screen transition-all duration-300 origin-top ${
-          !menu ? "scale-100 opacity-100" : "scale-0 opacity-30"
+          menu ? "scale-100 opacity-100" : "scale-0 opacity-30"
         } min-h-screen pointer-events-none flex justify-center`}
       >
         <div className="flex max-w-[1500px] w-full h-fit pointer-events-auto">

@@ -4,9 +4,33 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
+@layer base {
+    body {
+        overflow: overlay;
+    }
+
     html {
         scroll-behavior: smooth;
+        @apply scroll-pt-10;
+    }
+
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+        @apply bg-transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        @apply bg-gray-900;
+        border-radius: 20px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        @apply bg-gray-600;
+    }
+
+    ::-webkit-scrollbar-track {
+        @apply w-0;
     }
 }
 
