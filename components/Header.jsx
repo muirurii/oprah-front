@@ -72,7 +72,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-white fixed top-0 text-sm left-0 w-screen z-10 flex items-center justify-between pr-4 sm:px-12 shadow shadow-gray-100 h-[120px]">
+    <header className="bg-white fixed top-0 text-sm left-0 w-screen z-10 flex items-center justify-between pr-4 sm:px-12 h-[120px]">
       <h1 className="text-3xl  bg-white relative z-50 pl-4 sm:p-0 h-full w-full flex items-center justify-tart text-secondary font-sec">
         <Link href="/">
           <a>

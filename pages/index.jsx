@@ -8,8 +8,8 @@ export default function Home({ latest, featured }) {
   return (
     <div className="py-8 w-screen">
       <Meta title="Orpah | Home" />
-      <div className="pt-16 gap-y-12 flex flex-col items-center justify-center hero">
-        <h2 className="text-2xl text-center font-sec sm:text-5xl font-semibold py-4 px-4 max-w-[600px]">
+      <div className="py-16 gap-y-12 flex flex-col items-center justify-center hero relative">
+        <h2 className="text-2xl bg-red-50 text-center font-sec sm:text-5xl font-semibold py-4 px-4 max-w-[600px]">
           <p>Unleashing the Hero Within, Inspire, Empower, Conquer!</p>
         </h2>
         <form className="flex items-center justify-center max-w-[700px] w-full px-2">
@@ -23,7 +23,13 @@ export default function Home({ latest, featured }) {
             <BiSearch className="h-8 w-8 stroke-white hover:stroke-slate-200  stroke-[2px]" />
           </button>
         </form>
-        <div className=""></div>
+        <div className="absolute -top-16 -left-48 -right-48 -bottom-0 -z-30 overflow-hidden hero-img">
+          <img
+            src="https://images.pexels.com/photos/5554667/pexels-photo-5554667.jpeg?auto=compress&cs=tinysrgb&w=1024"
+            className="absolute top-0 left-0 h-full w-full object-cover"
+            alt=""
+          />
+        </div>
       </div>
       <section
         className="py-8 flex justify-evenly items-s h relative 
