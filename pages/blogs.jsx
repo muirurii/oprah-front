@@ -134,11 +134,17 @@ const Blogs = ({ posts: initialPosts }) => {
     <main>
       <Meta title="Blogs" />
       <Heading text={"blogs"} />
-      <section className="mt-4 mb-16 flex items-start justify-center px-4 gap-x-2">
+      <section className="mt-4 mb-16 flex items-center justify-center px-4 gap-x-2">
+        <p
+          onClick={() => setShowSortMenu(!showSortMenu)}
+          className="hidden sm:block pr-4 hover:bg-slate-200 px-4 py-3 rounded-sm cursor-pointer"
+        >
+          Sort Blogs
+        </p>
         <section className="relative">
           <button
             onClick={() => setShowSortMenu(!showSortMenu)}
-            className="bg-black text-white h-12 w-12 flex items-center justify-center mr-1 mb-1 rounded"
+            className="bg-black text-white h-12 w-12 flex items-center justify-center mb-1 rounded"
           >
             <svg
               className="h-7 w-7"
@@ -158,14 +164,14 @@ const Blogs = ({ posts: initialPosts }) => {
             </svg>
           </button>
           {showSortMenu && (
-            <section className="absolute top-full z-[3] left-0 w-64 pb-2 bg-white shadow-sm shadow-gray-400 rounded overflow-hidden">
-              <h3 className="p-2 mb-2 text-center bg-secondary text-white">
+            <section className="absolute top-full z-[3] -left-4 w-screen sm:w-[400px] pb-2 bg-white shadow-sm shadow-gray-400 rounded overflow-hidden">
+              <h3 className="p-4 mb-2 text-center bg-secondary text-white">
                 Sort blogs by
               </h3>
-              <form onSubmit={handleSort}>
-                <div className="pl-0">
-                  <p className="text-sm pl-2">Time posted</p>
-                  <div className="py-2 pl-2">
+              <form className="pl-4" onSubmit={handleSort}>
+                <div>
+                  <p className="pl-2">Time posted</p>
+                  <div className="py-2 pl-3">
                     <fieldset className="p-1 flex items-center justify-start gap-x-3">
                       <input
                         onChange={updateSort}
@@ -176,7 +182,7 @@ const Blogs = ({ posts: initialPosts }) => {
                         id="latest"
                         checked={sort === "latest"}
                       />
-                      <label htmlFor="latest" className="text-xs font-lighter">
+                      <label htmlFor="latest" className="font-lighter">
                         Latest first
                       </label>
                     </fieldset>
@@ -190,17 +196,15 @@ const Blogs = ({ posts: initialPosts }) => {
                         id="old"
                         checked={sort === "oldest"}
                       />
-                      <label htmlFor="old" className="text-xs font-lighter">
+                      <label htmlFor="old" className="font-lighter">
                         Old blogs first
                       </label>
                     </fieldset>
                   </div>
                 </div>
                 <div className="pl-0">
-                  <p className="text-sm border-t border-gray-200 pt-1 pl-2">
-                    Views
-                  </p>
-                  <div className="py-2 pl-2">
+                  <p className=" border-t border-gray-200 pt-1 pl-2">Views</p>
+                  <div className="py-2 pl-3">
                     <fieldset className="p-1 flex items-center justify-start gap-x-2">
                       <input
                         onChange={updateSort}
@@ -211,10 +215,7 @@ const Blogs = ({ posts: initialPosts }) => {
                         id="mostViewed"
                         checked={sort === "mostViewed"}
                       />
-                      <label
-                        htmlFor="mostViewed"
-                        className="text-xs font-lighter"
-                      >
+                      <label htmlFor="mostViewed" className="font-lighter">
                         Most viewed first
                       </label>
                     </fieldset>
@@ -228,20 +229,15 @@ const Blogs = ({ posts: initialPosts }) => {
                         id="leastViewed"
                         checked={sort === "leastViewed"}
                       />
-                      <label
-                        htmlFor="leastViewed"
-                        className="text-xs font-lighter"
-                      >
+                      <label htmlFor="leastViewed" className="font-lighter">
                         Least viewed first
                       </label>
                     </fieldset>
                   </div>
                 </div>
                 <div className="pl-0">
-                  <p className="text-sm border-t border-gray-200 pt-1 pl-2">
-                    Likes
-                  </p>
-                  <div className="py-2 pl-2">
+                  <p className=" border-t border-gray-200 pt-1 pl-2">Likes</p>
+                  <div className="py-2 pl-3">
                     <fieldset className="p-1 flex items-center justify-start gap-x-2">
                       <input
                         onChange={updateSort}
@@ -252,10 +248,7 @@ const Blogs = ({ posts: initialPosts }) => {
                         id="mostLiked"
                         checked={sort === "mostLiked"}
                       />
-                      <label
-                        htmlFor="mostLiked"
-                        className="text-xs font-lighter"
-                      >
+                      <label htmlFor="mostLiked" className="font-lighter">
                         Most liked first
                       </label>
                     </fieldset>
@@ -269,35 +262,23 @@ const Blogs = ({ posts: initialPosts }) => {
                         id="leastLiked"
                         checked={sort === "leastLiked"}
                       />
-                      <label
-                        htmlFor="leastLiked"
-                        className="text-xs font-lighter"
-                      >
+                      <label htmlFor="leastLiked" className="font-lighter">
                         Least liked first
                       </label>
                     </fieldset>
                   </div>
                 </div>
-                <div className="flex px-2 my-2 items-center justify-between">
+                <div className="flex m-2 items-center justify-between">
                   <button
                     type="submit"
                     className={`
                       ${sorting ? "bg-red-300" : "bg-secondary"}
-                    text-white py-2 px-4
+                    text-white py-4 px-8
                       rounded 
-                      text-sm transition-all duration-300 hover:opacity-70
+                       transition-all duration-300 border hover:bg-white hover:text-black border-secondary
                       `}
                   >
                     {sorting ? "Applying changes..." : "Apply changes"}
-                  </button>
-                  <button
-                    onClick={() => setShowSortMenu(false)}
-                    type="button"
-                    className="transition-opacity duration-300 hover:opacity-70"
-                  >
-                    <svg className="fill-secondary h-6 w-6" viewBox="0 0 24 24">
-                      <path d="M6.22566 4.81096C5.83514 4.42044 5.20197 4.42044 4.81145 4.81096C4.42092 5.20148 4.42092 5.83465 4.81145 6.22517L10.5862 11.9999L4.81151 17.7746C4.42098 18.1651 4.42098 18.7983 4.81151 19.1888C5.20203 19.5793 5.8352 19.5793 6.22572 19.1888L12.0004 13.4141L17.7751 19.1888C18.1656 19.5793 18.7988 19.5793 19.1893 19.1888C19.5798 18.7983 19.5798 18.1651 19.1893 17.7746L13.4146 11.9999L19.1893 6.22517C19.5799 5.83465 19.5799 5.20148 19.1893 4.81096C18.7988 4.42044 18.1657 4.42044 17.7751 4.81096L12.0004 10.5857L6.22566 4.81096Z" />
-                    </svg>
                   </button>
                 </div>
               </form>
@@ -328,7 +309,8 @@ const Blogs = ({ posts: initialPosts }) => {
             }}
           />
           <button
-            className="border transition-all duration-300 peer-focus:border-2 peer-focus:border-l-0 border-l-0 border-secondary rounded-tr rounded-br h-12 px-1 flex items-center justify-center"
+            className="border transition-all duration-300 peer-focus:border-2 peer-focus:border-l-0 border-l-0
+             border-secondary rounded-tr rounded-br h-12 px-2 flex items-center justify-center"
             type="submit"
             onClick={() => searchInput.current.focus()}
             onFocus={() => searchInput.current.focus()}
