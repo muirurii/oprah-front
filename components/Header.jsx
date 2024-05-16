@@ -102,21 +102,21 @@ const Header = () => {
                 <li className="w-full">
                   <HeaderLink
                     handleToggleMenu={handleToggleMenu}
-                    link={"blogs"}
+                    link={"/blogs"}
                     text={"Blogs"}
                   />
                 </li>
                 <li className="w-full">
                   <HeaderLink
                     handleToggleMenu={handleToggleMenu}
-                    link={"about"}
+                    link={"/about"}
                     text={"About"}
                   />
                 </li>
                 <li className="w-full">
                   <HeaderLink
                     handleToggleMenu={handleToggleMenu}
-                    link={"contact"}
+                    link={"/contact"}
                     text={"Contact"}
                   />
                 </li>
@@ -124,7 +124,7 @@ const Header = () => {
                   <li className="w-full">
                     <HeaderLink
                       handleToggleMenu={handleToggleMenu}
-                      link={"new"}
+                      link={"/new"}
                       text={"New Blog"}
                     />
                   </li>
@@ -133,7 +133,7 @@ const Header = () => {
                   <li className="w-full">
                     <HeaderLink
                       handleToggleMenu={handleToggleMenu}
-                      link={"profile"}
+                      link={"/profile"}
                       text={"Profile"}
                     />
                   </li>
