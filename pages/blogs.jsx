@@ -2,6 +2,7 @@ import fetchData from "../customFunctions/fetch";
 import PostsContainer from "../components/PostsContainer";
 import Meta from "../components/Meta";
 import { useState, useEffect, useRef } from "react";
+import Heading from "../components/Heading";
 
 let onInputTimeout;
 
@@ -100,9 +101,9 @@ const Blogs = ({ posts: initialPosts }) => {
   const handleSearchInput = (e) => {
     clearTimeout(onInputTimeout);
     setSearch(e.target.value);
-   onInputTimeout = setTimeout(()=>{
-    handleSearch(e.target.value);
-    },1000)
+    onInputTimeout = setTimeout(() => {
+      handleSearch(e.target.value);
+    }, 1000);
   };
 
   const handleFromRecent = (e) => {
@@ -116,28 +117,28 @@ const Blogs = ({ posts: initialPosts }) => {
       search,
       ...recentSearch.filter((s) => s !== search).splice(0, 3),
     ];
-    setNewRecent(update)
+    setNewRecent(update);
   };
 
-  const setNewRecent = (update)=>{
+  const setNewRecent = (update) => {
     setRecentSearch(update);
     localStorage.setItem("searches", JSON.stringify(update));
-  }
+  };
 
-  const removeRecent = (id)=>{
-    const update = recentSearch.filter((s,i) => id !== i);
+  const removeRecent = (id) => {
+    const update = recentSearch.filter((s, i) => id !== i);
     setNewRecent(update);
-  }
+  };
 
   return (
     <main>
       <Meta title="Blogs" />
-      <h1 className="text-3xl pt-8 px-4">Blogs</h1>
-      <section className="mt-6 flex items-start justify-center md:justify-start px-4 gap-x-2">
+      <Heading text={"blogs"} />
+      <section className="mt-4 mb-16 flex items-start justify-center px-4 gap-x-2">
         <section className="relative">
           <button
             onClick={() => setShowSortMenu(!showSortMenu)}
-            className="bg-black text-white h-9 w-9 flex items-center justify-center mr-1 mb-1 rounded"
+            className="bg-black text-white h-12 w-12 flex items-center justify-center mr-1 mb-1 rounded"
           >
             <svg
               className="h-7 w-7"
@@ -306,10 +307,10 @@ const Blogs = ({ posts: initialPosts }) => {
         <form
           onSubmit={handleSearchSubmit}
           onFocus={() => setShowSortMenu(false)}
-          className="flex w-[288px] sm:w-[320px] items-center justify-center relative"
+          className="flex w-full max-w-[1200px] mx-4 items-center justify-center relative"
         >
           <input
-            className="h-9 transition-all duration-300
+            className="h-12 transition-all duration-300
             w-full
             border border-r-0 border-secondary
             rounded-bl rounded-tl outline-none
@@ -319,60 +320,70 @@ const Blogs = ({ posts: initialPosts }) => {
             value={search}
             onChange={handleSearchInput}
             ref={searchInput}
-            onFocus={()=> setShowRecent(true)}
-            onBlur={()=>{
+            onFocus={() => setShowRecent(true)}
+            onBlur={() => {
               setTimeout(() => {
-                setShowRecent(false)                
+                setShowRecent(false);
               }, 300);
             }}
           />
           <button
-            className="border transition-all duration-300 peer-focus:border-2 peer-focus:border-l-0 border-l-0 border-secondary rounded-tr rounded-br h-9 px-1 flex items-center justify-center"
+            className="border transition-all duration-300 peer-focus:border-2 peer-focus:border-l-0 border-l-0 border-secondary rounded-tr rounded-br h-12 px-1 flex items-center justify-center"
             type="submit"
             onClick={() => searchInput.current.focus()}
             onFocus={() => searchInput.current.focus()}
           >
-            {searching ? <div className="animate-spin rounded-full h-4 w-4 border-2 border-black border-t-secondary border-r-secondary border-3"></div> : <svg
-              className="h-5 w-5"
-              x="0px"
-              y="0px"
-              viewBox="0 0 487.95 487.95"
-              style={{ enableBackground: "new 0 0 487.95 487.95" }}
-              xmlSpace="preserve"
-            >
-              <g>
+            {searching ? (
+              <div className="animate-spin rounded-full h-4 w-4 border-2 border-black border-t-secondary border-r-secondary border-3"></div>
+            ) : (
+              <svg
+                className="h-5 w-5"
+                x="0px"
+                y="0px"
+                viewBox="0 0 487.95 487.95"
+                style={{ enableBackground: "new 0 0 487.95 487.95" }}
+                xmlSpace="preserve"
+              >
                 <g>
-                  <path d="M481.8,453l-140-140.1c27.6-33.1,44.2-75.4,44.2-121.6C386,85.9,299.5,0.2,193.1,0.2S0,86,0,191.4s86.5,191.1,192.9,191.1    c45.2,0,86.8-15.5,119.8-41.4l140.5,140.5c8.2,8.2,20.4,8.2,28.6,0C490,473.4,490,461.2,481.8,453z M41,191.4    c0-82.8,68.2-150.1,151.9-150.1s151.9,67.3,151.9,150.1s-68.2,150.1-151.9,150.1S41,274.1,41,191.4z" />
+                  <g>
+                    <path d="M481.8,453l-140-140.1c27.6-33.1,44.2-75.4,44.2-121.6C386,85.9,299.5,0.2,193.1,0.2S0,86,0,191.4s86.5,191.1,192.9,191.1    c45.2,0,86.8-15.5,119.8-41.4l140.5,140.5c8.2,8.2,20.4,8.2,28.6,0C490,473.4,490,461.2,481.8,453z M41,191.4    c0-82.8,68.2-150.1,151.9-150.1s151.9,67.3,151.9,150.1s-68.2,150.1-151.9,150.1S41,274.1,41,191.4z" />
+                  </g>
                 </g>
-              </g>
-            </svg>}
+              </svg>
+            )}
           </button>
-         {showRecent ? <div className="absolute z-[2] top-full bg-white rounded border border-gray-100 left-0 right-0 origin-top min-h-[60px] mt-1">
-            <h3 className="text-center py-2">Recent searches</h3>
-            <ul>
-              {recentSearch.length ? (
-                recentSearch.map((s, i) => {
-                  return (
-                    <li
-                      key={i * Math.random()}
-                      className="group flex relative py-1 pl-2 cursor-pointer text-sm text-gray-600"
-                    >
-                      <span
-                        onClick={handleFromRecent}
-                        className="block mr-6 w-full mr-4 truncate hover:text-clip hover:whitespace-normal"
-                      >{s}</span>
-                      <button
-                        className="hidden group-hover:block text-secondary float-right mr-2 h-full rounded-tr rounded-br"
-                        onClick={()=> removeRecent(i)}
-                      >x</button>
-                    </li>
-                  );
-                })
-              ) : (
-                <p className="py-2 text-sm text-center">No recent searches</p>
-              )}
-            </ul>
-          </div> : null }
+          {showRecent ? (
+            <div className="absolute z-[2] top-full bg-white rounded border border-gray-100 left-0 right-0 origin-top min-h-[60px] mt-1">
+              <h3 className="text-center py-2">Recent searches</h3>
+              <ul>
+                {recentSearch.length ? (
+                  recentSearch.map((s, i) => {
+                    return (
+                      <li
+                        key={i * Math.random()}
+                        className="group flex relative py-1 pl-2 cursor-pointer text-sm text-gray-600"
+                      >
+                        <span
+                          onClick={handleFromRecent}
+                          className="block mr-6 w-full mr-4 truncate hover:text-clip hover:whitespace-normal"
+                        >
+                          {s}
+                        </span>
+                        <button
+                          className="hidden group-hover:block text-secondary float-right mr-2 h-full rounded-tr rounded-br"
+                          onClick={() => removeRecent(i)}
+                        >
+                          x
+                        </button>
+                      </li>
+                    );
+                  })
+                ) : (
+                  <p className="py-2 text-sm text-center">No recent searches</p>
+                )}
+              </ul>
+            </div>
+          ) : null}
         </form>
       </section>
       {!posts.length && search.length ? (
