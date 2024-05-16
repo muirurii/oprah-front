@@ -88,7 +88,7 @@ const Header = () => {
         <div className="flex max-w-[1500px] w-full h-fit pointer-events-auto">
           <nav className="z-10 w-full border flex justify-center ">
             <ul
-              className={`  h0-[calc(100vh - 120px)] flex flex-col
+              className={`flex flex-col
               items-center justify-between pt-4 w-full bg-white shadow-md border-l-8 md:border-l-[32px] border-secondary shadow-slate-300`}
             >
               <div className="w-full">
@@ -116,7 +116,7 @@ const Header = () => {
                 <li className="w-full">
                   <HeaderLink
                     handleToggleMenu={handleToggleMenu}
-                    link={"about"}
+                    link={"contact"}
                     text={"Contact"}
                   />
                 </li>
@@ -126,6 +126,15 @@ const Header = () => {
                       handleToggleMenu={handleToggleMenu}
                       link={"new"}
                       text={"New Blog"}
+                    />
+                  </li>
+                ) : null}
+                {user.isLogged ? (
+                  <li className="w-full">
+                    <HeaderLink
+                      handleToggleMenu={handleToggleMenu}
+                      link={"profile"}
+                      text={"Profile"}
                     />
                   </li>
                 ) : null}

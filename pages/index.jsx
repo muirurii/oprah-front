@@ -6,30 +6,42 @@ import { BiSearch } from "react-icons/bi";
 
 export default function Home({ latest, featured }) {
   return (
-    <div className="py-8 w-screen">
+    <div className="pb-8 w-screen">
       <Meta title="Orpah | Home" />
-      <div className="py-16 gap-y-12 flex flex-col items-center justify-center hero relative">
-        <h2 className="text-2xl bg-red-50 text-center font-sec sm:text-5xl font-semibold py-4 px-4 max-w-[600px]">
-          <p>Unleashing the Hero Within, Inspire, Empower, Conquer!</p>
-        </h2>
-        <form className="flex items-center justify-center max-w-[700px] w-full px-2">
-          <input
-            className="inline-block h-12 md:h-14 w-full home-input pl-4 outline-none placeholder:text-center placeholder:text-sm pl md:placeholder:text-md
+      <div
+        className="py-16 flex items-center justify-evenly  hero relative
+         "
+      >
+        <div className="flex flex-col items-center justify-center gap-y-12 ">
+          <h2 className="text-2xl leading-8 sm:leading-[60px] lg:leading-[80px] uppercase font-sec sm:text-5xl lg:text-6xl py-4 px-4 max-w-[600px] font-medium">
+            <p>Unleashing the Hero Within, Inspire, Empower, Conquer!</p>
+          </h2>
+          <form className="flex items-center justify-center max-w-[700px] w-full px-2">
+            <input
+              className="inline-block h-12 md:h-14 w-full home-input pl-4 outline-none placeholder:text-center placeholder:text-sm pl md:placeholder:text-md
             border rounded-tl-full rounded-bl-full focus:border-2 border-secondary"
-            placeholder="Search for articles, tips, and inspiration"
-            type="text"
+              placeholder="Search for articles, tips, and inspiration"
+              type="text"
+            />
+            <button className="p-2 md:p-3 hover:fill-white bg-secondary border-l-0 rounded-tr-full rounded-br-full">
+              <BiSearch className="h-8 w-8 stroke-white hover:stroke-slate-200  stroke-[2px]" />
+            </button>
+          </form>
+        </div>
+        <div className="">
+          <img
+            className="w-96 hidden lg:block"
+            src="./content-writer.png"
+            alt=""
           />
-          <button className="p-2 md:p-3 hover:fill-white bg-secondary border-l-0 rounded-tr-full rounded-br-full">
-            <BiSearch className="h-8 w-8 stroke-white hover:stroke-slate-200  stroke-[2px]" />
-          </button>
-        </form>
-        <div className="absolute -top-16 -left-48 -right-48 -bottom-0 -z-30 overflow-hidden hero-img">
+        </div>
+        {/* <div className="absolute -top-16 -left-48 -right-48 -bottom-0 -z-30 overflow-hidden hero-img">
           <img
             src="https://images.pexels.com/photos/5554667/pexels-photo-5554667.jpeg?auto=compress&cs=tinysrgb&w=1024"
             className="absolute top-0 left-0 h-full w-full object-cover"
             alt=""
           />
-        </div>
+        </div> */}
       </div>
       <section
         className="py-8 flex justify-evenly items-s h relative 
