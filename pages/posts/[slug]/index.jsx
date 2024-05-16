@@ -81,18 +81,18 @@ const PostPage = ({ initialPost, recommended }) => {
       />
       <button
         onClick={goBack}
-        className="bg-secondary text-white py-2 px-3 text-sm rounded"
+        className="bg-secondary text-white py-3 sm:py-4 px-4 sm:px-7 text-sm rounded"
       >
         Go Back
       </button>
       <section className="mt-4 flex items-center lg:items-start text-sm font-light flex-col lg:flex-row justify-center gap-y-4 lg:gap-8 relative">
-        <section className="w-full max-w-xl md:max-w-[600px] rounded-md pt-2 sm:px-4 pb-6 relative">
+        <section className="w-full max-w-xl md:max-w-[900px] rounded-md pt-2 sm:px-4 pb-6 relative">
           <article
             className={`flex justify-between items-start my-4 ${
               user.role === "ADMIN" ? "pr-4" : null
             }`}
           >
-            <p className="text-sm text-gray-400">
+            <p className="">
               <span className="block">{relativeTime}</span>
             </p>
             {user.isLogged && user.role === "ADMIN" ? (
@@ -122,11 +122,14 @@ const PostPage = ({ initialPost, recommended }) => {
               </button>
             ) : null}
             {editModule && user.isLogged && user.role === "ADMIN" ? (
-              <div className="absolute top-2 right-5 text-sm px-4 py-6 gap-y-2 grid w-32 rounded shadow bg-white shadow-gray-300">
+              <div className="absolute top-2 right-5 text-sm w-32 bg-white">
                 <Link href={"/edit/[slug]"} as={`/edit/${post.slug}`}>
-                  <a className="py-1 flex items-center justify-start w-full gap-x-2 border-b border-gray-400 hover:border-secondary hover:text-secondary group transition-colors duration-300">
+                  <a
+                    className="py-2 px-3 flex items-center justify-start w-full gap-x-2 border border-slate-600 rounded-tr rounded-tl 
+                   hover:border-secondary hover:text-white hover:bg-secondary group transition-colors duration-300"
+                  >
                     <svg
-                      className="h-4 w-4 group-hover:fill-secondary"
+                      className="h-4 w-4 group-hover:fill-white"
                       x="0px"
                       y="0px"
                       viewBox="0 0 64 64"
@@ -145,10 +148,11 @@ const PostPage = ({ initialPost, recommended }) => {
                 </Link>
                 <button
                   onClick={handleDelete}
-                  className="py-1 flex items-center justify-start w-full gap-x-2 border-b border-gray-400 hover:border-secondary hover:text-secondary group transition-colors duration-300"
+                  className="py-2 px-3 flex items-center justify-start w-full gap-x-2 border border-t-0 border-slate-600 rounded-br rounded-bl 
+                  hover:border-secondary hover:text-white hover:bg-secondary group transition-colors duration-300"
                 >
                   <svg
-                    className="h-4 w-4 group-hover:fill-secondary"
+                    className="h-4 w-4 group-hover:fill-white"
                     x="0px"
                     y="0px"
                     viewBox="0 0 330 330"
@@ -176,35 +180,40 @@ const PostPage = ({ initialPost, recommended }) => {
             ) : null}
             <Reactions post={post} />
           </article>
-          <article className="mb-4">
-            <span className="text-secondary">By {post.creator.username}</span>
+          <article className="my-6">
+            <span className="text-secondary inline-block pr-2">
+              By {post.creator.username}
+            </span>
             {post.creator.profilePic.length ? (
               <img
                 src={post.creator.profilePic}
                 alt={post.creator.username}
-                className="inline-block ml-2 rounded-full h-8 w-8"
+                className="inline-block ml-2 rounded-full h-16 w-16"
               />
             ) : null}
           </article>
-          <h1 className="font-bold text-3xl pb-2"> {post.title} </h1>
+          <h1 className="font-bold text-3xl font-sec py-6"> {post.title} </h1>
           <img
             src={post.image}
-            className="w-full mt-4 h-[280px] rounded-md"
+            className="w-full mt-4 h-[380px] rounded-md object-cover"
             alt={post.title.slice(0, 6)}
           />
           <article
             dangerouslySetInnerHTML={{ __html: post.body }}
-            className="py-4 break-all grid gap-2 
-          prose prose-sm prose-img:rounded-sm
-          prose-img:h-64 prose-img:w-full prose-p:m-0
+            className="py-4 break-all w-full max-w-xl md:max-w-[900px] p-2 grid gap-2 
+          prose prose-sm prose-img:rounded-sm prose-img:object-cover
+          prose-img:h-64 prose-img:w-full prose-p:m-0 text-base
           prose-blockquote:border-secondary"
           ></article>
           <div className="py-4 flex flex-col gap-4">
             <CommentContainer postId={post._id} updatePost={updatePost} />
           </div>
         </section>
-        <article className="min-w-[33%] max-w-xl lg:max-w-md rounded overflow-hidden border border-gray-100">
-          <h2 className="bg-secondary text-white pl-4 py-3"> Read also </h2>
+        <article className="min-w-[33%] max-w-xl lg:max-w-md rounded overflow-hidden  border border-secondary">
+          <h2 className="bg-secondary text-white pl-4 py-4 border border-secondary">
+            {" "}
+            Read also{" "}
+          </h2>
           <div className="flex flex-col w-full">
             {recommended.map((post) => (
               <MoreCard key={post._id} post={post} />

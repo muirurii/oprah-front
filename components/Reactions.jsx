@@ -84,9 +84,9 @@ const Reactions = ({ post }) => {
 
   return (
     <div className="flex items-center justify-center gap-x-2">
-      <span className="text-gray-400 inline-flex items-center leading-none text-sm">
+      <span className="text-black inline-flex items-center leading-none text-sm">
         <svg
-          className="w-4 h-4 mr-1"
+          className="w-6 h-6 mr-1"
           stroke="currentColor"
           strokeWidth="2"
           fill="none"
@@ -101,11 +101,11 @@ const Reactions = ({ post }) => {
       </span>
       <span
         onClick={handleReaction}
-        className="text-gray-400 inline-flex items-center leading-none text-sm cursor-pointer"
+        className="text-black inline-flex items-center leading-none text-sm cursor-pointer"
       >
         {!hasLiked ? (
           <svg
-            className="w-4 h-4 mr-1 fill-gray-400 transition-colors duration-300"
+            className="w-6 h-6 mr-1 fill-black transition-colors duration-300"
             x="0px"
             y="0px"
             viewBox="0 0 485.3 485.3"
@@ -122,7 +122,7 @@ const Reactions = ({ post }) => {
           </svg>
         ) : (
           <svg
-            className="w-4 h-4 mr-1 transition-colors duration-300 fill-secondary"
+            className="w-6 h-6 mr-1 transition-colors duration-300 fill-secondary"
             id="Capa_1"
             x="0px"
             y="0px"
@@ -137,9 +137,9 @@ const Reactions = ({ post }) => {
         )}
         {likes.length}
       </span>
-      <span className="text-gray-400 inline-flex items-center leading-none text-sm">
+      <span className="text-black inline-flex items-center leading-none text-sm">
         <svg
-          className="w-4 h-4 mr-1"
+          className="w-6 h-6 mr-1"
           stroke="currentColor"
           strokeWidth="2"
           fill="none"
@@ -153,11 +153,11 @@ const Reactions = ({ post }) => {
       </span>
       <span
         onClick={handleBookmarking}
-        className="text-gray-400 inline-flex items-center  cursor-pointer leading-none text-sm"
+        className="text-black inline-flex items-center  cursor-pointer leading-none text-sm"
       >
         {!hasBookMarked ? (
           <svg
-            className="w-4 h-4 mr-1"
+            className="w-6 h-6 mr-1"
             strokeWidth="2px"
             viewBox="0 0 16 16"
             fill="currentColor"
@@ -166,7 +166,7 @@ const Reactions = ({ post }) => {
             <path d="M8 4a.5.5 0 0 1 .5.5V6H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V7H6a.5.5 0 0 1 0-1h1.5V4.5A.5.5 0 0 1 8 4z" />
           </svg>
         ) : (
-          <svg className="w-4 h-4 mr-1 fill-secondary" viewBox="0 0 52 52">
+          <svg className="w-6 h-6 mr-1 fill-secondary" viewBox="0 0 52 52">
             <path d="M46,2H6A3.2,3.2,0,0,0,2.82,5.18V46.82a3.19,3.19,0,0,0,4.87,2.7L26,38.11,44.31,49.52a3.19,3.19,0,0,0,4.87-2.7V5.18A3.2,3.2,0,0,0,46,2ZM39,17.49,31.53,23l2.85,8.81a.57.57,0,0,1-.35.72.54.54,0,0,1-.52-.07L26,27l-7.51,5.46a.58.58,0,0,1-.8-.13.6.6,0,0,1-.07-.52L20.47,23,13,17.49a.58.58,0,0,1,0-.82.55.55,0,0,1,.38-.18h9.25L25.5,7.67a.56.56,0,0,1,.69-.39.55.55,0,0,1,.39.39l2.89,8.82h9.25a.58.58,0,0,1,.46.68A.57.57,0,0,1,39,17.49Z" />
           </svg>
         )}
