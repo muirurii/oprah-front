@@ -67,7 +67,7 @@ const Layout = ({ children }) => {
           <Loader />
         </section>
       ) : (
-        <section className="overflow-x-hidden font-main pt-[140px]">
+        <section className="overflow-x-hidden font-main pt-[120px]">
           <Header />
           {loading ? <Loader /> : children}
           <Footer />

@@ -164,7 +164,7 @@ const Blogs = ({ posts: initialPosts }) => {
             </svg>
           </button>
           {showSortMenu && (
-            <section className="absolute top-full z-[3] -left-4 w-screen sm:w-[400px] pb-2 bg-white shadow-sm shadow-gray-400 rounded overflow-hidden">
+            <section className="absolute top-full z-[3] -left-4 w-screen sm:w-[400px] pb-4 bg-white shadow-sm shadow-gray-400 rounded overflow-hidden">
               <h3 className="p-4 mb-2 text-center bg-secondary text-white">
                 Sort blogs by
               </h3>
@@ -273,7 +273,7 @@ const Blogs = ({ posts: initialPosts }) => {
                     type="submit"
                     className={`
                       ${sorting ? "bg-red-300" : "bg-secondary"}
-                    text-white py-4 px-8
+                    text-white py-3 sm:py-4 px-7 sm:px-8 inline-block mt-2
                       rounded 
                        transition-all duration-300 border hover:bg-white hover:text-black border-secondary
                       `}
