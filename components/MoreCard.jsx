@@ -3,7 +3,7 @@ import Link from "next/link";
 const MoreCard = ({ post }) => {
   return (
     <section
-      className="min-h-[140px] w-full bg-red break-all text-sm font-lightcursor-pointer hover:bg-slate-100
+      className="min-h-[140px] w-full bg-red break-all font-lightcursor-pointer hover:border-secondary hover:bg-slate-100
       flex flex-col sm:flex-row sm:justify-start sm:items-center p-4 gap-x-4 border-b border-slate-400 last:border-none"
     >
       <div className="mb-2 relative w-full sm:mb-0 sm:w-24 h-36 sm:h-24">
