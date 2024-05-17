@@ -32,7 +32,7 @@ const Post = ({ post }) => {
             </div>
           </div>
           <h1 className="text-lg font-sec font-semibold text-gray-900 mb-3">
-            {post.title.slice(0, 20)} {post.title.length > 100 ? "..." : null}
+            {post.title.slice(0, 100)} {post.title.length > 100 ? "..." : null}
           </h1>
           <p className="leading-relaxed text-sm font-light mb-3 break-all">
             {post.excerpt.slice(0, 100)}...

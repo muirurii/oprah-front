@@ -6,7 +6,7 @@ export const menuReducer = (state, action) => {
             {
                 return {
                     ...state,
-                    menu: !state.menu
+                    menu: action.payload
                 }
             }
         default:

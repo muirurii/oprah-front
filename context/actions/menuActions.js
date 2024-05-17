@@ -1,7 +1,8 @@
 import actionTypes from ".";
 
-export const toggleMenu = (dispatch) => {
+export const toggleMenu = (dispatch, data) => {
     dispatch({
-        type: actionTypes.toggleMenu
+        type: actionTypes.toggleMenu,
+        payload: data
     });
 }
