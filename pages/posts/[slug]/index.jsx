@@ -195,7 +195,7 @@ const PostPage = ({ initialPost, recommended }) => {
           {/* <h1 className="font-bold text-3xl font-sec py-6"> {post.title} </h1> */}
           <img
             src={post.image}
-            className="w-full md:w-2/3 mto my-6 h-[380px] rounded-md object-cover"
+            className="w-full xl:w-2/3 my-6 h-[380px] mx-auto rounded-md object-cover"
             alt={post.title.slice(0, 6)}
           />
           <article
@@ -205,7 +205,7 @@ const PostPage = ({ initialPost, recommended }) => {
           prose-img:h-64 prose-img:w-full prose-p:m-0 text-base
           prose-blockquote:border-secondary"
           ></article>
-          <div className="py-4 flex flex-col gap-4">
+          <div className="py-8 flex flex-col gap-4">
             <CommentContainer postId={post._id} updatePost={updatePost} />
           </div>
         </section>

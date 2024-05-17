@@ -3,8 +3,8 @@ import Heading from "../components/Heading";
 const Contact = () => {
   return (
     <section className=" body-font relative">
+      <Heading text={"Contact Us"} />
       <div className="container px-5 pb-12 mx-auto">
-        <Heading text={"Contact Us"} />
         <div className="lg:w-1/2 md:w-2/3 mx-auto">
           <div className="flex flex-wrap -m-2">
             <div className="p-2 w-1/2">

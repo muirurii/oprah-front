@@ -156,7 +156,11 @@ const Header = () => {
           />
         </div>
       </div>
-      <section className="flex justify-end items-center gap-x-4 w-full">
+      <section
+        className={`flex justify-end items-center gap-x-4 w-full ${
+          user.isLogged ? "pr-16" : ""
+        }`}
+      >
         <div onClick={handleToggleMenu} className="relative z-[4000]">
           {menu ? (
             <BiMenuAltRight className="h-8 w-8 cursor-pointer" />
