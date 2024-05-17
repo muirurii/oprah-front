@@ -49,7 +49,7 @@ const Header = () => {
   };
 
   const handleToggleMenu = () => {
-    toggleMenu(dispatch);
+    toggleMenu(dispatch, !menu);
   };
 
   const getGreeting = (username) => {

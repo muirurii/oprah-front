@@ -4,6 +4,7 @@ import Footer from "./Footer";
 import Header from "./Header";
 import { setUser } from "../context/actions/userActions";
 import { Context } from "../context";
+import { toggleMenu } from "../context/actions/menuActions";
 import Router from "next/router";
 import Loader from "./Loader";
 
@@ -34,6 +35,7 @@ const Layout = ({ children }) => {
     Router.events.on("routeChangeStart", () => {
       window.scrollTo(0, 0);
       setLoading(true);
+      toggleMenu(dispatch, false);
     });
     Router.events.on("routeChangeComplete", () => {
       setLoading(false);

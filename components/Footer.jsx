@@ -96,7 +96,7 @@ const Footer = () => {
           <p className="flex items-center justify-center text-black md:text-left">
             <span>Crafted by</span>
             <a
-              className="inline-block ml-2 text-secondary overflow-hidden relative z-10 my-link
+              className="inline-block ml-2 text-secondary overflow-hidden relative my-link
                 after:absolute after:-left-2 after:bottom-0 after:h-[1px] after:bg-secondary after:w-full
                 after:-z-20"
               href="https://peterngugi.netlify.app "
