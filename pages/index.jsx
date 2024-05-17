@@ -35,13 +35,6 @@ export default function Home({ latest, featured }) {
             alt=""
           />
         </div>
-        {/* <div className="absolute -top-16 -left-48 -right-48 -bottom-0 -z-30 overflow-hidden hero-img">
-          <img
-            src="https://images.pexels.com/photos/5554667/pexels-photo-5554667.jpeg?auto=compress&cs=tinysrgb&w=1024"
-            className="absolute top-0 left-0 h-full w-full object-cover"
-            alt=""
-          />
-        </div> */}
       </div>
       <section
         className="py-8 flex justify-evenly items-s h relative 

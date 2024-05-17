@@ -39,6 +39,7 @@ const sections = [
 const HomeCard = ({ section, index }) => {
   const { ref, inView, entry } = useInView({
     threshold: 0.9,
+    triggerOnce: true,
   });
   return (
     <InView triggerOnce={true}>
