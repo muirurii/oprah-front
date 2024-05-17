@@ -88,7 +88,7 @@ const Reactions = ({ post }) => {
         <svg
           className="w-6 h-6 mr-1"
           stroke="currentColor"
-          strokeWidth="2"
+          strokeWidth="1"
           fill="none"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -141,7 +141,7 @@ const Reactions = ({ post }) => {
         <svg
           className="w-6 h-6 mr-1"
           stroke="currentColor"
-          strokeWidth="2"
+          strokeWidth="1"
           fill="none"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -158,7 +158,7 @@ const Reactions = ({ post }) => {
         {!hasBookMarked ? (
           <svg
             className="w-6 h-6 mr-1"
-            strokeWidth="2px"
+            strokeWidth="1"
             viewBox="0 0 16 16"
             fill="currentColor"
           >
