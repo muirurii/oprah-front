@@ -72,7 +72,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-white fixed top-0 text-sm left-0 w-screen z-10 flex items-center justify-between pr-4 sm:px-12 h-[120px]">
+    <header className="bg-white fixed top-0 text-sm left-0 w-screen z-10 flex items-center justify-between px-3 sm:px-6 lg:px-12 h-[120px]">
       <h1 className="text-3xl  bg-white relative z-50 pl-4 sm:p-0 h-full w-full flex items-center justify-tart text-secondary font-sec">
         <Link href="/">
           <a>
@@ -140,7 +140,7 @@ const Header = () => {
                 ) : null}
               </div>
               <div className="w-full h-full flex flex-col justify-evenly items-center p-2 md:p-4">
-                <li className="w-full flex items-center justify-evenly">
+                <li className="w-full flex items-center justify-evenly py-4 md:py-0">
                   <BiLogoInstagram className="w-6 md:w-12 h-6 md:h-10 cursor-pointer hover:fill-secondary" />
                   <BiLogoFacebook className="w-6 md:w-12 h-6 md:h-10 cursor-pointer hover:fill-secondary" />
                   <BiLogoTwitter className="w-6 md:w-12 h-6 md:h-10 cursor-pointer hover:fill-secondary" />
@@ -156,8 +156,8 @@ const Header = () => {
           />
         </div>
       </div>
-      <div>
-        <div onClick={handleToggleMenu} className="relative z-[4000] mr-14">
+      <section className="flex justify-end items-center gap-x-4 w-full">
+        <div onClick={handleToggleMenu} className="relative z-[4000]">
           {menu ? (
             <BiMenuAltRight className="h-8 w-8 cursor-pointer" />
           ) : (
@@ -204,24 +204,30 @@ const Header = () => {
             </div>
           </li>
         ) : (
-          <ul className="absolute z-50 bg-white top-0 right-2 sm:right-8 flex items-center h-full">
+          <ul className="a flex items-center justify-center sm:gap-x-4">
             <Link href="/login">
               <a>
-                <li className="mr-4 text-white hover:text-black bg-secondary hover:bg-white border border-secondary rounded py-2 px-5 transition-colors duration-300 md:py-3 md:px-6">
+                <li
+                  className="border border-secondary rounded hidden md:inline-block hover:text-secondary 
+                 transition-colors duration-300 py-3 px-6"
+                >
                   Log In
                 </li>
               </a>
             </Link>
             <Link href="/signup">
               <a>
-                <li className="mr-4 border border-secondary rounded py-2 px-5 hover:text-secondary transition-colors duration-300 md:py-3 md:px-6">
+                <li
+                  className=" text-white hover:text-black bg-secondary hover:bg-white border border-secondary rounded
+                 transition-colors duration-300 py-2 px-5 md:py-3 md:px-6"
+                >
                   Sign Up
                 </li>
               </a>
             </Link>
           </ul>
         )}
-      </div>
+      </section>
     </header>
   );
 };
