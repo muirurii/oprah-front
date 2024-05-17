@@ -6,6 +6,7 @@ import { setUser } from "../context/actions/userActions";
 import { useContext } from "react";
 import { Context } from "../context";
 import { useRouter } from "next/router";
+import Heading from "../components/Heading";
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -60,101 +61,125 @@ const SignUp = () => {
   };
 
   return (
-    <div className="w-full h-screenLessHeader flex items-center justify-center">
+    <main className="pb-16">
       <Meta title="Signup" />
-      <form
-        className="w-full max-w-[500px] rounded-lg"
-        onSubmit={handleFormSubmit}
-      >
-        <h2 className="text-2xl text-center mb-8">Create account</h2>
-        <div className="px-2 pb-10">
-          {err.length ? (
-            <p className="text-sm text-red-600 text-center pb-2">{err}</p>
-          ) : null}
-          <div className="w-full mb-4">
-            <div className="flex items-center">
-              <input
-                type="text"
-                placeholder="username"
-                className="
+      <Heading text={"Create Account"} />
+      <div className="flex flex-col items-center justify-center">
+        <form
+          className="w-full max-w-[500px] rounded-lg"
+          onSubmit={handleFormSubmit}
+        >
+          <div className="px-2 pb-10">
+            {err.length ? (
+              <p className="text-sm text-red-600 text-center pb-2">{err}</p>
+            ) : null}
+            <div className="w-full mb-4">
+              <label htmlFor="username" className="block pb-2">
+                Username
+              </label>
+              <div className="flex items-center">
+                <input
+                  id="username"
+                  type="text"
+                  placeholder="Enter a username"
+                  className="
                     w-full
+                    h-12
                     border
                     rounded
                     px-3
                     py-2
-                    focus:outline-none
+                    outline-none
+                    focus:border-2
                     border-black focus:border-secondary"
-                onChange={(e) => handleFormChange({ username: e.target.value })}
-              />
+                  onChange={(e) =>
+                    handleFormChange({ username: e.target.value })
+                  }
+                />
+              </div>
             </div>
-          </div>
-          <div className="w-full mb-4">
-            <div className="flex items-center">
-              <input
-                type="password"
-                placeholder="enter a password"
-                className="
+            <div className="w-full mb-4">
+              <label htmlFor="password" className="block pb-2">
+                Password
+              </label>
+              <div className="flex items-center">
+                <input
+                  type="password"
+                  id="password"
+                  placeholder="Enter a password"
+                  className="
                     w-full
+                    h-12
                     border
                     rounded
                     px-3
                     py-2
-                    focus:outline-none
+                    outline-none
+                    focus:border-2
                     border-black focus:border-secondary
                   "
-                onChange={(e) => handleFormChange({ password: e.target.value })}
-              />
+                  onChange={(e) =>
+                    handleFormChange({ password: e.target.value })
+                  }
+                />
+              </div>
             </div>
-          </div>
-          <div className="w-full mb-4">
-            <div className="flex items-center">
-              <input
-                type="password"
-                placeholder="repeat password"
-                className="
-                    w-full
+            <div className="w-full mb-4">
+              <label htmlFor="repeat-password" className="block pb-2">
+                Repeat password
+              </label>
+              <div className="flex items-center">
+                <input
+                  type="password"
+                  placeholder="Repeat password"
+                  id="repeat-password"
+                  className="
+                   w-full
+                    h-12
                     border
                     rounded
                     px-3
                     py-2
-                    focus:outline-none
+                    outline-none
+                    focus:border-2
                     border-black focus:border-secondary"
-                onChange={(e) =>
-                  handleFormChange({ repeatPassword: e.target.value })
-                }
-              />
+                  onChange={(e) =>
+                    handleFormChange({ repeatPassword: e.target.value })
+                  }
+                />
+              </div>
             </div>
-          </div>
-          <p className="text-sm">
-            Log in
-            <Link href={"/login"}>
-              <a className="mx-1 inline-block border-b border-secondary text-secondary">
-                here
-              </a>
-            </Link>
-            if you have an account
-          </p>
-          <button
-            type="submit"
-            className={`
+            <p className="text-sm">
+              Log in
+              <Link href={"/login"}>
+                <a className="mx-1 inline-block border-b border-secondary text-secondary">
+                  here
+                </a>
+              </Link>
+              if you have an account
+            </p>
+            <button
+              type="submit"
+              className={`
                 w-full
-                py-2
+                py-3
                 mt-8
-                rounded-full
+                rounded
                 ${
                   creatingAccount
                     ? "bg-red-300 pointer-events-none"
                     : "bg-secondary"
                 }
                 text-white
-                focus:outline-none
-              `}
-          >
-            {creatingAccount ? "Creating..." : "Create Account"}
-          </button>
-        </div>
-      </form>
-    </div>
+                outline-none
+                focus:ringborder-2         `}
+            >
+              {creatingAccount ? "Creating..." : "Create Account"}
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
   );
 };
 

@@ -69,7 +69,7 @@ const FormFields = ({
           <label htmlFor="title">Title</label>
           <input
             required
-            className="h-10 border border-black focus:border-secondary outline-none rounded pl-1"
+            className="h-12 border border-black focus:border-secondary outline-none rounded pl-1"
             type="text"
             id="title"
             placeholder="post title"
@@ -82,7 +82,7 @@ const FormFields = ({
           <label htmlFor="image">Image</label>
           <div className="flex items-start justify-start gap-x-2">
             <input
-              className="cursor-pointer w-24 file:w-full file:text-white file:h-full border rounded file:bg-black file:border-none file:rounded file:text-xs outline-none h-10 mt-1"
+              className="cursor-pointer w-24 file:w-full file:text-white file:h-full border rounded file:bg-black file:border-none file:rounded file:text-xs outline-none h-12 mt-1"
               type="file"
               name="picUrl"
               value={selectedFile}
@@ -104,7 +104,7 @@ const FormFields = ({
           <label htmlFor="category">Category</label>
           <select
             required
-            className="h-10 border border-black focus:border-secondary outline-none rounded pl-1"
+            className="h-12 border border-black focus:border-secondary outline-none rounded pl-1"
             name="categories"
             id="category"
             value={data.category}
@@ -118,18 +118,17 @@ const FormFields = ({
         </div>
         <div className="flex flex-col gap-y-2 mt-1 w-[300px] sm:w-[500px]">
           <label htmlFor="excerpt">Excerpt</label>
-          <input
+          <textarea
             type="text"
-            className="h-10 border border-black focus:border-secondary
+            className="border border-black focus:border-secondary
           outline-none rounded pl-1"
             id="excerpt"
             placeholder="post excerpt"
             name="excerpt"
             value={data.excerpt}
             onChange={handleChange}
-            minLength={100}
-            maxLength={120}
-          />
+            rows={20}
+          ></textarea>
         </div>
         <div className="flex flex-col gap-y-2 mt-1">
           <label htmlFor="body">Body</label>
@@ -143,9 +142,11 @@ const FormFields = ({
             value={data.body}
             onChange={handleChange}
           ></textarea> */}
-          <div className="
+          <div
+            className="
           overflow-x-scroll lg:overflow-x-hidden w-screen
-          ">
+          "
+          >
             <div className="w-fit py-2 mr-6">
               <MdEditor
                 language="en-US"

@@ -85,8 +85,8 @@ const PostPage = ({ initialPost, recommended }) => {
       >
         Go Back
       </button>
-      <section className="mt-4 flex items-center lg:items-start text-sm font-light flex-col lg:flex-row justify-center gap-y-4 lg:gap-8 relative">
-        <section className="w-full max-w-xl md:max-w-[900px] rounded-md pt-2 sm:px-4 pb-6 relative">
+      <section className="mt-4 flex items-center lg:items-start flex-col lg:flex-row justify-evenly gap-y-4 lg:gap-8 relative">
+        <section className="w-full max-w-xl md:max-w-[1200px] rounded-md pt-2 sm:px-4 pb-6 relative">
           <article
             className={`flex justify-between items-start my-4 ${
               user.role === "ADMIN" ? "pr-4" : null
@@ -192,16 +192,16 @@ const PostPage = ({ initialPost, recommended }) => {
               />
             ) : null}
           </article>
-          <h1 className="font-bold text-3xl font-sec py-6"> {post.title} </h1>
+          {/* <h1 className="font-bold text-3xl font-sec py-6"> {post.title} </h1> */}
           <img
             src={post.image}
-            className="w-full mt-4 h-[380px] rounded-md object-cover"
+            className="w-full md:w-2/3 mto my-6 h-[380px] rounded-md object-cover"
             alt={post.title.slice(0, 6)}
           />
           <article
             dangerouslySetInnerHTML={{ __html: post.body }}
-            className="py-4 break-all w-full max-w-xl md:max-w-[900px] p-2 grid gap-2 
-          prose prose-sm prose-img:rounded-sm prose-img:object-cover
+            className="py-4 break-all w-full max-w-xl md:max-w-[1200px] p-2 grid gap-2 text-black
+          prose prose-m prose-img:rounded-sm prose-img:object-cover
           prose-img:h-64 prose-img:w-full prose-p:m-0 text-base
           prose-blockquote:border-secondary"
           ></article>
@@ -209,9 +209,8 @@ const PostPage = ({ initialPost, recommended }) => {
             <CommentContainer postId={post._id} updatePost={updatePost} />
           </div>
         </section>
-        <article className="min-w-[33%] max-w-xl lg:max-w-md rounded overflow-hidden  border border-secondary">
+        <article className="min-w-[33%] w-full top-0 max-w-xl lg:max-w-md rounded overflow-hidden  border border-secondary">
           <h2 className="bg-secondary text-white pl-4 py-4 border border-secondary">
-            {" "}
             Read also{" "}
           </h2>
           <div className="flex flex-col w-full">
