@@ -8,7 +8,7 @@ const Footer = () => {
   } = useContext(Context);
 
   return (
-    <footer className="text-gray-200 bg-black text-sm font-light">
+    <footer className="text-gray-200 bg-black text-sm font-light mt-16 lg:mt-32">
       <section className="px-5 py-24 mx-auto flex justify-evenly md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
         <article className="w-64 md:w-96 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
           <a className="flex font-medium items-center md:justify-start justify-center text-gray-500">

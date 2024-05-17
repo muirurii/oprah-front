@@ -6,6 +6,7 @@ import Meta from "../../components/Meta";
 import { Context } from "../../context";
 import fetchData from "../../customFunctions/fetch";
 import Loader from "../../components/Loader";
+import Heading from "../../components/Heading";
 
 const Edit = () => {
   const {
@@ -43,16 +44,16 @@ const Edit = () => {
 
   const submitHandler = async (data) => {
     setIsSubmitting(true);
-    if(isSubmitting) return;
+    if (isSubmitting) return;
     setMessage("");
-    
+
     const details = {
       oldTitle: post.title,
       newTitle: data.title,
       newImage: data.image,
       newCategories: data.categories,
       newBody: data.body,
-      newExcerpt:data.excerpt
+      newExcerpt: data.excerpt,
     };
 
     try {
@@ -79,7 +80,9 @@ const Edit = () => {
   return (
     <main>
       <Meta title="Update post" />
-      {fetchingPost ? <Loader /> : !user.isLogged || user.role !== "ADMIN" ? (
+      {fetchingPost ? (
+        <Loader />
+      ) : !user.isLogged || user.role !== "ADMIN" ? (
         <div className="h-[400px] flex items-center justify-center">
           <Meta title="You are not logged in" />
           <Link href="/login">
@@ -88,14 +91,14 @@ const Edit = () => {
         </div>
       ) : (
         <>
-        <h1 className="text-3xl pt-4 pl-4">Edit blog post</h1>
-        <FormFields
-          initial={post}
-          buttonText="Update blog"
-          message={message}
-          submitHandler={submitHandler}
-          isSubmitting={isSubmitting}
-        />
+          <Heading text="Edit blog post" />
+          <FormFields
+            initial={post}
+            buttonText="Update blog"
+            message={message}
+            submitHandler={submitHandler}
+            isSubmitting={isSubmitting}
+          />
         </>
       )}
     </main>

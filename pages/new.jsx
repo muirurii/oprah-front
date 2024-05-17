@@ -5,6 +5,7 @@ import FormFields from "../components/FormFields";
 import Meta from "../components/Meta";
 import { Context } from "../context";
 import fetchData from "../customFunctions/fetch";
+import Heading from "../components/Heading";
 
 const Admin = () => {
   const {
@@ -16,11 +17,11 @@ const Admin = () => {
 
   const router = useRouter();
   const submitHandler = async (data) => {
-    if(isSubmitting) return;
+    if (isSubmitting) return;
     setIsSubmitting(true);
     console.log(data);
 
-    const { title, body, image, categories,excerpt } = data;
+    const { title, body, image, categories, excerpt } = data;
     const details = {
       title,
       body,
@@ -57,7 +58,7 @@ const Admin = () => {
       ) : (
         <>
           <Meta title="Add a blog" />
-          <h1 className="text-3xl pt-4 pl-4">New blog post</h1>
+          <Heading text="Add New Blog" />
           <FormFields
             initial={{}}
             buttonText="Add blog"
