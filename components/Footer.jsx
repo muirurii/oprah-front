@@ -8,47 +8,56 @@ const Footer = () => {
   } = useContext(Context);
 
   return (
-    <footer className="text-gray-200 bg-black text-sm font-light mt-16 lg:mt-32">
-      <section className="px-5 py-24 mx-auto flex justify-evenly md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
+    <footer className="text-gray-200 bg-black font-light mt-16 lg:mt-32">
+      <section className="px-5 py-32 mx-auto flex justify-evenly md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
         <article className="w-64 md:w-96 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
           <a className="flex font-medium items-center md:justify-start justify-center text-gray-500">
-            <h1 className="text-xl text-secondary font-sec">Orpah</h1>
+            <h1 className="text-2xl text-secondary font-sec">
+              <span className="text-white">O</span>rpah
+            </h1>
           </a>
-          <p className="mt-2 text-sm text-gray-500">
+          <p className="mt-4 text-gray-500">
             After nourishment, shelter and companionship, stories are things we
             need most in the world.
           </p>
         </article>
-        <article className="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
-          <div className="lg:w-1/3 md:w-1/2 w-full px-4">
-            <h2 className="font-medium text-gray-500 tracking-widest text-md mb-3">
+        <article className="w-1/2 flex flex-wrap justify-evenly mx-auto gap-y-8 -mb-10 md:mt-0 mt-10 md:text-left text-center">
+          <div className="lw-full px-4">
+            <h2 className="font-sec uppercase text-center text-secondary tracking-widest text-md mb-3">
               Quick Links
             </h2>
-            <nav className="list-none mb-10">
-              <li>
+            <nav className="list-none">
+              <li className="text-center">
                 <Link href={"/"}>
-                  <a className="text-gray-400 hover:text-secondary transition-colors duration-300">
+                  <a className="text-gray-400 hover:text-secondary transition-colors duration-300 mb-2 inline-block">
                     Home
                   </a>
                 </Link>
               </li>
-              <li>
+              <li className="text-center">
                 <Link href={"/about"}>
-                  <a className="text-gray-400 hover:text-secondary transition-colors duration-300">
+                  <a className="text-gray-400 hover:text-secondary transition-colors duration-300 mb-2 inline-block">
                     About
                   </a>
                 </Link>
               </li>
-              <li>
+              <li className="text-center">
+                <Link href={"/Contacts"}>
+                  <a className="text-gray-400 hover:text-secondary transition-colors duration-300 mb-2 inline-block">
+                    Contacts
+                  </a>
+                </Link>
+              </li>
+              <li className="text-center">
                 <Link href={"/signup"}>
-                  <a className="text-gray-400 hover:text-secondary transition-colors duration-300">
+                  <a className="text-gray-400 hover:text-secondary transition-colors duration-300 mb-2 inline-block">
                     Signup
                   </a>
                 </Link>
               </li>
-              <li>
+              <li className="text-center">
                 <Link href={"/login"}>
-                  <a className="text-gray-400 hover:text-secondary transition-colors duration-300">
+                  <a className="text-gray-400 hover:text-secondary transition-colors duration-300 mb-2 inline-block">
                     Log In
                   </a>
                 </Link>
@@ -56,27 +65,34 @@ const Footer = () => {
             </nav>
           </div>
           <div className="lg:w-1/3 md:w-1/2 w-full px-4">
-            <h2 className="font-medium text-gray-500 tracking-widest text-md mb-3">
-              Categories
+            <h2 className="font-sec uppercase text-center text-secondary tracking-widest text-md mb-3">
+              Blogs
             </h2>
             <nav className="list-none mb-10">
-              <li>
+              <li className="text-center">
                 <Link href={"/fashion"}>
-                  <a className="text-gray-400 hover:text-secondary transition-colors duration-300">
+                  <a className="text-gray-400 hover:text-secondary transition-colors duration-300 mb-2 inline-block">
+                    All blogs
+                  </a>
+                </Link>
+              </li>
+              <li className="text-center">
+                <Link href={"/fashion"}>
+                  <a className="text-gray-400 hover:text-secondary transition-colors duration-300 mb-2 inline-block">
                     Fashion
                   </a>
                 </Link>
               </li>
-              <li>
+              <li className="text-center">
                 <Link href={"/technology"}>
-                  <a className="text-gray-400 hover:text-secondary transition-colors duration-300">
+                  <a className="text-gray-400 hover:text-secondary transition-colors duration-300 mb-2 inline-block">
                     Technology
                   </a>
                 </Link>
               </li>
-              <li>
+              <li className="text-center">
                 <Link href={"/lifestyle"}>
-                  <a className="text-gray-400 hover:text-secondary transition-colors duration-300">
+                  <a className="text-gray-400 hover:text-secondary transition-colors duration-300 mb-2 inline-block">
                     Lifestyle
                   </a>
                 </Link>
